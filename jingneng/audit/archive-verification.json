@@ -2,7 +2,7 @@
   "passed": true,
   "runtime_source_files_verified": 34874,
   "modified_application_files": 58,
-  "supplemental_files_checked": 50,
+  "supplemental_files_checked": 54,
   "known_credentials_found": 0,
   "provider_token_patterns_found": 0,
   "application_files_match_runtime": true,
@@ -15,5 +15,23 @@
   "root_metadata_exceptions": [
     "README.md documented; original retained in UPSTREAM_README.md",
     ".gitignore adds local-only exclusions"
-  ]
+  ],
+  "configuration_supplement": {
+    "action_help_xmlids": [
+      "sale_management.sale_order_template_action",
+      "account.res_partner_action_customer"
+    ],
+    "synchronized_view_xmlids": [
+      "sale.view_order_form",
+      "sale.sale_order_drawing_selection_form",
+      "base.view_partner_form",
+      "base.res_partner_kanban_view",
+      "sales_team.crm_team_view_form"
+    ],
+    "access_model": "ir.access",
+    "access_records": 31,
+    "raw_translation_records": 1356,
+    "business_or_user_records_exported": 0,
+    "additional_credentials_found": 0
+  }
 }

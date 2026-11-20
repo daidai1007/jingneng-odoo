@@ -30,6 +30,15 @@ OdooNativePreview/
 
 快照包含相关模块完整视图/动作参考，不表示每条均为新增修改。代码改动以Git基线比较和 `jingneng/audit/changed-source.json` 为准。用户、客户、订单、成本快照和图纸不在配置快照中。
 
+### 帮助文案、权限和多语言补充
+
+- `database-interface-supplement.snapshot.json` 补充数据库中两处帮助文案，并以稳定XML ID核对五个已同步的表单视图，不把本机数字ID当成迁移标识。
+- `interface-translations.snapshot.json` 保存配置表中当前存在的原始JSONB译文，包括动作名称/帮助和视图结构的语言版本。主配置快照是单一环境语言下的读取，不能代替此多语言参考。
+- 本分发使用新的 `ir.access` 统一权限模型，不存在旧版 `ir.model.access`、`ir.rule` 模型。`access-control.snapshot.json` 保存订单、订单行、图纸和产品相关的31条权限/限制配置，均已解析XML ID；不要套用旧模型名回放。
+- 不导出人员及用户语言偏好。新环境按需要为本机演示或业务账号选择 `zh_CN`，角色分配由管理员在目标环境完成。
+
+上述内容仍仅为配置参考；同步需匹配相同代码版本、目标字段和实际语言，不能将整个快照无条件写入任意数据库。
+
 ## 计价与识图依赖
 
 - `sale.drawing_recognition.client` 为原报价客户端规则目录，计价复用 `scheme2_ui.py`、`attachment_v2_client.py` 和纯计算依赖。

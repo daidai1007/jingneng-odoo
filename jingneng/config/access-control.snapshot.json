@@ -1,0 +1,351 @@
+{
+  "schema": 1,
+  "odoo_model": "ir.access",
+  "legacy_models_not_present": [
+    "ir.model.access",
+    "ir.rule"
+  ],
+  "records": [
+    {
+      "xml_id": "mrp.access_product_template_user",
+      "model": "product.template",
+      "name": "product.template user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "mrp.group_mrp_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "purchase.access_product_template_purchase_user",
+      "model": "product.template",
+      "name": "product.template purchase_user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "purchase.group_purchase_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "product.access_product_template_manager",
+      "model": "product.template",
+      "name": "product.template.manager",
+      "active": true,
+      "operation": "crud",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "product.group_product_manager",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "stock.access_product_template_stock_user",
+      "model": "product.template",
+      "name": "product.template stock user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "stock.group_stock_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "product.access_product_template_user",
+      "model": "product.template",
+      "name": "product.template.user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "base.group_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "product.product_comp_rule",
+      "model": "product.template",
+      "name": "Product multi-company",
+      "active": true,
+      "operation": "crud",
+      "domain": " ['|', ('company_id', 'parent_of', company_ids), ('company_id', '=', False)]",
+      "kind": "restriction",
+      "group_xml_id": false,
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "mrp.access_product_product_user",
+      "model": "product.product",
+      "name": "product.product user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "mrp.group_mrp_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "purchase.access_product_product_purchase_user",
+      "model": "product.product",
+      "name": "product.product.purchase.user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "purchase.group_purchase_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "product.access_product_product_manager",
+      "model": "product.product",
+      "name": "product.product manager",
+      "active": true,
+      "operation": "crud",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "product.group_product_manager",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "stock.access_product_product_stock_user",
+      "model": "product.product",
+      "name": "product_product_stock_user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "stock.group_stock_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "product.access_product_product_employee",
+      "model": "product.product",
+      "name": "product.product employee",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "base.group_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "account.access_product_product_account_user",
+      "model": "product.product",
+      "name": "product.product.account.user",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "account.group_account_readonly",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_personal_rule",
+      "model": "sale.order",
+      "name": "Personal Orders",
+      "active": true,
+      "operation": "cru",
+      "domain": "['|',('user_id','=',user.id),('user_id','=',False)]",
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_salesman",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_see_all",
+      "model": "sale.order",
+      "name": "All Orders",
+      "active": true,
+      "operation": "cru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_salesman_all_leads",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_see_all_1",
+      "model": "sale.order",
+      "name": "All Orders",
+      "active": true,
+      "operation": "crud",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_manager",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale_mrp.sale_order_mrp_rule",
+      "model": "sale.order",
+      "name": "MRP User Orders",
+      "active": true,
+      "operation": "ru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "mrp.group_mrp_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_invoicing_rule",
+      "model": "sale.order",
+      "name": "Account Invoicing Orders",
+      "active": true,
+      "operation": "ru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "account.group_account_invoice",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale_stock.sale_order_stock_rule",
+      "model": "sale.order",
+      "name": "Stock User Orders",
+      "active": true,
+      "operation": "ru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "stock.group_stock_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_account_readonly_rule",
+      "model": "sale.order",
+      "name": "Account Readonly Orders",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "account.group_account_readonly",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_rule_portal",
+      "model": "sale.order",
+      "name": "Portal Personal Quotations/Sales Orders",
+      "active": true,
+      "operation": "r",
+      "domain": "[('partner_id','child_of',[user.commercial_partner_id.id])]",
+      "kind": "permission",
+      "group_xml_id": "base.group_portal",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_comp_rule",
+      "model": "sale.order",
+      "name": "Sales Order multi-company",
+      "active": true,
+      "operation": "crud",
+      "domain": "[('company_id', 'in', company_ids)]",
+      "kind": "restriction",
+      "group_xml_id": false,
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_drawing_read",
+      "model": "sale.order.drawing",
+      "name": "Sales drawings read",
+      "active": true,
+      "operation": "r",
+      "domain": "[('order_id', 'access', 'read')]",
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_salesman",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_drawing_write",
+      "model": "sale.order.drawing",
+      "name": "Sales drawings edit",
+      "active": true,
+      "operation": "cud",
+      "domain": "[('order_id', 'access', 'write')]",
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_salesman",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_line_personal_rule",
+      "model": "sale.order.line",
+      "name": "Personal Order Lines",
+      "active": true,
+      "operation": "crud",
+      "domain": "['|',('salesman_id','=',user.id),('salesman_id','=',False)]",
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_salesman",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_line_see_all",
+      "model": "sale.order.line",
+      "name": "All Orders Lines",
+      "active": true,
+      "operation": "crud",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "sales_team.group_sale_salesman_all_leads",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale_mrp.sale_order_line_mrp_rule",
+      "model": "sale.order.line",
+      "name": "MRP User Order Lines",
+      "active": true,
+      "operation": "ru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "mrp.group_mrp_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_line_invoicing_rule",
+      "model": "sale.order.line",
+      "name": "Account Invoicing Order Lines",
+      "active": true,
+      "operation": "ru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "account.group_account_invoice",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale_stock.sale_order_line_rule_stock_user",
+      "model": "sale.order.line",
+      "name": "Stock User Sales Orders Line",
+      "active": true,
+      "operation": "ru",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "stock.group_stock_user",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_line_account_readonly_rule",
+      "model": "sale.order.line",
+      "name": "Account Readonly Order Lines",
+      "active": true,
+      "operation": "r",
+      "domain": false,
+      "kind": "permission",
+      "group_xml_id": "account.group_account_readonly",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_line_rule_portal",
+      "model": "sale.order.line",
+      "name": "Portal Sales Orders Line",
+      "active": true,
+      "operation": "r",
+      "domain": "[('order_id', 'access', 'read')]",
+      "kind": "permission",
+      "group_xml_id": "base.group_portal",
+      "requires_manual_identity_resolution": false
+    },
+    {
+      "xml_id": "sale.sale_order_line_comp_rule",
+      "model": "sale.order.line",
+      "name": "Sales Order Line multi-company",
+      "active": true,
+      "operation": "crud",
+      "domain": "[('company_id', 'in', company_ids)]",
+      "kind": "restriction",
+      "group_xml_id": false,
+      "requires_manual_identity_resolution": false
+    }
+  ]
+}
