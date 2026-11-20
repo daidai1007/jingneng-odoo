@@ -5,7 +5,7 @@
             <img
                 class="w-100 border rounded"
                 t-att-src="this.imageUrl"
-                alt="Product Image"
+                alt="产品图像"
             />
         </td>
         <td class="d-block p-0 p-md-3 product_name_description">
@@ -36,7 +36,7 @@
                 />
             </t>
             <div t-if="!this.env.isPossibleCombination(this.props)" class="alert alert-warning impossible_combination_alert mt-3">
-                <span>This option or combination of options is not available</span>
+                <span>此选项或选项组合不可用</span>
             </div>
             <t t-if="this.props.available_uoms?.length > 1" t-call="sale.uom_selector"/>
         </td>
@@ -69,7 +69,7 @@
                     t-if="!this.isMainProduct"
                     t-on-click="() => this.env.removeProduct(this.props.product_tmpl_id)"
                 >
-                    Remove
+                    移除
                 </a>
             </td>
         </t>
@@ -91,7 +91,7 @@
                     t-on-click="() => this.env.addProduct(this.props.product_tmpl_id)"
                 >
                     <i class="oi" data-icon="add" role="img"/>
-                    <span name="add_button" class="ms-2 d-none d-md-inline">Add</span>
+                    <span name="add_button" class="ms-2 d-none d-md-inline">添加</span>
                 </button>
             </td>
         </t>

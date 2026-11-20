@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "parameters": [
+    {
+      "key": "sale.async_emails",
+      "type": "bool",
+      "value": false,
+      "machine_specific": false
+    },
+    {
+      "key": "sale.automatic_stock_procurement",
+      "type": "bool",
+      "value": false,
+      "machine_specific": false
+    },
+    {
+      "key": "sale.default_confirmation_template",
+      "type": "str",
+      "value": "21",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.default_invoice_email_template",
+      "type": "str",
+      "value": "7",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.bundle",
+      "type": "str",
+      "value": "G:/gongsi/banjinxitong/板件后续二次修改/AIQuoteDualSystem/_internal",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.client",
+      "type": "str",
+      "value": "G:/gongsi/banjinxitong/板件后续二次修改/render-test-deploy/desktop_client",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.converter",
+      "type": "str",
+      "value": "G:/Program Files/ODA/ODAFileConverter 27.1.0/ODAFileConverter.exe",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.dependencies",
+      "type": "str",
+      "value": "G:/京能/Odoo/识图运行库/20261118",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.pure_dependencies",
+      "type": "str",
+      "value": "G:/京能/Odoo/识图运行库/20261118",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.renderer",
+      "type": "str",
+      "value": "G:/gongsi/banjinxitong/板件后续二次修改/AIQuoteDualSystem/runtime/poppler/bin/pdftoppm.exe",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.drawing_recognition.workspace",
+      "type": "str",
+      "value": "G:/京能/Odoo/识图工作缓存",
+      "machine_specific": false
+    },
+    {
+      "key": "sale.selection_accessory_catalog_path",
+      "type": "str",
+      "value": "G:\\京能\\Odoo\\核对材料\\线上附件目录-xlsx-7b6fcb18de6f8969-r5.json",
+      "machine_specific": true
+    }
+  ],
+  "excluded_sensitive_keys": []
+}

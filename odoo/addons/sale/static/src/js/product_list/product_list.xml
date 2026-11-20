@@ -14,7 +14,7 @@
             >
                 <thead t-if="!this.props.areProductsOptional">
                     <tr>
-                        <th class="px-0 border-bottom-0" colspan="2">Product</th>
+                        <th class="px-0 border-bottom-0" colspan="2">产品</th>
                     </tr>
                 </thead>
                 <tbody class="border-top-0">

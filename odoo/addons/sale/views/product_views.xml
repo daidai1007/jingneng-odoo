@@ -132,18 +132,59 @@
         </field>
     </record>
 
+    <record id="jingneng_product_category_cabinet" model="product.category">
+        <field name="name">机箱机柜</field>
+    </record>
+
+    <record id="jingneng_product_category_attachment" model="product.category">
+        <field name="name">附件</field>
+    </record>
+
+    <record id="jingneng_product_catalog_list" model="ir.ui.view">
+        <field name="name">product.template.list.jingneng.catalog</field>
+        <field name="model">product.template</field>
+        <field name="priority">95</field>
+        <field name="arch" type="xml">
+            <list string="产品" js_class="sale_jingneng_product_catalog">
+                <field name="name" string="名称"/>
+                <field name="categ_id" string="产品类别" optional="show"/>
+                <field name="jingneng_catalog_series" optional="show"/>
+                <field name="jingneng_catalog_specification" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="jingneng_product_catalog_search" model="ir.ui.view">
+        <field name="name">product.template.search.jingneng.catalog</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="mode">primary</field>
+        <field name="priority">95</field>
+        <field name="arch" type="xml">
+            <filter name="filter_to_sell" position="replace">
+                <filter name="filter_to_sell" string="京能目录"
+                    domain="[('categ_id', 'in', [%(sale.jingneng_product_category_cabinet)d, %(sale.jingneng_product_category_attachment)d])]"/>
+                <separator/>
+                <filter name="jingneng_cabinet" string="机箱机柜" domain="[('categ_id', '=', %(sale.jingneng_product_category_cabinet)d)]"/>
+                <filter name="jingneng_attachment" string="附件" domain="[('categ_id', '=', %(sale.jingneng_product_category_attachment)d)]"/>
+            </filter>
+        </field>
+    </record>
+
     <record id="product_template_action" model="ir.actions.act_window">
         <field name="name">Products</field>
         <field name="explanation">Shows the product catalog available for sale. Use this when the user wants to update item pricing, inventory details, or product descriptions.</field>
         <field name="res_model">product.template</field>
         <field name="path">products</field>
+        <field name="view_mode">list,kanban,form,activity</field>
         <field name="view_ids" eval="[Command.clear(),
-            Command.create({'view_mode': 'kanban'}),
-            Command.create({'view_mode': 'list', 'view_id': ref('account.product_template_list_view_sellable_inherit')}),
-            Command.create({'view_mode': 'form'}),
-            Command.create({'view_mode': 'activity'})]"/>
-        <field name="search_view_id" ref="product.product_template_search_view"/>
-        <field name="context">{"search_default_filter_to_sell":1, "sale_multi_pricelist_product_template": 1}</field>
+            Command.create({'sequence': 1, 'view_mode': 'list', 'view_id': ref('sale.jingneng_product_catalog_list')}),
+            Command.create({'sequence': 2, 'view_mode': 'kanban'}),
+            Command.create({'sequence': 3, 'view_mode': 'form'}),
+            Command.create({'sequence': 4, 'view_mode': 'activity'})]"/>
+        <field name="search_view_id" ref="sale.jingneng_product_catalog_search"/>
+        <field name="domain" eval="['|', ('categ_id', '=', ref('sale.jingneng_product_category_attachment')), '&amp;', '&amp;', '&amp;', ('active', '=', True), ('sale_ok', '=', True), ('categ_id', '=', ref('sale.jingneng_product_category_cabinet')), ('jingneng_catalog_series', 'in', ['JA', 'JC', 'JE', 'JK', 'JM', 'JP', 'JP WIDE', 'JQ', 'JS', 'JS WIDE', '操作台'])]"/>
+        <field name="context" eval="{'search_default_filter_to_sell': 1, 'sale_multi_pricelist_product_template': 1, 'default_categ_id': ref('sale.jingneng_product_category_cabinet'), 'jingneng_sale_ui': True}"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new product

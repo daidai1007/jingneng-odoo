@@ -130,9 +130,6 @@ class SaleEdiXmlUbl_Bis3(models.AbstractModel):
             'cbc:OrderTypeCode': {'_text': '220'},
             'cbc:Note': {'_text': html2plaintext(sale_order.note)} if sale_order.note else None,
             'cbc:DocumentCurrencyCode': {'_text': vals['currency_name']},
-            'cac:ValidityPeriod': {
-                'cbc:EndDate': {'_text': sale_order.validity_date},
-            },
             'cac:OriginatorDocumentReference': {
                 'cbc:ID': {'_text': sale_order.client_order_ref}
             },

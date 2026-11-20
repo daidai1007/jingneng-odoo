@@ -51,3 +51,17 @@ package.json
 /man/
 /share/
 /src/
+
+# Jingneng local runtime and credentials (never versioned)
+/jingneng/local/
+/odoo.conf
+/设置.json
+/.env
+/.env.local
+/pgdata/
+/odoo-data/
+/日志/
+*.dump
+*.backup
+**/__pycache__/
+**/client_config.json

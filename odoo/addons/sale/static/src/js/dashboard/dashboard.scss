@@ -61,3 +61,297 @@
 .o_sale_dashboard {
     background-color: $o-control-panel-background-color;
 }
+
+
+.o_quotation_progress {
+    --qp-violet: #65538c;
+    --qp-ink: var(--body-color, #29263a);
+    --qp-muted: var(--secondary-color, #646175);
+    --qp-paper: var(--body-bg, white);
+    --qp-border: var(--border-color, #e5e2ed);
+    color: var(--qp-ink);
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 1rem;
+
+    .o_qp_header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: .25rem 1rem 1rem;
+    }
+    .o_qp_summary {
+        max-width: 100%;
+        margin-inline-start: auto;
+    }
+    .o_qp_toolbar {
+        padding: 0 1rem .75rem;
+    }
+    .o_qp_month {
+        display: grid;
+        place-items: center;
+        min-width: 7.3rem;
+        padding: 0 .55rem;
+        background: var(--qp-paper);
+        border-block: 1px solid var(--qp-border);
+        font-weight: 650;
+        white-space: nowrap;
+    }
+    .o_qp_board {
+        background: transparent;
+    }
+    .o_qp_tabs {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: .5rem;
+        padding: 2px;
+        margin: -2px;
+    }
+    .o_qp_tab {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        text-align: center;
+
+        .o_dashboard_card_data { font-variant-numeric: tabular-nums; }
+    }
+    .o_qp_empty { padding: 2rem 1rem; text-align: center; color: var(--qp-muted); }
+    .o_qp_scroll { overflow: auto; }
+    .o_qp_table {
+        table-layout: fixed;
+        width: 100%;
+        min-width: 65rem;
+        border-spacing: 0;
+        border-collapse: separate;
+        font-size: .86rem;
+        font-variant-numeric: tabular-nums;
+
+        th, td { padding: .41rem .75rem; vertical-align: middle; }
+        thead th {
+            height: 2.65rem;
+            border-bottom: 1px solid var(--qp-border);
+            background: transparent;
+            text-align: left;
+        }
+        tbody { background: var(--qp-paper); }
+        tbody tr { height: 3.55rem; }
+        tbody tr:nth-child(even) { background: rgba(101, 83, 140, .022); }
+        tbody tr.o_qp_selected { background: rgba(155, 120, 208, .11); }
+        tbody tr.o_qp_selected th { box-shadow: inset 3px 0 #8168af; }
+        tbody tr + tr :is(th, td) { border-top: 1px solid var(--qp-border); }
+        .o_qp_col_record { width: 13.5rem; }
+        .o_qp_col_status { width: 9.3rem; }
+        .o_qp_col_next { width: 10.3rem; }
+        .o_qp_axis, .o_qp_lane { position: relative; padding: 0; border-left: 1px solid var(--qp-border); }
+    }
+    .o_qp_order {
+        border: 0;
+        background: transparent;
+        color: var(--link-color, var(--qp-violet));
+        padding: 0;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .o_qp_customer, .o_qp_note {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--qp-muted);
+        font-size: .76rem;
+        font-weight: 400;
+    }
+    .o_qp_status {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        border-radius: 1rem;
+        color: var(--qp-mark);
+        background: color-mix(in srgb, var(--qp-mark) 11%, var(--qp-paper));
+        font-size: .74rem;
+        font-weight: 650;
+        padding: .22rem .47rem;
+        white-space: nowrap;
+    }
+    .o_qp_source { --qp-mark: #267a8e; }
+    .o_qp_draft { --qp-mark: #6d7484; }
+    .o_qp_quotation { --qp-mark: #14787b; }
+    .o_qp_sent { --qp-mark: #3e619c; }
+    .o_qp_contract { --qp-mark: #695096; }
+    .o_qp_sale { --qp-mark: #227258; }
+    .o_qp_cancel { --qp-mark: #985413; }
+    .o_qp_delivery { --qp-mark: #826198; }
+    .o_qp_dot {
+        background: var(--qp-mark);
+        display: inline-block;
+        border-radius: 50%;
+        width: .42rem;
+        height: .42rem;
+        flex: none;
+    }
+    .o_qp_axis_month { position: absolute; top: .22rem; left: .42rem; font-size: .72rem; color: var(--qp-muted); }
+    .o_qp_week { position: absolute; bottom: .22rem; padding-left: .42rem; font-size: .72rem; white-space: nowrap; }
+    .o_qp_week_line, .o_qp_today_line { position: absolute; inset-block: 0; width: 1px; background: var(--qp-border); }
+    .o_qp_today_line { background: #9e87bd; z-index: 1; }
+    .o_qp_today_badge {
+        position: absolute;
+        bottom: .23rem;
+        transform: translateX(-50%);
+        z-index: 2;
+        color: #fff;
+        background: var(--qp-violet);
+        padding: .21rem .4rem;
+        border-radius: .32rem;
+        font-size: .72rem;
+        white-space: nowrap;
+    }
+    .o_qp_timeline {
+        height: 3.48rem;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        --qp-day-width: calc(100% / var(--quotation-days));
+        background: repeating-linear-gradient(
+            90deg, color-mix(in srgb,var(--qp-border) 55%,transparent) 0 1px,
+            transparent 1px var(--qp-day-width)
+        );
+    }
+    .o_qp_span {
+        position: absolute;
+        top: 1.62rem;
+        height: .24rem;
+        border-radius: .25rem;
+        background: var(--qp-mark);
+        opacity: .5;
+        z-index: 1;
+        &.o_qp_planned {
+            top: 1.69rem;
+            height: 2px;
+            border-radius: 0;
+            background: repeating-linear-gradient(90deg, var(--qp-mark) 0 5px, transparent 5px 9px);
+            opacity: .64;
+        }
+    }
+    .o_qp_point {
+        position: absolute;
+        z-index: 2;
+        top: 1.35rem;
+        transform: translateX(-50%);
+        width: .82rem;
+        height: .82rem;
+        padding: 0;
+        border: 2px solid var(--qp-paper);
+        border-radius: 50%;
+        background: var(--qp-mark);
+        box-shadow: 0 0 0 1px var(--qp-mark);
+    }
+    .o_qp_diamond {
+        --qp-mark: #826198;
+        display: inline-block;
+        width: .5rem;
+        height: .5rem;
+        transform: rotate(45deg);
+        border: 1.5px solid var(--qp-mark);
+        background: var(--qp-paper);
+    }
+    .o_qp_delivery_label {
+        position: absolute;
+        top: 1.3rem;
+        z-index: 2;
+        transform: translateX(-50%);
+        display: grid;
+        justify-items: center;
+        gap: .12rem;
+        color: var(--qp-muted);
+        white-space: nowrap;
+    }
+    .o_qp_no_events { position: absolute; top: 1.1rem; left: .7rem; font-size: .75rem; color: var(--qp-muted); }
+    .o_qp_legend, .o_qp_inspector {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .7rem;
+        color: var(--qp-muted);
+        font-size: .78rem;
+    }
+    .o_qp_legend_plan {
+        width: 1rem;
+        border-top: 2px dashed #826198;
+    }
+    .o_qp_legend {
+        border-top: 1px solid var(--qp-border);
+        padding: .55rem .8rem;
+
+        > span, .o_qp_pager { display: inline-flex; align-items: center; gap: .4rem; }
+        .o_qp_pager { margin-left: auto; font-variant-numeric: tabular-nums; }
+        .o_qp_pager button { padding: .13rem .4rem; }
+    }
+    .o_qp_inspector {
+        padding: .55rem .8rem;
+        border-top: 1px solid var(--qp-border);
+        background: transparent;
+
+        strong { color: var(--qp-ink); }
+        .o_qp_inspector_next { flex: 1 1 auto; }
+        .btn { margin-left: auto; }
+    }
+}
+
+
+.o_jingneng_catalog_filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: .55rem;
+    padding: .6rem .85rem .85rem;
+
+    .o_dashboard_card {
+        min-width: 8.2rem;
+        min-height: 3.75rem;
+        line-height: 1.25;
+        font-weight: 650;
+    }
+    .o_dashboard_card small { font-weight: 400; }
+}
+
+
+
+// Sales reporting uses the same backend theme and native controls as the order views.
+.jn-reports {
+    --jn-report-chart-height: 290px;
+    --jn-report-name-width: 18rem;
+    min-height: 0;
+    .jn-report-body { background: var(--o-webclient-background-color, #f9fafb); }
+    .jn-report-search { width:450px; max-width:100%; }
+    .jn-report-filter { display:flex; align-items:center; gap:.5rem; white-space:nowrap; }
+    .jn-report-filter .form-select { width:auto; min-width:6rem; }
+    .jn-date { width:10rem; }
+    .jn-sort { width:auto; }
+    .jn-report-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; }
+    .jn-report-card { color:inherit; font:inherit; min-width:0; }
+    .jn-report-card.active { border-color:$o-brand-primary!important; box-shadow:inset 0 3px $o-brand-primary; }
+    .jn-report-graphs { display:grid; grid-template-columns:minmax(0,3fr) minmax(320px,2fr); gap:1rem; }
+    .jn-report-chart { position:relative; height:var(--jn-report-chart-height); }
+    .jn-ranking-row { margin-bottom:1rem; }
+    .jn-rank-name { max-width:var(--jn-report-name-width); overflow-wrap:anywhere; }
+    .jn-rank-track { height:.4rem; border-radius:.2rem; overflow:hidden; }
+    .jn-report-table { min-width:750px; }
+    .jn-report-table th { background:var(--o-control-panel-background-color,var(--bs-light)); white-space:nowrap; }
+    .jn-report-table td { padding:.8rem 1rem; vertical-align:middle; }
+    .jn-report-table th { padding:.8rem 1rem; }
+    .jn-wrap { max-width:var(--jn-report-name-width); min-width:9rem; overflow-wrap:anywhere; }
+    .jn-wrap button { white-space:normal; }
+    .jn-result { font-size:inherit; font-weight:500; }
+    .jn-result-won { background:rgba($success,.12); color:$success; }
+    .jn-result-lost { background:rgba($warning,.15); color:$body-color; }
+    .jn-result-pending { background:rgba($secondary,.12); color:$body-color; }
+    @media(max-width:991px) { .jn-report-graphs { grid-template-columns:minmax(0,1fr); } }
+    @media(max-width:575px) {
+        .jn-report-cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; }
+        .jn-report-card strong { font-size:1.3rem!important; }
+        .jn-report-filter { flex:1; justify-content:space-between; }
+    }
+}

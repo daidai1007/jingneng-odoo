@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <templates xml:space="preserve">
-    <t t-name="sale.SaleListRenderer" t-inherit="account.FileUploadListRenderer" t-inherit-mode="primary">
+    <t t-name="sale.SaleListRenderer" t-inherit="sale.CustomerFilterListRenderer" t-inherit-mode="primary">
         <ActionHelper position="replace">
             <t t-if="this.showNoContentHelper">
                 <SaleActionHelper noContentHelp="this.props.noContentHelp"/>
             </t>
         </ActionHelper>
+    </t>
+    <t t-name="sale.CustomerFilterListRenderer" t-inherit="account.FileUploadListRenderer" t-inherit-mode="primary">
+        <xpath expr="//i[hasclass('o_list_sortable_icon')]" position="replace">
+            <JingnengCustomerFilter t-if="this.props.list.resModel === 'sale.order' &amp;&amp; column.name === 'partner_id'"/>
+            <JingnengCustomerFilter t-elif="this.props.list.resModel === 'sale.order' &amp;&amp; column.name === 'user_id'"
+                                   fieldName="'user_id'" label="'销售人员'" unit="'人'"/>
+            <i t-else="" class="o_list_sortable_icon" t-att-class="this.getSortableIconClass(column)"
+               t-att-data-icon="this.getSortableIcon(column)"/>
+        </xpath>
+    </t>
+    <t t-name="sale.JingnengCustomerFilter">
+        <div class="o_order_column_filter d-flex align-items-center pe-1"
+             t-on-click.stop="" t-on-pointerup.stop="" t-on-keydown.stop="">
+            <Dropdown state="this.dropdown" beforeOpen.bind="this.beforeOpen"
+                      menuClass="(this.props.fieldName === 'partner_id' ? 'o_customer_filter_menu' : 'o_salesperson_filter_menu') + ' p-3'" position="'bottom-end'">
+                <button type="button" class="btn btn-link p-0 border-0 d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width: 24px; height: 24px"
+                        t-att-class="this.active ? 'text-primary' : 'text-body'"
+                        t-att-aria-pressed="this.active ? 'true' : 'false'" t-att-aria-label="this.props.label + '筛选'" t-att-title="'筛选' + this.props.label">
+                    <i class="oi" data-icon="filter_alt" aria-hidden="true"/>
+                </button>
+                <t t-set-slot="content">
+                    <div style="width: 300px; max-width: calc(100vw - 48px)" t-on-click.stop="">
+                        <div class="fw-bold mb-2">筛选<t t-esc="this.props.label"/></div>
+                        <input type="search" class="o_input form-control mb-2" t-att-placeholder="'搜索' + this.props.label + (this.props.fieldName === 'partner_id' ? '名称' : '')"
+                               t-att-aria-label="'搜索' + this.props.label + (this.props.fieldName === 'partner_id' ? '名称' : '')" t-att-value="this.state.query" t-on-input="this.search"/>
+                        <div t-if="this.state.loading" class="text-muted py-2" role="status">正在加载<t t-esc="this.props.label"/>…</div>
+                        <div t-elif="this.state.error" class="py-2" role="alert">
+                            <span class="text-warning" t-esc="this.state.error"/>
+                            <button type="button" class="btn btn-link btn-sm" t-on-click="this.load">重试</button>
+                        </div>
+                        <div t-elif="!this.state.items.length" class="text-muted py-2" role="status">未找到<t t-esc="this.props.label"/></div>
+                        <div t-else="" class="overflow-auto" style="max-height: 260px">
+                            <label t-foreach="this.state.items" t-as="item" t-key="item.id"
+                                   class="d-flex align-items-start gap-2 py-1 mb-0">
+                                <input type="checkbox" class="form-check-input flex-shrink-0 mt-1"
+                                       t-att-aria-label="item.name" t-att-checked="this.state.ids.includes(item.id)"
+                                       t-on-change="(event)=>this.toggle(item.id,event.target.checked)"/>
+                                <span class="text-break" t-esc="item.name"/>
+                            </label>
+                        </div>
+                        <small t-if="this.state.more" class="d-block text-muted mt-2">请继续输入<t t-esc="this.props.label"/>名称缩小范围</small>
+                        <div class="d-flex align-items-center gap-2 pt-2 mt-2 border-top">
+                            <button type="button" class="btn btn-primary btn-sm" t-on-click="this.apply"
+                                    t-att-disabled="!this.state.ids.length || this.state.loading || this.state.error">应用筛选</button>
+                            <button type="button" class="btn btn-secondary btn-sm" t-on-click="this.clear">清除筛选</button>
+                            <small class="text-muted ms-auto">已选 <t t-esc="this.state.ids.length"/> <t t-esc="this.props.unit"/></small>
+                        </div>
+                    </div>
+                </t>
+            </Dropdown>
+        </div>
     </t>
 </templates>

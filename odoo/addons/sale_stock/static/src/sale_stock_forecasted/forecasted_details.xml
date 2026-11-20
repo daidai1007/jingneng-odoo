@@ -8,10 +8,10 @@
                 <t t-set="draft_so_out_count" t-value="currentProduct.draft_sale_orders.length"/>
                 <a t-if="draft_so_out_count == 1" href="#"
                     t-on-click.prevent="() => this.props.openView('sale.order', 'form', currentProduct.draft_sale_orders[0].id)">
-                    1 Quotation</a>
+                    1 份报价单</a>
                 <a t-else="" href="#"
                     t-on-click.prevent="() => this.props.openView('sale.order', 'list', false, [['id', 'in', currentProduct.draft_sale_orders.map((so) => so.id)]])">
-                    <t t-out="draft_so_out_count"/> Quotations</a>
+                    <t t-out="draft_so_out_count"/> 报价</a>
                 </td>
                 <td class="text-end">
                     <span class="text-danger">

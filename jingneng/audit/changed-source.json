@@ -1,0 +1,292 @@
+[
+  {
+    "path": "odoo/addons/account/static/src/components/tax_totals/tax_totals.xml",
+    "state": "modified",
+    "bytes": 5985
+  },
+  {
+    "path": "odoo/addons/base/views/res_partner_views.xml",
+    "state": "modified",
+    "bytes": 39967
+  },
+  {
+    "path": "odoo/addons/base_import/models/base_import.py",
+    "state": "modified",
+    "bytes": 90009
+  },
+  {
+    "path": "odoo/addons/sale/controllers/portal.py",
+    "state": "modified",
+    "bytes": 22674
+  },
+  {
+    "path": "odoo/addons/sale/data/ir_cron.xml",
+    "state": "modified",
+    "bytes": 2169
+  },
+  {
+    "path": "odoo/addons/sale/i18n/zh_CN.po",
+    "state": "modified",
+    "bytes": 350587
+  },
+  {
+    "path": "odoo/addons/sale/models/product_product.py",
+    "state": "modified",
+    "bytes": 8056
+  },
+  {
+    "path": "odoo/addons/sale/models/product_template.py",
+    "state": "modified",
+    "bytes": 20804
+  },
+  {
+    "path": "odoo/addons/sale/models/sale_order.py",
+    "state": "modified",
+    "bytes": 303364
+  },
+  {
+    "path": "odoo/addons/sale/models/sale_order_line.py",
+    "state": "modified",
+    "bytes": 128499
+  },
+  {
+    "path": "odoo/addons/sale/report/ir_actions_report_templates.xml",
+    "state": "modified",
+    "bytes": 34730
+  },
+  {
+    "path": "odoo/addons/sale/report/sale_report.py",
+    "state": "modified",
+    "bytes": 18324
+  },
+  {
+    "path": "odoo/addons/sale/report/sale_report_views.xml",
+    "state": "modified",
+    "bytes": 14486
+  },
+  {
+    "path": "odoo/addons/sale/security/ir.access.csv",
+    "state": "modified",
+    "bytes": 7887
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.xml",
+    "state": "modified",
+    "bytes": 5792
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/dashboard/dashboard.js",
+    "state": "modified",
+    "bytes": 33470
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/dashboard/dashboard.scss",
+    "state": "modified",
+    "bytes": 12321
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/dashboard/dashboard.xml",
+    "state": "modified",
+    "bytes": 29905
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/product/product.xml",
+    "state": "modified",
+    "bytes": 6513
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/product_card/product_card.xml",
+    "state": "modified",
+    "bytes": 1886
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/product_configurator_dialog/product_configurator_dialog.xml",
+    "state": "modified",
+    "bytes": 1563
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/product_list/product_list.xml",
+    "state": "modified",
+    "bytes": 1293
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/quantity_availability/qty_at_date_widget.xml",
+    "state": "modified",
+    "bytes": 1937
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/quantity_buttons/quantity_buttons.xml",
+    "state": "modified",
+    "bytes": 1380
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/sale_action_helper/sale_action_helper_dialog.xml",
+    "state": "modified",
+    "bytes": 964
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/sale_order_line_field/sale_order_line_field.js",
+    "state": "modified",
+    "bytes": 36280
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/sale_order_line_field/sale_order_line_field.scss",
+    "state": "modified",
+    "bytes": 8678
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/sale_order_line_field/sale_order_line_field.xml",
+    "state": "modified",
+    "bytes": 48127
+  },
+  {
+    "path": "odoo/addons/sale/static/src/js/upload_rfq_cog_menu/upload_rfq_cog_menu.xml",
+    "state": "modified",
+    "bytes": 596
+  },
+  {
+    "path": "odoo/addons/sale/static/src/views/dashboard_list_view/dashboard_list_view.js",
+    "state": "modified",
+    "bytes": 5943
+  },
+  {
+    "path": "odoo/addons/sale/static/src/views/dashboard_list_view/dashboard_list_view.xml",
+    "state": "modified",
+    "bytes": 1512
+  },
+  {
+    "path": "odoo/addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js",
+    "state": "modified",
+    "bytes": 5299
+  },
+  {
+    "path": "odoo/addons/sale/static/src/views/sale_onboarding_list/sale_onboarding_list_renderer.xml",
+    "state": "modified",
+    "bytes": 5007
+  },
+  {
+    "path": "odoo/addons/sale/static/src/views/sale_order_form_view/sale_order_form_view.js",
+    "state": "modified",
+    "bytes": 95022
+  },
+  {
+    "path": "odoo/addons/sale/static/src/xml/combo_menu_widget.xml",
+    "state": "modified",
+    "bytes": 1010
+  },
+  {
+    "path": "odoo/addons/sale/static/src/xml/discount_menu_widget.xml",
+    "state": "modified",
+    "bytes": 691
+  },
+  {
+    "path": "odoo/addons/sale/static/xls/quotations_import_template.xlsx",
+    "state": "modified",
+    "bytes": 4975
+  },
+  {
+    "path": "odoo/addons/sale/views/product_views.xml",
+    "state": "modified",
+    "bytes": 15388
+  },
+  {
+    "path": "odoo/addons/sale/views/sale_menus.xml",
+    "state": "modified",
+    "bytes": 3884
+  },
+  {
+    "path": "odoo/addons/sale/views/sale_order_views.xml",
+    "state": "modified",
+    "bytes": 119594
+  },
+  {
+    "path": "odoo/addons/sale/views/sale_portal_templates.xml",
+    "state": "modified",
+    "bytes": 68795
+  },
+  {
+    "path": "odoo/addons/sale/wizard/res_config_settings_views.xml",
+    "state": "modified",
+    "bytes": 16237
+  },
+  {
+    "path": "odoo/addons/sales_team/views/crm_team_views.xml",
+    "state": "modified",
+    "bytes": 10866
+  },
+  {
+    "path": "odoo/addons/sale_edi_ubl/models/sale_edi_xml_ubl_bis3.py",
+    "state": "modified",
+    "bytes": 17873
+  },
+  {
+    "path": "odoo/addons/sale_management/i18n/zh_CN.po",
+    "state": "modified",
+    "bytes": 34693
+  },
+  {
+    "path": "odoo/addons/sale_management/models/sale_order.py",
+    "state": "modified",
+    "bytes": 5886
+  },
+  {
+    "path": "odoo/addons/sale_management/static/src/fields/sale_order_line_field/sale_order_line_field.xml",
+    "state": "modified",
+    "bytes": 4250
+  },
+  {
+    "path": "odoo/addons/sale_management/static/src/fields/sale_order_template_line_field/sale_order_template_line_field.xml",
+    "state": "modified",
+    "bytes": 740
+  },
+  {
+    "path": "odoo/addons/sale_management/static/src/views/components/template_dropdown.xml",
+    "state": "modified",
+    "bytes": 2358
+  },
+  {
+    "path": "odoo/addons/sale_management/views/sale_order_template_views.xml",
+    "state": "modified",
+    "bytes": 17239
+  },
+  {
+    "path": "odoo/addons/sale_margin/models/sale_order.py",
+    "state": "modified",
+    "bytes": 2693
+  },
+  {
+    "path": "odoo/addons/sale_margin/views/sale_order_views.xml",
+    "state": "modified",
+    "bytes": 1956
+  },
+  {
+    "path": "odoo/addons/sale_stock/models/sale_order_line.py",
+    "state": "modified",
+    "bytes": 25459
+  },
+  {
+    "path": "odoo/addons/sale_stock/static/src/return_order_dialog/return_label_info.xml",
+    "state": "modified",
+    "bytes": 578
+  },
+  {
+    "path": "odoo/addons/sale_stock/static/src/return_order_dialog/return_order_dialog.xml",
+    "state": "modified",
+    "bytes": 4430
+  },
+  {
+    "path": "odoo/addons/sale_stock/static/src/sale_stock_forecasted/forecasted_details.xml",
+    "state": "modified",
+    "bytes": 2331
+  },
+  {
+    "path": "odoo/addons/sale_stock/static/src/widgets/qty_at_date_widget.xml",
+    "state": "modified",
+    "bytes": 5092
+  },
+  {
+    "path": "odoo/addons/sale_stock/static/src/xml/delay_alert.xml",
+    "state": "modified",
+    "bytes": 419
+  }
+]

@@ -479,6 +479,11 @@ class Base_ImportImport(models.TransientModel):
         with self.file.open() as file:
             book = openpyxl.load_workbook(file, data_only=True, rich_text=True)
         sheets = options['sheets'] = book.sheetnames
+        reader = getattr(self.env[self.res_model], "_read_custom_import_xlsx", None)
+        if reader:
+            custom = reader(book, options)
+            if custom is not None:
+                return custom
         sheet_name = options['sheet'] = options.get('sheet') or sheets[0]
         sheet = book[sheet_name]
         rows = []

@@ -1,6 +1,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import timedelta
 from itertools import starmap, zip_longest
 
 from odoo import api, fields, models
@@ -46,14 +45,6 @@ class SaleOrder(models.Model):
         super()._compute_prepayment_percent()
         for order in self.filtered("sale_order_template_id"):
             order.prepayment_percent = order.sale_order_template_id.prepayment_percent
-
-    @api.depends("sale_order_template_id")
-    def _compute_validity_date(self):
-        super()._compute_validity_date()
-        for order in self.filtered("sale_order_template_id"):
-            validity_days = order.sale_order_template_id.number_of_days
-            if validity_days > 0:
-                order.validity_date = fields.Date.context_today(order) + timedelta(validity_days)
 
     @api.depends("sale_order_template_id")
     def _compute_journal_id(self):

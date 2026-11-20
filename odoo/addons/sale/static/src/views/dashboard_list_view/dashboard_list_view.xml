@@ -4,4 +4,29 @@
             <Dashboard/>
         </xpath>
     </t>
+
+    <t t-name="sale.JingnengProductCatalogFilters">
+        <div class="o_jingneng_catalog_filters" aria-label="产品类别">
+            <t t-foreach="this.cards" t-as="card" t-key="card.key">
+                <button type="button"
+                        t-attf-class="o_dashboard_card btn o_dashboard_card_{{card.color}} {{this.state.active.includes(card.key) ? 'active' : ''}}"
+                        t-att-aria-pressed="this.state.active.includes(card.key) ? 'true' : 'false'"
+                        t-att-data-category="card.key" t-on-click="() => this.changeCategory(card.key)">
+                    <span class="d-flex align-items-baseline justify-content-center gap-1">
+                        <strong class="o_dashboard_card_data fs-4" t-esc="this.state.totals[card.key] ?? '—'"/>
+                        <small t-esc="card.unit"/>
+                    </span>
+                    <span class="d-block" t-esc="card.label"/>
+                </button>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="sale.JingnengProductCatalogListRenderer" t-inherit="web.ListRenderer" t-inherit-mode="primary">
+        <xpath expr="//div[hasclass('o_list_renderer')]" position="before">
+            <JingnengProductCatalogFilters/>
+        </xpath>
+    </t>
+
 </templates>
+

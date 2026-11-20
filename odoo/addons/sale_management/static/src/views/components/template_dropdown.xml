@@ -10,7 +10,7 @@
             t-on-click.stop="() => this.createQuotation()"
             data-bounce-button=""
         >
-            New
+            新建
         </button>
         <Dropdown t-else="">
             <button
@@ -20,7 +20,7 @@
                 t-att-data-hotkey="this.props.hotkey"
                 data-bounce-button=""
             >
-                New
+                新建
             </button>
             <t t-set-slot="content">
                 <DropdownItem
@@ -28,7 +28,7 @@
                     class="'btn btn-link'"
                     onSelected="() => this.createQuotation()"
                 >
-                    New Quotation
+                    新报价
                 </DropdownItem>
                 <div role="separator" class="dropdown-divider"/>
                 <t t-foreach="this.state.quotationTemplates" t-as="template" t-key="template.id">

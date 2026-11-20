@@ -1,9 +1,9 @@
 <templates>
     <div t-name="sale_stock.DelayAlertWidget" class="m-1">
-        <p>The delivery
+        <p>交货
             <t t-foreach="this.props.late_elements" t-as="late_element" t-key="late_element.id">
                 <a t-out="late_element.name" href="#" t-on-click="this.openElement" t-att-element-id="late_element.id" t-att-element-model="late_element.model"/>,
-            </t> will be late.
+            </t> 将会延迟。
         </p>
     </div>
 </templates>

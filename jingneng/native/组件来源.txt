@@ -1,0 +1,17 @@
+随附组件和许可证
+
+Odoo 社区版 20.0-20261112。服务器和 Simplified Chinese 语言文件取自 Odoo S.A. 官方签名的 Windows 安装程序。
+https://nightly.odoo.com/20.0/nightly/exe/odoo_setup_20.0.20261112.exe
+官方源文件索引 https://nightly.odoo.com/20.0/nightly/src/
+许可证随 server/LICENSE 提供。
+
+Python 3.12.3、随附 Python 依赖、Visual C++ 应用本地 DLL 和 wkhtmltopdf 0.12.6 取自同一 Odoo Windows 构建。Python 许可证见 python/LICENSE.txt。各 Python 包随运行时保留其许可文件。
+https://www.python.org/ftp/python/3.12.3/
+https://github.com/wkhtmltopdf/packaging/releases
+https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files
+
+PostgreSQL 16.16。Windows x64 二进制包由 EnterpriseDB 提供。PostgreSQL 许可证随 pgsql/COPYRIGHT 提供。
+https://get.enterprisedb.com/postgresql/postgresql-16.16-1-windows-x64-binaries.zip
+https://www.postgresql.org/ftp/source/v16.16/
+
+本包装提供本机演示启动、配置和样例初始化，安装时生成本机测试凭据。

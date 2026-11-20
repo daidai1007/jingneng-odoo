@@ -6,6 +6,7 @@ from odoo import SUPERUSER_ID, fields, http
 from odoo.exceptions import AccessError, MissingError, ValidationError
 from odoo.fields import Command
 from odoo.http import request
+from odoo.http.stream import content_disposition
 
 from odoo.addons.payment import utils as payment_utils
 from odoo.addons.payment.controllers import portal as payment_portal
@@ -13,6 +14,21 @@ from odoo.addons.portal.controllers.portal import pager as portal_pager
 
 
 class CustomerPortal(payment_portal.PaymentPortal):
+    @http.route("/sale/customer-quotation/<int:order_id>/xlsx", type="http", auth="user", methods=["GET"])
+    def customer_quotation_xlsx(self, order_id, **kwargs):
+        if not request.env.user.has_group("base.group_user"):
+            raise AccessError("此下载入口仅供内部用户使用。")
+        order = request.env["sale.order"].browse(order_id).exists()
+        if not order:
+            return request.not_found()
+        order.check_access("read")
+        content = order._customer_quotation_xlsx()
+        return request.make_response(content, headers=[
+            ("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+            ("Content-Disposition", content_disposition(order.name + "-报价单.xlsx")),
+            ("Content-Length", str(len(content))), ("Cache-Control", "no-store"),
+        ])
+
     def _prepare_portal_counter_values(self, counter):
         partner = self.env.user.partner_id
         if counter == "quotation_count":
@@ -367,14 +383,12 @@ class CustomerPortal(payment_portal.PaymentPortal):
                 "signed_by": name,
                 "signed_on": fields.Datetime.now(),
                 "signature": signature,
+                "quotation_workflow_step": "contract",
             })
             # flush now to make signature data available to PDF render request
             self.env.cr.flush()
         except (TypeError, binascii.Error):
             return {"error": self.env._("Invalid signature data.")}
-
-        if not order_sudo._has_to_be_paid():
-            order_sudo.with_context(sale_include_signature=True)._validate_order()
 
         pdf = (
             self

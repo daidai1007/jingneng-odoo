@@ -1,0 +1,37 @@
+
+// Sales reporting uses the same backend theme and native controls as the order views.
+.jn-reports {
+    --jn-report-chart-height: 290px;
+    --jn-report-name-width: 18rem;
+    min-height: 0;
+    .jn-report-body { background: var(--o-webclient-background-color, #f9fafb); }
+    .jn-report-search { width:450px; max-width:100%; }
+    .jn-report-filter { display:flex; align-items:center; gap:.5rem; white-space:nowrap; }
+    .jn-report-filter .form-select { width:auto; min-width:6rem; }
+    .jn-date { width:10rem; }
+    .jn-sort { width:auto; }
+    .jn-report-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; }
+    .jn-report-card { color:inherit; font:inherit; min-width:0; }
+    .jn-report-card.active { border-color:$o-brand-primary!important; box-shadow:inset 0 3px $o-brand-primary; }
+    .jn-report-graphs { display:grid; grid-template-columns:minmax(0,3fr) minmax(320px,2fr); gap:1rem; }
+    .jn-report-chart { position:relative; height:var(--jn-report-chart-height); }
+    .jn-ranking-row { margin-bottom:1rem; }
+    .jn-rank-name { max-width:var(--jn-report-name-width); overflow-wrap:anywhere; }
+    .jn-rank-track { height:.4rem; border-radius:.2rem; overflow:hidden; }
+    .jn-report-table { min-width:750px; }
+    .jn-report-table th { background:var(--o-control-panel-background-color,var(--bs-light)); white-space:nowrap; }
+    .jn-report-table td { padding:.8rem 1rem; vertical-align:middle; }
+    .jn-report-table th { padding:.8rem 1rem; }
+    .jn-wrap { max-width:var(--jn-report-name-width); min-width:9rem; overflow-wrap:anywhere; }
+    .jn-wrap button { white-space:normal; }
+    .jn-result { font-size:inherit; font-weight:500; }
+    .jn-result-won { background:rgba($success,.12); color:$success; }
+    .jn-result-lost { background:rgba($warning,.15); color:$body-color; }
+    .jn-result-pending { background:rgba($secondary,.12); color:$body-color; }
+    @media(max-width:991px) { .jn-report-graphs { grid-template-columns:minmax(0,1fr); } }
+    @media(max-width:575px) {
+        .jn-report-cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; }
+        .jn-report-card strong { font-size:1.3rem!important; }
+        .jn-report-filter { flex:1; justify-content:space-between; }
+    }
+}

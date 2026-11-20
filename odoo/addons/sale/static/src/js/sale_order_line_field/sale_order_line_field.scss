@@ -11,3 +11,293 @@
         opacity: 1;
     }
 }
+
+.o_sale_drawing_list {
+    min-height: 17rem;
+
+    .o_list_renderer {
+        overflow-x: auto;
+    }
+
+    .o_list_table td[name="name"] {
+        min-width: 14rem;
+    }
+}
+
+.o_sale_drawing_review {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: map-get($spacers, 4);
+    align-items: start;
+}
+
+.o_sale_drawing_preview {
+    min-height: 28rem;
+    background: $o-view-background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+
+    .o_field_widget {
+        width: 100%;
+    }
+
+    iframe {
+        width: 100%;
+        height: 65vh;
+        max-height: 48rem;
+        min-height: 28rem;
+        border: 0;
+    }
+
+    .o_field_image {
+        min-height: 28rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            max-width: 100%;
+            max-height: 65vh;
+            object-fit: contain;
+        }
+    }
+}
+
+.o_sale_drawing_cad {
+    padding: map-get($spacers, 5);
+}
+
+.o_drawing_source_text {
+    max-height: 15rem;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+@include media-breakpoint-down(lg) {
+    .o_sale_drawing_review {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.o_sale_drawing_image_viewport {
+    height: 65vh;
+    min-height: 28rem;
+    max-height: 48rem;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: $o-gray-200;
+
+    > div {
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        max-width: none !important;
+        max-height: none !important;
+        transform-origin: top left;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    &.o_drawing_pan_active,
+    &.o_drawing_pan_active * {
+        cursor: grabbing !important;
+        user-select: none !important;
+    }
+}
+
+.o_drawing_dimension_tools {
+    padding: map-get($spacers, 1) map-get($spacers, 2);
+    border-bottom: 1px solid $border-color;
+}
+
+.o_sale_drawing_review .o_field_widget[name="dimension_assist_data"] {
+    display: block;
+    width: 100%;
+}
+
+.o_drawing_dimension_hint {
+    min-width: 0;
+    flex: 1 1 12rem;
+}
+
+.o_drawing_dimension_bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: map-get($spacers, 2);
+}
+
+.o_drawing_dimension_value {
+    width: 100%;
+    input, select { min-width: 0; width: 100%; }
+    .o_drawing_dimension_source {
+        display: block;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.o_quote_selection_table {
+    display: block;
+    width: 100%;
+    .o_quote_table_scroll { overflow-x: auto; }
+    .o_quote_products {
+        table-layout: fixed;
+        min-width: 42rem;
+        th { background: $o-gray-100; vertical-align: middle; }
+        th, td { padding: map-get($spacers, 2); }
+        td { vertical-align: top; overflow-wrap: anywhere; }
+        .o_quote_product_name { width: 25%; }
+        .o_quote_parameters { width: 32%; }
+        .o_quote_quantity { width: 8%; }
+        .o_quote_operations { width: 25%; }
+        .o_quote_product_row:focus-within { background: $o-gray-100; }
+    }
+    .o_quote_dimensions {
+        display: grid;
+        grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+        gap: map-get($spacers, 2);
+        label { min-width: 0; }
+        input { width: 100%; }
+    }
+    .o_quote_row_actions .btn { padding: 0 map-get($spacers, 1); white-space: nowrap; }
+    .o_quote_parameter_summary {
+        position: relative;
+        padding-inline-end: 1.75rem;
+        min-height: 1.5rem;
+        .o_quote_parameter_edit {
+            position: absolute;
+            inset-inline-end: 0;
+            inset-block-start: 0;
+            min-width: 1.5rem;
+            min-height: 1.5rem;
+        }
+    }
+    .o_quote_inline_config {
+        background: $o-gray-100;
+        .o_quote_config_fields {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: map-get($spacers, 3);
+            label { display: flex; flex-direction: column; margin: 0; }
+            .o_quote_config_notes { grid-column: 1 / -1; }
+        }
+    }
+    .o_quote_attachment {
+        width: 20rem;
+        max-width: 100%;
+        background: rgba($info, .14);
+        border-inline-start: 3px solid rgba($info, .4);
+        border-radius: $border-radius;
+        .o_quote_attachment_name { min-width: 0; overflow-wrap: anywhere; }
+        .o_image { width: 2.5rem; height: 2.5rem; background-size: contain; }
+        > .btn { min-width: 0; }
+    }
+    @include media-breakpoint-down(md) {
+        .o_quote_products { min-width: 36rem; }
+        .o_quote_inline_config .o_quote_config_fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+}
+
+.o_quote_cabinet_door_row {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: center;
+    gap: map-get($spacers, 2);
+    padding-block: map-get($spacers, 2);
+    border-bottom: 1px solid $o-gray-200;
+}
+.o_quote_cabinet_allocations {
+    .o_quote_accessory_quantity { min-width: 4rem; max-width: 6rem; }
+    td { vertical-align: middle; }
+    select { min-width: 7rem; }
+}
+.o_quote_order_cabinets {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    > span { display: block; }
+}
+.o_quote_order_cabinet_details { white-space: normal; }
+
+.o_quote_parameter_editor {
+    width: 23rem;
+    max-width: calc(100vw - 2rem);
+    .o_quote_parameter_fields {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: map-get($spacers, 3);
+        label { display: flex; flex-direction: column; gap: map-get($spacers, 1); margin: 0; min-width: 0; }
+        .o_quote_parameter_wide { grid-column: 1 / -1; }
+    }
+}
+
+.o_sale_order_line_o2m .o_saved_result_group_header td {
+    text-align: center; font-weight: 600; padding: .4rem .5rem;
+    border-bottom: 1px solid $border-color; background: $o-gray-100;
+    &.o_saved_group_quote { background: rgba($info, .12); }
+    &.o_saved_group_cost { background: rgba($primary, .09); }
+}
+.o_sale_order_line_o2m .o_saved_margin_value { font-size: .85em; color: $o-gray-600; }
+
+.o_sale_order_line_o2m .o_saved_result_table {
+    --ListRenderer-table-padding-x: #{$table-cell-padding-x-sm};
+    min-width: 100%;
+    .o_saved_result_group_header td { white-space: nowrap; }
+    .o_saved_margin_value { white-space: nowrap; }
+}
+
+// Quotation document rows use native table metrics and retain full customer wording.
+.o_quotation_customer_lines {
+    .o_list_table .o_data_row { height: 4.5rem; }
+    .o_field_quotation_name, .o_quotation_remark_text { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .o_quotation_remark_field { min-width: 16rem; }
+    .o_quotation_remark_text { min-height: 3rem; }
+    .o_quotation_remark_editor { min-height: 7rem; resize: vertical; white-space: pre-wrap; }
+    .o_quotation_number { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: .2em; }
+    .o_list_table td[name="quotation_remark"] { vertical-align: top; }
+}
+
+.o_quotation_customer_lines .o_saved_result_table { min-width: 0; }
+
+// Keep the quotation identity group visible while financial columns scroll.
+.o_internal_quote_cost_lines {
+    .o_list_table .o_quote_frozen_info {
+        position: sticky;
+        inset-inline-start: var(--quote-info-fixed-start);
+        z-index: 3;
+        background-color: var(--table-bg, #{$o-view-background-color});
+    }
+    .o_list_table thead th.o_quote_frozen_info {
+        z-index: 5;
+        background-color: var(--ListRenderer-thead-bg-color, #{$o-view-background-color});
+    }
+    .o_list_table .o_saved_result_group_header td.o_quote_frozen_info {
+        z-index: 6;
+        background-color: $o-gray-100;
+    }
+    .o_quote_frozen_info_edge::after {
+        content: "";
+        position: absolute;
+        inset-block: 0;
+        inset-inline-end: 0;
+        width: 1px;
+        background-color: $border-color;
+        pointer-events: none;
+    }
+    .o_list_table td[name="quotation_name"],
+    .o_list_table td[name="quotation_specification"] {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+}

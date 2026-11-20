@@ -30,12 +30,17 @@ class SaleOrder(models.Model):
                 order.margin = mapped_data.get(order.id, 0.0)
                 order.margin_percent = order.amount_untaxed and order.margin / order.amount_untaxed
 
-    @api.depends("margin")
+    @api.depends("margin", "order_line.saved_result_snapshot", "order_line.selection_pricing_result")
     def _compute_extra_total_fields(self):
         super()._compute_extra_total_fields()
 
         for order in self:
-            if not order.margin:
+            # Saved quote margins are shown as M/N on the quote row. The
+            # native purchase-price margin is a different ledger and must not
+            # appear as a second, contradictory total for imported snapshots.
+            if not self.env.user.has_group("base.group_user"):
+                continue
+            if not order.margin or any(order.order_line.mapped("saved_result_snapshot")) or any(order.order_line.mapped("selection_pricing_result")):
                 continue
 
             groups = order.extra_total_fields

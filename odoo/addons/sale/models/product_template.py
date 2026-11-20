@@ -1,9 +1,13 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from collections import defaultdict
+from copy import deepcopy
+
+from lxml import etree
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 from odoo.addons.sale.models.res_company import SALE_INVOICE_POLICY
 
@@ -70,6 +74,84 @@ class ProductTemplate(models.Model):
         help="Delivery lead time, in days. It's the number of days, promised to the customer,"
         " between the confirmation of the sales order and the delivery.",
     )
+
+    jingneng_catalog_series = fields.Char(string="系列 / 附件分类")
+    jingneng_catalog_specification = fields.Char(string="规格")
+
+    @api.model
+    @api.readonly
+    def get_jingneng_product_catalog_counts(self):
+        categories = {
+            "jingneng_cabinet": self.env.ref("sale.jingneng_product_category_cabinet", raise_if_not_found=False),
+            "jingneng_attachment": self.env.ref("sale.jingneng_product_category_attachment", raise_if_not_found=False),
+        }
+        grouped = dict(self._read_group(
+            Domain(self.env["sale.order.line"]._domain_product_id()) | Domain(
+                "categ_id", "=", categories["jingneng_attachment"].id if categories["jingneng_attachment"] else 0
+            ),
+            ["categ_id"], ["__count"],
+        ))
+        return {name: grouped.get(category, 0) for name, category in categories.items()}
+
+    @api.model
+    @api.readonly
+    def get_views(self, views, options=None):
+        action_id = (options or {}).get("action_id")
+        sales_context = self.env.context.get("jingneng_sale_ui")
+        if action_id:
+            action = self.env.ref("sale.product_template_action", raise_if_not_found=False)
+            if action and action_id == action.id:
+                sales_context = True
+                replacements = {
+                    "list": ("account.product_template_list_view_sellable_inherit", "sale.jingneng_product_catalog_list"),
+                    "search": ("product.product_template_search_view", "sale.jingneng_product_catalog_search"),
+                }
+                resolved = []
+                for view_id, view_type in views:
+                    if view_type in replacements:
+                        old_id, current_id = replacements[view_type]
+                        old = self.env.ref(old_id, raise_if_not_found=False)
+                        current = self.env.ref(current_id, raise_if_not_found=False)
+                        if current and (not view_id or (old and view_id == old.id)):
+                            view_id = current.id
+                    resolved.append((view_id, view_type))
+                views = resolved
+        result = super().get_views(views, options=options)
+        return self._without_sales_lead_time(result) if sales_context else result
+
+    @api.model
+    def _without_sales_lead_time(self, result):
+        # Product forms are shared with Inventory/Purchase; only alter the Sales response.
+        result = deepcopy(result)
+        for view in result.get("views", {}).values():
+            if not view.get("arch"):
+                continue
+            arch = etree.fromstring(view["arch"])
+            for node in arch.xpath("//field[@name='sale_delay'] | //label[@for='sale_delay']"):
+                node.set("invisible", "True")
+                node.attrib.pop("optional", None)
+                if node.tag == "field":
+                    node.set("column_invisible", "True")
+                    if node.getparent().tag == "div":
+                        node.getparent().set("invisible", "True")
+            view["arch"] = etree.tostring(arch, encoding="unicode")
+        for model in result.get("models", {}).values():
+            field = model.get("sale_delay")
+            if field:
+                field.update(readonly=True, searchable=False, sortable=False, groupable=False, exportable=False)
+        return result
+
+    @api.model
+    def fields_get(self, allfields=None, attributes=None):
+        descriptions = super().fields_get(allfields, attributes)
+        if self.env.context.get("jingneng_sale_ui") and "sale_delay" in descriptions:
+            field = descriptions["sale_delay"]
+            for attribute in ("searchable", "sortable", "groupable", "exportable"):
+                if attribute in field:
+                    field[attribute] = False
+            if "readonly" in field:
+                field["readonly"] = True
+        return descriptions
 
     @api.depends("invoice_policy", "sale_ok", "service_tracking")
     def _compute_product_tooltip(self):

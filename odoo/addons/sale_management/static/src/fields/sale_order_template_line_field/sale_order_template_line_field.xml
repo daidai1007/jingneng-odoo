@@ -12,8 +12,8 @@
                 attrs="{ 'class': this.disableOptionalButton(record) ? 'disabled' : '' }"
             >
                 <i class="me-1 oi oi-fw" data-icon="radio_button_checked"/>
-                <span t-if="record.data.is_optional">Unset Optional</span>
-                <span t-else="">Set Optional</span>
+                <span t-if="record.data.is_optional">未设置 可选</span>
+                <span t-else="">设置可选</span>
             </DropdownItem>
         </t>
     </t>

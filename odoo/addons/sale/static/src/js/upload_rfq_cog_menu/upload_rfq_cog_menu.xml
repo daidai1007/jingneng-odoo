@@ -9,7 +9,7 @@
                 onUploadComplete.bind="this.onUploadComplete"
             >
                 <t t-set-slot="toggler">
-                    <span>Upload Request For Quotation</span>
+                    <span>上传报价请求</span>
                 </t>
             </FileUploader>
         </DropdownItem>

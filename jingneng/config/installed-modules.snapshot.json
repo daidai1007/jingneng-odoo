@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "name": "account",
+    "installed_version": "20.0.1.6"
+  },
+  {
+    "id": 6,
+    "name": "account_edi_ubl_cii",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 8,
+    "name": "account_payment",
+    "installed_version": "20.0.2.0"
+  },
+  {
+    "id": 13,
+    "name": "account_qr_code_sepa",
+    "installed_version": "20.0.0.1"
+  },
+  {
+    "id": 17,
+    "name": "analytic",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 18,
+    "name": "api_doc",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 22,
+    "name": "auth_passkey",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 23,
+    "name": "auth_passkey_portal",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 27,
+    "name": "auth_signup",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 29,
+    "name": "auth_totp",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 30,
+    "name": "auth_totp_mail",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 31,
+    "name": "auth_totp_portal",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 32,
+    "name": "barcodes",
+    "installed_version": "20.0.2.0"
+  },
+  {
+    "id": 33,
+    "name": "barcodes_gs1_nomenclature",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 34,
+    "name": "base",
+    "installed_version": "20.0.1.3"
+  },
+  {
+    "id": 35,
+    "name": "base_address_extended",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 38,
+    "name": "base_import",
+    "installed_version": "20.0.2.0"
+  },
+  {
+    "id": 39,
+    "name": "base_import_module",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 40,
+    "name": "base_install_request",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 42,
+    "name": "base_report_wkhtmltox",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 43,
+    "name": "base_setup",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 46,
+    "name": "bus",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 54,
+    "name": "contacts",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 64,
+    "name": "digest",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 80,
+    "name": "google_gmail",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 107,
+    "name": "html_editor",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 108,
+    "name": "http_routing",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 109,
+    "name": "iap",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 111,
+    "name": "iap_mail",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 152,
+    "name": "l10n_cn",
+    "installed_version": "20.0.1.8"
+  },
+  {
+    "id": 352,
+    "name": "mail",
+    "installed_version": "20.0.1.19"
+  },
+  {
+    "id": 353,
+    "name": "mail_bot",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 356,
+    "name": "mail_plugin",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 377,
+    "name": "microsoft_outlook",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 378,
+    "name": "mrp",
+    "installed_version": "20.0.2.0"
+  },
+  {
+    "id": 379,
+    "name": "mrp_account",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 389,
+    "name": "mysubscription",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 390,
+    "name": "onboarding",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 391,
+    "name": "partner_autocomplete",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 393,
+    "name": "payment",
+    "installed_version": "20.0.2.0"
+  },
+  {
+    "id": 417,
+    "name": "phone_validation",
+    "installed_version": "20.0.2.1"
+  },
+  {
+    "id": 420,
+    "name": "portal",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 421,
+    "name": "portal_discuss",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 470,
+    "name": "privacy_lookup",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 471,
+    "name": "product",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 494,
+    "name": "purchase",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 498,
+    "name": "purchase_edi_ubl_bis3",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 499,
+    "name": "purchase_mrp",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 504,
+    "name": "purchase_stock",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 507,
+    "name": "resource",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 508,
+    "name": "resource_mail",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 509,
+    "name": "rpc",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 510,
+    "name": "sale",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 512,
+    "name": "sale_edi_ubl",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 519,
+    "name": "sale_management",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 520,
+    "name": "sale_margin",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 521,
+    "name": "sale_mrp",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 523,
+    "name": "sale_pdf_quote_builder",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 529,
+    "name": "sale_purchase",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 531,
+    "name": "sale_purchase_stock",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 533,
+    "name": "sale_sms",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 534,
+    "name": "sale_stock",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 535,
+    "name": "sale_stock_margin",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 539,
+    "name": "sales_team",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 540,
+    "name": "sms",
+    "installed_version": "20.0.3.0"
+  },
+  {
+    "id": 545,
+    "name": "spreadsheet",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 546,
+    "name": "spreadsheet_account",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 547,
+    "name": "spreadsheet_dashboard",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 548,
+    "name": "spreadsheet_dashboard_account",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 555,
+    "name": "spreadsheet_dashboard_sale",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 557,
+    "name": "spreadsheet_dashboard_stock_account",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 560,
+    "name": "stock",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 561,
+    "name": "stock_account",
+    "installed_version": "20.0.1.1"
+  },
+  {
+    "id": 567,
+    "name": "stock_sms",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 642,
+    "name": "uom",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 643,
+    "name": "utm",
+    "installed_version": "20.0.1.2"
+  },
+  {
+    "id": 644,
+    "name": "web",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 645,
+    "name": "web_hierarchy",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 646,
+    "name": "web_tour",
+    "installed_version": "20.0.1.0"
+  },
+  {
+    "id": 647,
+    "name": "web_unsplash",
+    "installed_version": "20.0.1.1"
+  }
+]

@@ -1,13 +1,24 @@
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from hashlib import sha256
 from collections import defaultdict
 from datetime import timedelta
 
-from markupsafe import Markup
+from markupsafe import Markup, escape
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Command, Domain
 from odoo.tools import float_compare, float_is_zero, format_date, groupby
 
+
+SAVED_RESULT_COLUMNS = (('saved_fixed_quote', '固定报价', None), ('saved_discounted_face', '折扣面价', None), ('saved_quote_coefficient', '折扣系数', None), ('saved_quote_unit', '报价', None), ('saved_quote_freight', '报价运费', None), ('saved_quote_total', '报价总价', None), ('saved_cost_unit', '成本单价', None), ('saved_material_cost', '材料成本', 'material_cost'), ('saved_auxiliary_cost', '辅材成本', 'auxiliary_cost'), ('saved_manufacturing_cost', '制造成本', 'manufacturing_cost'), ('saved_labor_cost', '人工成本', 'labor_cost'), ('saved_attachment_cost', '附件成本', 'attachment_fee'), ('saved_spray_cost', '喷涂费用', 'spray_cost'), ('saved_management_cost', '管理费用', 'management_fee'), ('saved_tax_cost', '税费', 'tax_cost'), ('saved_cost_freight', '成本运费', None), ('saved_cost_total', '成本总价', None), ('saved_gross_margin', '毛利率', None), ('saved_net_margin', '净利率', None), ('saved_self_made_weight', '自制件重量', None))
+SAVED_QUOTE_FIELDS = ('saved_fixed_quote', 'saved_discounted_face', 'saved_quote_coefficient', 'saved_quote_unit', 'saved_quote_freight', 'saved_quote_total')
+SAVED_CLASSIFIED_FIELDS = ('saved_material_cost', 'saved_auxiliary_cost', 'saved_labor_cost', 'saved_attachment_cost', 'saved_spray_cost')
 
 class SaleOrderLine(models.Model):
     _name = "sale.order.line"
@@ -48,6 +59,331 @@ class SaleOrderLine(models.Model):
         copy=False,
     )
     sequence = fields.Integer(string="Sequence", default=10)
+    selection_values = fields.Json(string="报价选型参数", copy=True)
+    selection_drawing_id = fields.Many2one(
+        "sale.order.drawing", string="来源图纸", ondelete="set null", copy=False,
+    )
+    selection_candidate_id = fields.Many2one(
+        "sale.order.drawing.candidate", string="来源识别项目", ondelete="set null", copy=False,
+    )
+
+    # Customer-facing text remains backed by the native description, separately from product_id.
+    quotation_name = fields.Char(string="名称", compute="_compute_quotation_text", inverse="_inverse_quotation_name")
+    quotation_remark = fields.Text(string="备注", compute="_compute_quotation_text", inverse="_inverse_quotation_remark")
+    quotation_order_type = fields.Selection([("internal", "内部"), ("external", "外部")],
+        string="订单类型", default="external", copy=True, groups="base.group_user")
+    quotation_name_manual = fields.Boolean(copy=True)
+    quotation_name_value = fields.Char(copy=True)
+    quotation_remark_manual = fields.Boolean(copy=True)
+    quotation_remark_value = fields.Text(copy=True)
+    quotation_remark_generated = fields.Boolean(copy=True)
+    quotation_specification = fields.Char(string="规格（W×D×H）", compute="_compute_quotation_specification", compute_sudo=True)
+    quotation_discounted_unit = fields.Monetary(string="折后单价", compute="_compute_quotation_amounts")
+    quotation_discounted_total = fields.Monetary(string="折后总价", compute="_compute_quotation_amounts")
+
+    @api.depends("name", "product_id", "quotation_name_manual", "quotation_name_value",
+                 "quotation_remark_manual", "quotation_remark_value")
+    def _compute_quotation_text(self):
+        for line in self:
+            title, _, remark = (line.name or "").partition("\n")
+            product = line.product_id.with_context(display_default_code=False)
+            if title == line.product_id.display_name:
+                title = product.display_name or title
+            if (line.product_id.default_code or "").startswith("JN-DEMO-") and "演示" in title:
+                title = product.display_name
+            line.quotation_name = (line.quotation_name_value or "") if line.quotation_name_manual else (title or product.display_name or "")
+            line.quotation_remark = (line.quotation_remark_value or "") if line.quotation_remark_manual else remark
+
+    def _inverse_quotation_name(self):
+        for line in self:
+            title, remark = line.quotation_name or "", line.quotation_remark or ""
+            line.quotation_name_manual = True
+            line.quotation_name_value = title
+            line.name = title + ("\n" + remark if remark else "")
+
+    def _inverse_quotation_remark(self):
+        for line in self:
+            title, remark = line.quotation_name or "", line.quotation_remark or ""
+            line.quotation_remark_manual = True
+            line.quotation_remark_value = remark
+            line.name = title + ("\n" + remark if remark else "")
+
+    @api.onchange("quotation_name")
+    def _onchange_quotation_name(self):
+        self._inverse_quotation_name()
+
+    @api.onchange("quotation_remark")
+    def _onchange_quotation_remark(self):
+        self._inverse_quotation_remark()
+
+    @api.depends("selection_values", "saved_result_snapshot")
+    def _compute_quotation_specification(self):
+        for line in self:
+            values = line.selection_values or {}
+            dimensions = [self._saved_number(values.get(key)) for key in ("width_mm", "depth_mm", "height_mm")]
+            if any(dimensions):
+                line.quotation_specification = " × ".join(f"{float(value):g}" if value else "—" for value in dimensions) + " mm"
+            else:
+                item = (line.saved_result_snapshot or {}).get("item") or {}
+                line.quotation_specification = (item.get("quote_display") or {}).get("specification") or ""
+
+    @api.depends("price_subtotal", "price_total", "price_unit", "discount", "product_uom_qty", "order_id.document_tax_mode")
+    def _compute_quotation_amounts(self):
+        for line in self:
+            amount = line.price_total if line.order_id.document_tax_mode == "tax_included" else line.price_subtotal
+            line.quotation_discounted_total = amount
+            line.quotation_discounted_unit = amount / line.product_uom_qty if line.product_uom_qty else line.price_unit * (1 - line.discount / 100)
+
+    def _quotation_refresh_automatic_remark(self):
+        """Use the original pure formatter only for new/previously generated configuration text."""
+        self.ensure_one()
+        if (self.display_type or self.quotation_remark_manual or self.saved_result_snapshot
+                or (self.quotation_remark and not self.quotation_remark_generated)):
+            return
+        values = dict(self.selection_values or {})
+        if not values:
+            return
+        client = self.env["ir.config_parameter"].sudo().get_str("sale.drawing_recognition.client") or ""
+        if not client or not (Path(client) / "quote_configuration_remark.py").is_file():
+            raise UserError("原报价备注模板未配置，请检查原报价程序目录。")
+        door = {
+            "前单开门后背板": (1, 0, "SINGLE", "PANEL"),
+            "前双开门后背板": (0, 1, "DOUBLE", "PANEL"),
+            "前后单开门": (2, 0, "SINGLE", "SINGLE"),
+            "前单开门后双开门": (1, 1, "SINGLE", "DOUBLE"),
+            "前双开门后单开门": (1, 1, "DOUBLE", "SINGLE"),
+            "前后双开门": (0, 2, "DOUBLE", "DOUBLE"),
+        }.get(values.get("door_type"))
+        material = values.get("material") or ""
+        selection = values.get("accessory_selection_data") or {}
+        selected = [name for name, checked in (selection.get("choices") or {}).items() if checked]
+        configuration = {"component_list": list(dict.fromkeys(selected))}
+        if values.get("selection_notes"):
+            configuration["special_requirements"] = values["selection_notes"]
+        item = {"product_family": values.get("product_series") or self.product_template_id.jingneng_catalog_series,
+                "material_code": material, "scheme2_selected_material": "碳钢板" if material == "SECC" else material,
+                "coating_type": values.get("coating_type") or "", "display_color": values.get("display_color") or "",
+                "cabinet_body_thickness_mm": values.get("thickness_mm") or None,
+                "quote_configuration": configuration}
+        if door:
+            item.update(single_door_count=door[0], double_door_count=door[1],
+                        door_position={"front": door[2], "rear": door[3]})
+        worker = "import json,sys;sys.dont_write_bytecode=True;sys.path.insert(0,sys.argv[1]);from quote_configuration_remark import build_configuration_remark;print(json.dumps(build_configuration_remark(json.load(sys.stdin)),ensure_ascii=False))"
+        try:
+            result = subprocess.run([sys.executable, "-c", worker, client],
+                input=json.dumps(item, ensure_ascii=False).encode("utf-8"), capture_output=True, timeout=10,
+                env={**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONDONTWRITEBYTECODE": "1"},
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0), check=True)
+            remark = json.loads(result.stdout.decode("utf-8"))
+        except (subprocess.SubprocessError, ValueError, OSError):
+            raise UserError("原报价备注模板生成失败，请检查当前选型与原程序目录。") from None
+        title = self.quotation_name or ""
+        self.write({"name": title + ("\n" + remark if remark else ""), "quotation_remark_generated": True})
+
+    selection_pricing_result = fields.Json(string="当前规格计价快照", readonly=True, copy=False, groups="base.group_user")
+    selection_pricing_error = fields.Char(string="最近计价错误", readonly=True, copy=False, groups="base.group_user")
+    selection_discount_coefficient = fields.Float(string="折扣系数", compute="_compute_selection_discount_coefficient",
+        inverse="_inverse_selection_discount_coefficient", digits=(16, 6), readonly=False, groups="base.group_user")
+
+    @api.depends("selection_values", "discount", "saved_result_snapshot")
+    def _compute_selection_discount_coefficient(self):
+        for line in self:
+            line.selection_discount_coefficient = (line.selection_values or {}).get("quote_discount_coefficient", (line.saved_result_snapshot or {}).get("values", {}).get("saved_quote_coefficient") if (line.saved_result_snapshot or {}).get("values", {}).get("saved_quote_coefficient") is not None else 1 - line.discount / 100)
+
+    def _inverse_selection_discount_coefficient(self):
+        for line in self:
+            value = line.selection_discount_coefficient
+            if not __import__('math').isfinite(value) or value < 0:
+                raise ValidationError("折扣系数必须为有效非负数。")
+            line.selection_values = {**(line.selection_values or {}), "quote_discount_coefficient": value}
+
+    @api.onchange("selection_discount_coefficient")
+    def _onchange_selection_discount_coefficient(self):
+        self._inverse_selection_discount_coefficient()
+
+    saved_fixed_quote = fields.Float(string='固定报价', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_discounted_face = fields.Float(string='折扣面价', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_quote_coefficient = fields.Float(string='折扣系数', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_quote_unit = fields.Float(string='报价', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_quote_freight = fields.Float(string='报价运费', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_quote_total = fields.Float(string='报价总价', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_cost_unit = fields.Float(string='成本单价', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_material_cost = fields.Float(string='材料成本', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_auxiliary_cost = fields.Float(string='辅材成本', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_manufacturing_cost = fields.Float(string='制造成本', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_labor_cost = fields.Float(string='人工成本', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_attachment_cost = fields.Float(string='附件成本', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_spray_cost = fields.Float(string='喷涂费用', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_management_cost = fields.Float(string='管理费用', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_tax_cost = fields.Float(string='税费', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_cost_freight = fields.Float(string='成本运费', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_cost_total = fields.Float(string='成本总价', compute="_compute_saved_results", digits=(16, 2), readonly=True, groups="base.group_user")
+    saved_gross_margin = fields.Float(string='毛利率', compute="_compute_saved_results", digits=(16, 6), readonly=True, groups="base.group_user")
+    saved_net_margin = fields.Float(string='净利率', compute="_compute_saved_results", digits=(16, 6), readonly=True, groups="base.group_user")
+    saved_self_made_weight = fields.Float(string='自制件重量', compute="_compute_saved_results", digits=(16, 3), readonly=True, groups="base.group_user")
+
+    # Saved results are a separate ledger. Never feed them into Odoo's price,
+    # discount, tax or standard purchase-price computations.
+    saved_result_snapshot = fields.Json(string="原报价结果快照", copy=False, readonly=True, groups="base.group_user")
+    saved_result_values = fields.Json(compute="_compute_saved_results", groups="base.group_user")
+    saved_result_state = fields.Selection(
+        [("missing", "未计算"), ("saved", "已读取"), ("calculated", "已计算"), ("stale", "待重算"), ("failed", "计算失败")],
+        string="原结果状态", compute="_compute_saved_results", groups="base.group_user")
+    saved_result_source = fields.Char(string="原报价来源", compute="_compute_saved_results", groups="base.group_user")
+    saved_result_html = fields.Html(string="原报价明细", compute="_compute_saved_result_html", sanitize=True, groups="base.group_user")
+
+    def _saved_result_signature(self):
+        self.ensure_one()
+        values = {"product": self.product_id.id, "quantity": self.product_uom_qty,
+                  "uom": self.product_uom_id.id, "price": self.price_unit,
+                  "discount": self.discount, "taxes": sorted(self.tax_ids.ids),
+                  "name": self.name, "selection": self.selection_values,
+                  "company": self.company_id.id, "currency": self.currency_id.id,
+                  "reference": self.order_id.client_order_ref,
+                  "partner": self.order_id.partner_id.id, "pricelist": self.order_id.pricelist_id.id}
+        if "quote_discount_coefficient" in (self.selection_values or {}):
+            values["price_settings"] = self.order_id.selection_price_settings
+        return sha256(json.dumps(values, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()
+
+    @staticmethod
+    def _saved_number(value, percent=False):
+        if value is None or isinstance(value, bool):
+            return None
+        text = str(value).strip().replace(",", "")
+        if text in ("", "—", "-", "未记录", "待核对"):
+            return None
+        try:
+            number = Decimal(text.rstrip("%"))
+        except InvalidOperation:
+            return None
+        if not number.is_finite():
+            return None
+        return float(number / 100 if percent and text.endswith("%") else number)
+
+    def _saved_result_from_item(self, case, item, ordinal, read_at):
+        self.ensure_one()
+        frozen = item.get("quote_cost_display") or {}
+        saved = frozen.get("values", {}) if frozen.get("schema") == 1 else {}
+        formula = item.get("formula") or {}
+        allocation = formula.get("cost_allocation") or {}
+        classified = allocation.get("totals", {}) if allocation.get("complete") else formula
+        values = {}
+        for name, label, raw_key in SAVED_RESULT_COLUMNS:
+            if label in saved:
+                values[name] = self._saved_number(saved[label], name in ("saved_gross_margin", "saved_net_margin"))
+            elif raw_key:
+                ledger = classified if name in SAVED_CLASSIFIED_FIELDS else formula
+                values[name] = self._saved_number(ledger.get(raw_key))
+            else:
+                values[name] = None
+        # Old documents may have no frozen table. Only aggregate the amounts
+        # that are explicitly saved; never apply today's manufacturing/tax rules.
+        freight = self._saved_number(item.get("freight_fee", item.get("freight")))
+        values["saved_cost_freight"] = self._saved_number(saved["运费"]) if "运费" in saved else freight
+        total = self._saved_number(formula.get("total_cost"))
+        if "成本单价" not in saved and total is not None and freight is not None:
+            values["saved_cost_unit"] = float((Decimal(str(total)) + Decimal(str(freight))).quantize(Decimal(".01"), rounding=ROUND_HALF_UP))
+        quantity = self._saved_number(item.get("quantity"))
+        if "成本总价" not in saved and values["saved_cost_unit"] is not None and quantity is not None:
+            values["saved_cost_total"] = float((Decimal(str(values["saved_cost_unit"])) * Decimal(str(quantity))).quantize(Decimal(".01"), rounding=ROUND_HALF_UP))
+        document = item.get("quote_display") or {}
+        for name, label, key in (("saved_quote_unit", "报价", "unit_price"),
+                                  ("saved_quote_total", "报价总价", "total")):
+            if label not in saved:
+                values[name] = self._saved_number(document.get(key))
+        if "折扣系数" not in saved:
+            values["saved_quote_coefficient"] = self._saved_number(item.get("quick_discount"))
+        if "报价运费" not in saved:
+            if item.get("quick_freight_mode") == "MANUAL":
+                values["saved_quote_freight"] = self._saved_number(item.get("quick_freight_fee"))
+            elif item.get("quick_freight_mode", "FOLLOW_COST") == "FOLLOW_COST":
+                values["saved_quote_freight"] = freight
+        missing = [label for name, label, _ in SAVED_RESULT_COLUMNS if values.get(name) is None]
+        raw = json.loads(json.dumps(item, ensure_ascii=False, default=str))
+        snapshot = {"schema": 1, "values": values, "item": raw,
+                    "source": {"scheme_no": case["scheme_no"], "version": case["version"],
+                               "ordinal": ordinal, "read_at": read_at,
+                               "provenance": case.get("provenance"), "lock_version": case.get("lock_version"),
+                               "pointer": case.get("source_path", "原确认版本") + f"/items/{ordinal - 1}",
+                               "mode": "frozen_display" if saved else "saved_formula_ledger",
+                               "sha256": sha256(json.dumps(raw, ensure_ascii=False, sort_keys=True).encode()).hexdigest()},
+                    "missing": missing, "signature": self._saved_result_signature()}
+        return snapshot
+
+    def _store_saved_result(self, case, item, ordinal, read_at):
+        self.write({"saved_result_snapshot": self._saved_result_from_item(case, item, ordinal, read_at)})
+
+    @api.depends("saved_result_snapshot", "selection_pricing_result", "selection_pricing_error", "selection_values", "product_id", "product_uom_qty",
+                 "product_uom_id", "price_unit", "discount", "tax_ids", "name",
+                 "company_id", "currency_id", "order_id.client_order_ref", "order_id.partner_id", "order_id.pricelist_id", "order_id.selection_price_settings")
+    def _compute_saved_results(self):
+        for line in self:
+            snapshot = line.selection_pricing_result or line.saved_result_snapshot or {}
+            values = snapshot.get("values", {})
+            line.saved_result_values = values
+            line.saved_result_state = ("failed" if line.selection_pricing_error else
+                ("stale" if snapshot.get("signature") != line._saved_result_signature() else
+                 "calculated" if line.selection_pricing_result else "saved") if snapshot else "missing")
+            source = snapshot.get("source", {})
+            line.saved_result_source = (f"{source.get('scheme_no')} / V{source.get('version')} / 第{source.get('ordinal')}行") if source else False
+            for name, _, _ in SAVED_RESULT_COLUMNS:
+                line[name] = values.get(name) if values.get(name) is not None else 0
+
+    @api.depends("saved_result_snapshot", "selection_pricing_result", "saved_result_state")
+    @api.depends_context("saved_result_mode")
+    def _compute_saved_result_html(self):
+        for line in self:
+            snapshot = line.selection_pricing_result or line.saved_result_snapshot or {}
+            if not snapshot:
+                line.saved_result_html = "<p>当前规格尚未计算，请在图纸与选型中计算报价；有关联历史来源的单据也可读取原结果。</p>"
+                continue
+            source, values = snapshot["source"], snapshot["values"]
+            item = snapshot["item"]
+            parts = [f"<p>{escape(line.saved_result_source)}</p>"]
+            if line.selection_pricing_error:
+                parts.append(f'<p class="text-danger">{escape(line.selection_pricing_error)}</p>')
+            if line.saved_result_state == "stale":
+                parts.append('<p class="text-warning">当前产品参数或价格已修改，以下仍为原版本结果，需更新。</p>')
+            quote_mode = self.env.context.get("saved_result_mode") == "quote"
+            selected = [column for column in SAVED_RESULT_COLUMNS if (column[0] in SAVED_QUOTE_FIELDS) == quote_mode]
+            parts.append('<table class="table table-sm"><thead><tr><th>项目</th><th class="text-end">原保存结果</th></tr></thead><tbody>')
+            for name, label, _ in selected:
+                value = values.get(name)
+                result = "原版本未记录" if value is None else f"{value:.2%}" if name in ("saved_gross_margin", "saved_net_margin") else f"{value:,.2f}"
+                parts.append(f'<tr><td>{escape(label)}</td><td class="text-end">{escape(result)}</td></tr>')
+            parts.append('</tbody></table>')
+            if quote_mode:
+                breakdown = (item.get("quote_cost_display") or {}).get("price_breakdown") or {}
+                for key, title in (("fixed", "固定报价组成"), ("discounted", "折扣面价组成")):
+                    rows = (breakdown.get(key) or {}).get("rows") or []
+                    if not rows:
+                        continue
+                    parts.append(f'<h5>{title}</h5><table class="table table-sm"><thead><tr><th>项目</th><th>原面价</th><th>系数</th><th>报价</th></tr></thead><tbody>')
+                    for row in rows:
+                        cells = [row.get("category", ""), row.get("original", "—"), row.get("discount", "—"), row.get("amount", "—")]
+                        parts.append('<tr>' + ''.join(f'<td>{escape(str(value))}</td>' for value in cells) + '</tr>')
+                        for detail in row.get("details") or []:
+                            parts.append(f'<tr class="text-muted"><td>　{escape(str(detail.get("name", "")))}</td><td>{escape(str(detail.get("original", "—")))}</td><td></td><td>{escape(str(detail.get("amount", "—")))}</td></tr>')
+                    parts.append('</tbody></table>')
+            parts.append('<p class="text-muted">费用按单台／单组显示，成本总价为整行金额；当前计算与历史快照分开保存，缺失项不补零。</p>')
+            line.saved_result_html = Markup(''.join(parts))
+
+    def _saved_result_action(self, mode):
+        self.ensure_one()
+        self.check_access("read")
+        if not self.env.user.has_group("base.group_user"):
+            raise UserError("此明细仅供内部查看。")
+        return {"type": "ir.actions.act_window", "name": "面价明细" if mode == "quote" else "成本明细",
+                "res_model": self._name, "res_id": self.id,
+                "views": [(self.env.ref("sale.sale_order_saved_result_form").id, "form")], "target": "new",
+                "context": {**self.env.context, "saved_result_mode": mode}}
+
+    def action_open_saved_quote_breakdown(self):
+        return self._saved_result_action("quote")
+
+    def action_open_saved_cost_details(self):
+        return self._saved_result_action("cost")
+
 
     # Order-related fields
     company_id = fields.Many2one(
@@ -263,7 +599,8 @@ class SaleOrderLine(models.Model):
         string="Lead Time",
         compute="_compute_customer_lead",
         store=True,
-        readonly=False,
+        readonly=True,
+        exportable=False,
         required=True,
         precompute=True,
         help="Number of days between the order confirmation and the shipping of the products",
@@ -471,7 +808,15 @@ class SaleOrderLine(models.Model):
             so_line.display_name = name
 
     def _domain_product_id(self):
-        return [("sale_ok", "=", True)]
+        # Every sales product picker uses the same eleven selection series.
+        from .sale_order import DRAWING_PRODUCT_SERIES
+
+        cabinet = self.env.ref("sale.jingneng_product_category_cabinet", raise_if_not_found=False)
+        return [
+            ("active", "=", True), ("sale_ok", "=", True),
+            ("categ_id", "=", cabinet.id if cabinet else 0),
+            ("jingneng_catalog_series", "in", [series for series, _ in DRAWING_PRODUCT_SERIES]),
+        ]
 
     @api.depends("product_id")
     def _compute_product_template_id(self):
@@ -530,7 +875,13 @@ class SaleOrderLine(models.Model):
                 line = line.with_context(lang=lang)
 
             if line.product_id:
-                line.name = line._get_sale_order_line_multiline_description_sale()
+                description = line._get_sale_order_line_multiline_description_sale()
+                title, _, remark = (description or "").partition("\n")
+                if line.quotation_name_manual:
+                    title = line.quotation_name_value or ""
+                if line.quotation_remark_manual:
+                    remark = line.quotation_remark_value or ""
+                line.name = title + ("\n" + remark if remark else "")
                 continue
 
             if line.is_downpayment:
@@ -776,6 +1127,8 @@ class SaleOrderLine(models.Model):
 
         force_recompute = self.env.context.get("force_price_recomputation")
         for line in self:
+            if line.selection_pricing_result:
+                continue
             # Don't compute the price for deleted lines or lines for which the
             # price unit doesn't come from the product.
             if not line.order_id or line.is_downpayment or line._is_global_discount():
@@ -1102,7 +1455,21 @@ class SaleOrderLine(models.Model):
     @api.depends("product_id", "company_id")
     def _compute_customer_lead(self):
         for line in self:
-            line.customer_lead = line.product_id.with_company(line.company_id).sale_delay
+            line.customer_lead = 0
+
+    @api.constrains("customer_lead")
+    def _check_disabled_customer_lead(self):
+        if any(line.customer_lead for line in self):
+            raise ValidationError("销售提前期已停用，请直接填写订单交付日期。")
+
+    @api.model
+    def fields_get(self, allfields=None, attributes=None):
+        descriptions = super().fields_get(allfields, attributes)
+        description = descriptions.get("customer_lead", {})
+        for attribute in ("searchable", "sortable", "groupable", "exportable"):
+            if attribute in description:
+                description[attribute] = False
+        return descriptions
 
     @api.depends("is_expense", "product_id")
     def _compute_qty_delivered_method(self):
@@ -2043,7 +2410,7 @@ class SaleOrderLine(models.Model):
             order_date = self.order_id.date_order
         else:
             order_date = fields.Datetime.now()
-        return order_date + timedelta(days=self.customer_lead or 0.0)
+        return order_date
 
     def compute_uom_qty(self, new_qty, stock_move, rounding=True):
         return self.product_uom_id._compute_quantity(new_qty, stock_move.uom_id, rounding)

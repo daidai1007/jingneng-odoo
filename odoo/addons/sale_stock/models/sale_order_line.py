@@ -21,7 +21,7 @@ class SaleOrderLine(models.Model):
     qty_to_deliver = fields.Float(compute='_compute_qty_to_deliver', digits='Product Unit')
     is_mto = fields.Boolean(compute='_compute_is_mto')
     display_qty_widget = fields.Boolean(compute='_compute_qty_to_deliver')
-    customer_lead = fields.Integer(store=True, readonly=False, inverse='_inverse_customer_lead')
+    customer_lead = fields.Integer(store=True, readonly=True, exportable=False, inverse='_inverse_customer_lead')
 
     @api.depends('route_ids', 'order_id.warehouse_id', 'product_id')
     def _compute_warehouse_id(self):
@@ -383,6 +383,12 @@ class SaleOrderLine(models.Model):
         depending on the sale order line product rule.
         """
         if self.env.context.get("skip_procurement"):
+            return True
+        # Sales logistics are handed off separately to the technical department.
+        # This database switch leaves manual inventory operations unchanged.
+        if not self.env["ir.config_parameter"].sudo().get_bool(
+            "sale.automatic_stock_procurement", True
+        ):
             return True
         precision = self.env['decimal.precision'].precision_get('Product Unit')
         procurements = []

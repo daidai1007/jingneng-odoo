@@ -1,0 +1,77 @@
+<t t-name="sale.JingnengReportChart">
+    <div class="jn-report-chart"><canvas t-ref="this.chart.ref" role="img" t-att-aria-label="this.props.label"/></div>
+</t>
+<t t-name="sale.JingnengReports">
+  <div class="o_action jn-reports d-flex flex-column h-100">
+    <div class="o_control_panel bg-view p-3 border-bottom">
+      <div class="d-flex align-items-center flex-wrap gap-3 mb-3">
+        <h2 class="m-0 me-auto" t-out="this.title"/>
+        <label class="jn-report-search input-group"><span class="input-group-text"><i class="oi" data-icon="search" aria-hidden="true"/></span><input class="form-control" type="search" aria-label="搜索报表" placeholder="搜索客户、销售人员、产品或单据…" t-att-value="this.state.filters.search" t-on-input="(ev)=>this.filter('search',ev)"/></label>
+        <div class="btn-group" aria-label="报表视图"><button class="btn btn-secondary" t-att-class="{'active':this.state.view==='graph'}" title="图表视图" aria-label="图表视图" t-on-click="()=>this.changeView('graph')"><i class="oi" data-icon="bar_chart" aria-hidden="true"/></button><button class="btn btn-secondary" t-att-class="{'active':this.state.view==='pivot'}" title="透视表视图" aria-label="透视表视图" t-on-click="()=>this.changeView('pivot')"><i class="oi" data-icon="pivot_table_chart" aria-hidden="true"/></button></div>
+      </div>
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <div class="btn-group me-3" aria-label="分析主题"><button class="btn" t-att-class="this.bids?'btn-primary':'btn-secondary'" t-on-click="()=>this.analysis('bids')">中标／失标分析</button><button class="btn" t-att-class="!this.bids?'btn-primary':'btn-secondary'" t-on-click="()=>this.analysis('sales')">销售订单业绩</button></div>
+        <label class="jn-report-filter">日期<select class="form-select" aria-label="日期范围" t-att-value="this.state.filters.period" t-on-change="(ev)=>this.filter('period',ev)"><option value="6">近6个月</option><option value="3">近3个月</option><option value="1">本月</option><option value="12">近12个月</option><option value="custom">自定义</option></select></label>
+        <t t-if="this.state.filters.period==='custom'"><input type="date" class="form-control jn-date" aria-label="开始日期" t-att-value="this.state.filters.start" t-on-change="(ev)=>this.filter('start',ev)"/><span>至</span><input type="date" class="form-control jn-date" aria-label="结束日期" t-att-value="this.state.filters.end" t-on-change="(ev)=>this.filter('end',ev)"/></t>
+        <label t-if="!this.bids" class="jn-report-filter">状态<select class="form-select" aria-label="统计状态" t-att-value="this.state.filters.scope" t-on-change="(ev)=>this.filter('scope',ev)"><option value="sale">销售订单</option><option value="contract">合同</option><option value="quote">报价单／已发送</option><option value="valid">全部有效单据</option></select></label>
+        <label t-if="this.bids" class="jn-report-filter">结果<select class="form-select" aria-label="客户反馈结果" t-att-value="this.state.filters.result" t-on-change="(ev)=>this.filter('result',ev)"><option value="all">全部报价</option><option value="won">中标</option><option value="lost">失标</option><option value="pending">待反馈</option></select></label>
+        <label t-if="this.product" class="jn-report-filter">分类<select class="form-select" aria-label="产品分类" t-att-value="this.state.filters.kind" t-on-change="(ev)=>this.filter('kind',ev)"><option value="">全部分类</option><option>机箱机柜</option><option>附件</option><option>未分类</option></select></label>
+        <label t-if="this.product" class="jn-report-filter">单位<select class="form-select" aria-label="产品单位" t-att-value="this.state.filters.unit" t-on-change="(ev)=>this.filter('unit',ev)"><option value="">按单据统计</option><option t-foreach="this.units" t-as="unit" t-key="unit.id" t-att-value="unit.id" t-out="unit.name"/></select></label>
+        <label class="jn-report-filter">计量<select class="form-select" aria-label="计量" t-att-value="this.state.filters.metric" t-on-change="(ev)=>this.filter('metric',ev)"><option value="count" t-out="this.bids?'报价单数':'单据数量'"/><option value="amount" t-out="this.amountLabel"/><option t-if="this.product and !this.bids and this.state.filters.unit" value="qty">产品数量</option></select></label>
+        <label t-if="this.state.data" class="jn-report-filter">币种<select class="form-select" aria-label="币种" t-att-value="this.state.filters.currency" t-on-change="(ev)=>this.filter('currency',ev)"><option t-foreach="this.state.data.currencies" t-as="currency" t-key="currency.id" t-att-value="currency.id" t-out="currency.name"/></select></label>
+        <button class="btn btn-secondary ms-auto" t-att-disabled="this.state.loading or !this.state.data" t-on-click="this.export"><i class="oi me-1" data-icon="download" aria-hidden="true"/>导出明细</button><button class="btn btn-secondary" aria-label="刷新报表" title="刷新报表" t-on-click="this.load"><i class="oi" data-icon="refresh" aria-hidden="true"/></button>
+      </div>
+    </div>
+    <div class="jn-report-body flex-grow-1 overflow-auto p-3">
+      <div t-if="this.state.loading" role="status" class="p-5 text-center text-muted"><i class="oi oi-spin me-2" data-icon="progress_activity" aria-hidden="true"/>正在加载报表…</div>
+      <div t-elif="this.state.error" class="alert alert-danger" role="alert"><t t-out="this.state.error"/><button class="btn btn-link ms-2" t-on-click="this.load">重新加载</button></div>
+      <t t-elif="this.state.data">
+        <div class="d-flex flex-wrap gap-2 align-items-center text-muted small mb-3">
+          <span><t t-out="this.state.data.start"/> — <t t-out="this.state.data.end"/> · <t t-out="this.currency?.name"/></span>
+          <span t-if="this.bids">按首次正式发送日期归属，取同一业务最新有效报价；结果截至当前。</span>
+          <span t-else="" t-out="{'sale':'按确认销售订单日期统计。','contract':'按进入合同日期统计；金额为合同金额。','quote':'按报价创建日期统计；金额为报价额。','valid':'按单据日期统计全部未取消单据；金额不代表销售订单业绩。'}[this.state.filters.scope]"/>
+        </div>
+        <div class="jn-report-cards mb-3">
+          <button t-foreach="this.cards" t-as="card" t-key="card.key" class="jn-report-card bg-view border rounded text-start p-3" t-att-class="{'active':this.bids and this.state.filters.result===card.key}" t-att-data-result="card.key" t-on-click="()=>this.card(card.key)">
+            <div class="text-muted mb-1" t-out="card.label"/><strong class="d-block fs-3 mb-1" t-out="card.value"/><span class="text-muted small" t-out="card.sub"/>
+          </button>
+        </div>
+        <div t-if="this.bids" class="text-muted small mb-3">中标率 = 中标数 ÷（中标数 + 失标数）；待反馈不参与计算。结果筛选不改变上方中标率分母。</div>
+        <div t-if="this.product" class="alert alert-light border py-2 small" role="note"><span t-if="this.bids">产品结果关联报价整单的客户反馈，未登记单项中标。多产品报价可出现在多个产品行，行数及关联报价额不可相加。</span><span t-else="">产品金额按明细行汇总；单据数按产品内去重，不可跨产品相加。选择同一单位后可查看数量。</span><span t-if="this.state.data.unclassified"> 有 <t t-out="this.state.data.unclassified"/> 份单据包含未分类产品，可筛选“未分类”查看。</span></div>
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+          <div t-if="this.bids" class="btn-group me-auto"><button class="btn btn-secondary" t-att-class="{'active':this.state.section==='summary'}" t-on-click="()=>{this.state.section='summary';this.clearDrill();}">结果概览</button><button class="btn btn-secondary" t-att-class="{'active':this.state.section==='reasons'}" t-on-click="()=>{this.state.section='reasons';this.state.filters.result='lost';this.clearDrill();}">失标原因</button></div>
+          <button t-foreach="this.chips" t-as="chip" t-key="chip.key" class="btn btn-sm btn-secondary" t-on-click="()=>this.removeChip(chip.key)"><t t-out="chip.label"/><i class="oi ms-2" data-icon="close" aria-hidden="true"/></button>
+          <button t-if="this.chips.length or this.state.details" class="btn btn-link" t-on-click="this.clearDrill">返回汇总</button>
+        </div>
+        <div t-if="!this.vm.cohort.length" class="bg-view border rounded p-5 text-center">
+          <h4>当前范围暂无<t t-out="this.bids?'已正式发送的有效报价':'符合条件的单据'"/></h4><p class="text-muted">可调整日期、币种或搜索条件。</p><p t-if="this.bids" class="text-muted">报价发送给客户后进入待反馈，收到客户回复后登记中标或失标。历史订单无需补判结果。</p>
+          <button t-if="this.bids and this.state.data.missing_sent" class="btn btn-secondary" t-on-click="this.missing">查看报价单</button>
+        </div>
+        <t t-else="">
+          <div t-if="this.state.section==='reasons'" class="bg-view border rounded p-3 mb-3">
+            <h4>失标原因分布</h4><JingnengReportChart t-if="this.reasons.length" config="this.reasonChartConfig" label="'失标原因数量分布，点击原因查看报价'"/><p t-else="" class="text-muted py-4 text-center">当前范围没有已登记的失标报价。</p>
+            <table t-if="this.reasons.length" class="table table-hover"><thead><tr><th>失标原因</th><th class="text-end">报价单数</th><th class="text-end">含税报价额</th></tr></thead><tbody><tr t-foreach="this.reasons" t-as="reason" t-key="reason.id"><td><button class="btn btn-link p-0" t-on-click="()=>this.drill('reason',reason.id,'lost')" t-out="reason.name"/></td><td class="text-end" t-out="reason.count"/><td class="text-end" t-out="this.money(reason.amount)"/></tr></tbody></table>
+          </div>
+          <div t-elif="this.state.view==='graph'" class="jn-report-graphs mb-3">
+            <section class="bg-view border rounded p-3"><h4 t-out="this.bids?'报价结果趋势':this.metricLabel+'趋势'"/><JingnengReportChart config="this.chartConfig" label="'按月份统计，点击柱形查看明细'"/></section>
+            <section class="bg-view border rounded p-3"><div class="d-flex align-items-center justify-content-between mb-3"><h4 class="m-0"><t t-out="this.groupLabel"/>排行</h4><select t-if="this.bids" class="form-select jn-sort" aria-label="排行排序" t-on-change="(ev)=>{this.state.sort=ev.target.value;this.state.page=0;}"><option value="value">按当前计量</option><option value="rate">按中标率</option></select></div>
+              <div t-foreach="this.ranking.slice(0,7)" t-as="group" t-key="group.id" class="jn-ranking-row"><button class="btn btn-link p-0 text-start w-100" t-on-click="()=>this.drill('group',group.id)"><span class="d-flex gap-2 justify-content-between"><span class="jn-rank-name" t-out="group.name"/><strong t-out="this.state.sort==='rate' and this.bids?group.rate:this.value(group.value)"/></span><span class="jn-rank-track bg-light d-block mt-2"><span class="d-block bg-primary h-100" t-att-style="'width:'+this.rankWidth(group)"/></span></button></div>
+              <p t-if="!this.ranking.length" class="text-muted py-4">当前筛选没有匹配单据。</p>
+            </section>
+          </div>
+          <section class="bg-view border rounded overflow-hidden">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 p-3 border-bottom"><h4 class="m-0" t-out="this.state.details?'单据明细':this.state.view==='pivot'?'数据透视':this.groupLabel+'汇总'"/><div class="d-flex align-items-center gap-2"><button t-if="!this.state.details" class="btn btn-link" t-on-click="()=>{this.state.details=true;this.state.page=0;}">查看全部明细</button><span class="text-muted small"><t t-out="this.state.page+1"/> / <t t-out="this.pageCount"/></span><button class="btn btn-secondary" aria-label="上一页" t-att-disabled="this.state.page===0" t-on-click="()=>this.page(-1)">‹</button><button class="btn btn-secondary" aria-label="下一页" t-att-disabled="this.state.page+1>=this.pageCount" t-on-click="()=>this.page(1)">›</button></div></div>
+            <div class="table-responsive"><table class="table table-hover mb-0 jn-report-table">
+              <thead><tr t-if="this.state.details"><th>单据编号</th><th>客户</th><th>销售人员</th><th t-out="this.bids?'首次正式发送日期':'统计日期'"/><th class="text-end" t-out="this.amountLabel"/><t t-if="this.bids"><th>客户反馈结果</th><th>反馈日期／跟进安排</th><th>操作</th></t></tr>
+              <tr t-else=""><th t-out="this.groupLabel"/><t t-if="this.bids"><th class="text-end">报价单数</th><th class="text-end">中标</th><th class="text-end">失标</th><th class="text-end">待反馈</th><th class="text-end">中标率</th><th class="text-end">含税报价额</th></t><t t-elif="this.state.view==='pivot'"><th t-foreach="this.vm.months" t-as="month" t-key="month" class="text-end" t-out="month"/><th class="text-end">合计（<t t-out="this.metricLabel"/>）</th></t><t t-else=""><th class="text-end">单据数量</th><th class="text-end" t-out="this.amountLabel"/><th t-if="this.product and this.state.filters.unit" class="text-end">数量（<t t-out="this.unitName"/>）</th></t></tr></thead>
+              <tbody><t t-foreach="this.pagedRows" t-as="row" t-key="row.id">
+                <tr t-if="this.state.details"><td><button class="btn btn-link p-0 fw-bold" t-on-click="()=>this.openOrder(row.id)" t-out="row.name"/><small t-if="this.bids and row.version>1" class="d-block text-muted">第 <t t-out="row.version"/> 版</small></td><td class="jn-wrap" t-out="row.customer"/><td t-out="row.person"/><td t-out="row.date"/><td class="text-end text-nowrap" t-out="this.money(row.amount)"/><t t-if="this.bids"><td><span class="badge rounded-pill jn-result" t-att-class="'jn-result-'+row.result" t-out="this.resultLabel(row)"/></td><td class="jn-wrap"><t t-if="row.result==='pending'"><t t-out="row.followup || '待安排跟进'"/></t><t t-else=""><t t-out="row.feedback"/><span t-if="row.result==='lost'" class="d-block text-muted" t-out="this.reasonName(row.reason)"/></t><small t-if="row.notes" class="d-block text-muted" t-out="row.notes"/></td><td><button class="btn btn-link p-0" t-on-click="()=>this.feedback(row.id)">登记反馈</button></td></t></tr>
+                <tr t-else=""><td class="jn-wrap"><button class="btn btn-link p-0 text-start" t-on-click="()=>this.drill('group',row.id)" t-out="row.name"/></td><t t-if="this.bids"><td class="text-end"><button class="btn btn-link p-0" t-on-click="()=>this.drill('group',row.id,'all')" t-out="row.count"/></td><td t-foreach="['won','lost','pending']" t-as="result" t-key="result" class="text-end"><button class="btn btn-link p-0" t-on-click="()=>this.drill('group',row.id,result)" t-out="row[result]"/></td><td class="text-end" t-out="row.rate"/><td class="text-end text-nowrap" t-out="this.money(row.amount)"/></t><t t-elif="this.state.view==='pivot'"><td t-foreach="this.vm.months" t-as="month" t-key="month" class="text-end"><button class="btn btn-link p-0" t-on-click="()=>{this.state.filters.month=month;this.drill('group',row.id);}" t-out="this.pivotValue(row,month)"/></td><td class="text-end" t-out="this.value(row.value)"/></t><t t-else=""><td class="text-end" t-out="row.count"/><td class="text-end text-nowrap" t-out="this.money(row.amount)"/><td t-if="this.product and this.state.filters.unit" class="text-end" t-out="this.number(row.qty)"/></t></tr>
+              </t><tr t-if="!this.pagedRows.length"><td colspan="20" class="text-muted text-center p-5">当前筛选没有匹配单据，可移除筛选后重试。</td></tr></tbody>
+            </table></div>
+          </section>
+        </t>
+      </t>
+    </div>
+  </div>
+</t>

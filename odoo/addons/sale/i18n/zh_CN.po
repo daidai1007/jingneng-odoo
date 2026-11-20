@@ -2511,7 +2511,7 @@ msgstr "编辑配置"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__invoice_mail_template_id
 msgid "Email Template"
-msgstr "EMail模板"
+msgstr "电子邮件模板"
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_res_config_settings__invoice_mail_template_id
@@ -3611,7 +3611,7 @@ msgstr "没有待开票项目"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_tree
 msgid "Number"
-msgstr "数量"
+msgstr "订单编号"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__message_needaction_counter
@@ -4885,7 +4885,7 @@ msgstr "发送形式发票"
 #. module: sale
 #: model:ir.actions.server,name:sale.model_sale_order_send_mail
 msgid "Send an email"
-msgstr "发送EMail"
+msgstr "发送电子邮件"
 
 #. module: sale
 #: model:mail.template,description:sale.mail_template_sale_confirmation

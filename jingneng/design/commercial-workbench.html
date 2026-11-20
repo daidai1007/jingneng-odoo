@@ -1,0 +1,231 @@
+<div id="jn-commercial-desk" aria-label="商务工作台视觉与交互方案">
+  <style>
+    #jn-commercial-desk{--jn-brand:#71639e;--jn-ink:#212529;--jn-muted:#68717b;--jn-line:#dee2e6;--jn-paper:#fff;--jn-canvas:#f8f9fa;--jn-control:#e9ecef;--jn-gap:16px;color-scheme:light;color:var(--jn-ink);background:var(--jn-canvas);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;position:relative;width:100%;min-width:0}
+    #jn-commercial-desk *{box-sizing:border-box}
+    #jn-commercial-desk button,#jn-commercial-desk input,#jn-commercial-desk select{font:inherit}
+    #jn-commercial-desk button{cursor:pointer}
+    #jn-commercial-desk button:disabled{cursor:default;opacity:.5}
+    #jn-commercial-desk button:focus-visible,#jn-commercial-desk input:focus-visible,#jn-commercial-desk select:focus-visible{outline:2px solid var(--jn-brand);outline-offset:3px}
+    #jn-commercial-desk [hidden]{display:none!important}
+    #jn-commercial-desk h2,#jn-commercial-desk h3,#jn-commercial-desk p{margin:0;font-family:inherit}
+    #jn-commercial-desk .jn-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--jn-brand);color:#fff;padding:8px 14px;min-height:46px}
+    #jn-commercial-desk .jn-app{display:flex;gap:9px;align-items:center;font-size:17px;font-weight:600;margin-right:10px}
+    #jn-commercial-desk .jn-app i{width:18px;height:18px}
+    #jn-commercial-desk .jn-nav{display:flex;flex-wrap:wrap;gap:2px;align-items:center}
+    #jn-commercial-desk .jn-nav button{border:0;background:transparent;color:#fff;padding:5px 9px;border-radius:3px;white-space:nowrap}
+    #jn-commercial-desk .jn-nav button[aria-current]{background:#ffffff24}
+    #jn-commercial-desk .jn-account{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:12px;white-space:nowrap}
+    #jn-commercial-desk .jn-avatar{background:#00a88f;color:#fff;border-radius:4px;padding:4px 7px;font-size:14px}
+    #jn-commercial-desk .jn-control-panel{background:var(--jn-paper);border-bottom:1px solid var(--jn-line);padding:15px 18px 13px}
+    #jn-commercial-desk .jn-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    #jn-commercial-desk h2{font-size:20px;font-weight:500}
+    #jn-commercial-desk .jn-date{color:var(--jn-muted);font-size:13px;display:flex;align-items:center;gap:6px}
+    #jn-commercial-desk .jn-date i{width:15px;height:15px}
+    #jn-commercial-desk .jn-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:13px}
+    #jn-commercial-desk .jn-button{border:1px solid transparent;border-radius:4px;background:var(--jn-control);color:var(--jn-ink);padding:6px 11px;display:inline-flex;gap:6px;align-items:center;justify-content:center;white-space:nowrap;text-decoration:none}
+    #jn-commercial-desk .jn-button i{width:15px;height:15px}
+    #jn-commercial-desk .jn-button:hover{filter:brightness(.97)}
+    #jn-commercial-desk .jn-primary{background:var(--jn-brand);color:#fff}
+    #jn-commercial-desk .jn-outline{background:var(--jn-paper);border-color:var(--jn-brand);color:var(--jn-brand)}
+    #jn-commercial-desk .jn-quiet{background:transparent;color:var(--jn-brand)}
+    #jn-commercial-desk .jn-scope{display:flex;gap:5px;align-items:center;color:var(--jn-muted);font-size:13px}
+    #jn-commercial-desk .jn-scope i{width:14px;height:14px}
+    #jn-commercial-desk .jn-main{padding:var(--jn-gap) 18px 20px;display:grid;gap:var(--jn-gap)}
+    #jn-commercial-desk .jn-stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+    #jn-commercial-desk .jn-stat{background:var(--jn-tone,#eef0f3);border:1px solid transparent;border-radius:4px;padding:11px 5px 10px;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;color:var(--jn-ink);position:relative}
+    #jn-commercial-desk .jn-stat strong{font-size:25px;line-height:1.25;font-weight:600;font-variant-numeric:tabular-nums;color:var(--jn-tone-ink,#4b5260)}
+    #jn-commercial-desk .jn-stat span{white-space:nowrap;font-size:13px}
+    #jn-commercial-desk .jn-stat[aria-pressed=true]{border-color:var(--jn-brand);box-shadow:inset 0 -2px var(--jn-brand)}
+    #jn-commercial-desk .jn-stat:hover{filter:brightness(.98)}
+    #jn-commercial-desk .jn-upper{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:var(--jn-gap);align-items:stretch}
+    #jn-commercial-desk .jn-panel{background:var(--jn-paper);border:1px solid var(--jn-line);border-radius:5px;min-width:0}
+    #jn-commercial-desk .jn-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--jn-line)}
+    #jn-commercial-desk h3{font-size:15px;font-weight:600}
+    #jn-commercial-desk .jn-count{font-size:12px;color:var(--jn-muted);font-weight:400;margin-left:6px}
+    #jn-commercial-desk .jn-link{border:0;background:transparent;color:var(--jn-brand);padding:0;text-align:left;text-decoration:none;overflow-wrap:anywhere}
+    #jn-commercial-desk .jn-link:hover{text-decoration:underline}
+    #jn-commercial-desk .jn-todo{display:grid;grid-template-columns:61px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #edf0f2;min-height:65px}
+    #jn-commercial-desk .jn-todo:last-child,#jn-commercial-desk .jn-reminder:last-child{border-bottom:0}
+    #jn-commercial-desk .jn-todo-time{font-size:12px;color:var(--jn-muted);font-variant-numeric:tabular-nums}
+    #jn-commercial-desk .jn-todo-name{font-weight:500;display:block}
+    #jn-commercial-desk .jn-sub{font-size:12px;color:var(--jn-muted);display:block;margin-top:2px;overflow-wrap:anywhere}
+    #jn-commercial-desk .jn-danger{color:#ad4542}
+    #jn-commercial-desk .jn-reminder{padding:12px 14px;border-bottom:1px solid #edf0f2}
+    #jn-commercial-desk .jn-reminder-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:3px}
+    #jn-commercial-desk .jn-notice-tag{font-size:12px;padding:2px 6px;border-radius:3px;background:#fff0d9;color:#8c5616;white-space:nowrap}
+    #jn-commercial-desk .jn-notice-tag.jn-late{background:#fbe9e8;color:#a43d3a}
+    #jn-commercial-desk .jn-table-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px 10px}
+    #jn-commercial-desk .jn-table-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    #jn-commercial-desk .jn-tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--jn-line);padding:0 14px}
+    #jn-commercial-desk .jn-tab{background:transparent;border:0;border-bottom:2px solid transparent;padding:9px 13px;color:var(--jn-muted)}
+    #jn-commercial-desk .jn-tab[aria-selected=true]{color:var(--jn-brand);border-bottom-color:var(--jn-brand)}
+    #jn-commercial-desk .jn-search{display:flex;align-items:center;gap:7px;border:1px solid #c6bddc;border-radius:5px;background:var(--jn-paper);padding:6px 9px;width:300px;max-width:100%}
+    #jn-commercial-desk .jn-search i{width:15px;height:15px;color:var(--jn-muted);flex:none}
+    #jn-commercial-desk .jn-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--jn-ink)}
+    #jn-commercial-desk .jn-search:focus-within{outline:2px solid #71639e35}
+    #jn-commercial-desk .jn-filter-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center;padding:8px 14px;border-bottom:1px solid var(--jn-line);font-size:12px;color:var(--jn-muted)}
+    #jn-commercial-desk .jn-filter-chip{background:#eeeaf5;color:#51406f;border:0;border-radius:3px;display:inline-flex;align-items:center;gap:7px;padding:3px 7px}
+    #jn-commercial-desk .jn-filter-chip i{width:12px;height:12px}
+    #jn-commercial-desk .jn-scroll{overflow-x:auto;max-width:100%}
+    #jn-commercial-desk table{border-collapse:collapse;width:100%;text-align:left}
+    #jn-commercial-desk .jn-orders-table{min-width:700px}
+    #jn-commercial-desk th{background:#f8f9fa;color:#343a40;font-size:13px;font-weight:600;border-bottom:1px solid var(--jn-line);white-space:nowrap}
+    #jn-commercial-desk td,#jn-commercial-desk th{padding:11px 13px;vertical-align:middle}
+    #jn-commercial-desk td{border-bottom:1px solid #e9ecef;font-size:13px}
+    #jn-commercial-desk tbody tr:hover{background:#f6f4fa}
+    #jn-commercial-desk .jn-orders-table td:nth-child(2){min-width:175px;max-width:250px;overflow-wrap:anywhere}
+    #jn-commercial-desk .jn-number{font-variant-numeric:tabular-nums;white-space:nowrap}
+    #jn-commercial-desk .jn-end{text-align:right}
+    #jn-commercial-desk .jn-badge{display:inline-block;border-radius:12px;padding:2px 8px;font-size:12px;white-space:nowrap;background:#e9ecef;color:#626872}
+    #jn-commercial-desk .jn-badge.quotation{background:#e0f2f4;color:#08798a}
+    #jn-commercial-desk .jn-badge.sent{background:#e9edf8;color:#3c5b9b}
+    #jn-commercial-desk .jn-badge.contract{background:#eee8f7;color:#6c4b9c}
+    #jn-commercial-desk .jn-badge.sale{background:#e4f3e9;color:#1f7f42}
+    #jn-commercial-desk .jn-table-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;padding:11px 14px;color:var(--jn-muted);font-size:12px}
+    #jn-commercial-desk .jn-pager{display:flex;align-items:center;gap:10px}
+    #jn-commercial-desk .jn-icon-button{padding:5px 8px}
+    #jn-commercial-desk .jn-empty{text-align:center;padding:35px 18px;color:var(--jn-muted)}
+    #jn-commercial-desk dialog{border:1px solid var(--jn-line);border-radius:7px;padding:0;color:var(--jn-ink);background:var(--jn-paper);width:680px;max-width:calc(100% - 24px);box-shadow:0 10px 32px #0002}
+    #jn-commercial-desk dialog::backdrop{background:#0005}
+    #jn-commercial-desk .jn-modal-title{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--jn-line)}
+    #jn-commercial-desk .jn-modal-title h3{font-size:19px;font-weight:500}
+    #jn-commercial-desk .jn-modal-body{padding:20px}
+    #jn-commercial-desk .jn-modal-footer{padding:12px 20px;border-top:1px solid var(--jn-line);display:flex;gap:8px;justify-content:flex-start;flex-wrap:wrap}
+    #jn-commercial-desk .jn-detail-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+    #jn-commercial-desk .jn-detail-top strong{font-size:24px;font-weight:600}
+    #jn-commercial-desk .jn-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px}
+    #jn-commercial-desk .jn-detail-grid label,#jn-commercial-desk .jn-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+    #jn-commercial-desk .jn-detail-grid label>span,#jn-commercial-desk .jn-field>span{color:var(--jn-muted);font-size:12px}
+    #jn-commercial-desk .jn-detail-grid label b{font-weight:400;overflow-wrap:anywhere}
+    #jn-commercial-desk .jn-detail-tabs{display:flex;gap:18px;border-bottom:1px solid var(--jn-line);padding:22px 0 10px;margin-bottom:12px;color:var(--jn-brand)}
+    #jn-commercial-desk .jn-input{border:0;border-bottom:1px solid #aaa0c1;background:var(--jn-paper);color:var(--jn-ink);padding:6px 0;width:100%;min-width:0}
+    #jn-commercial-desk .jn-choice-list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+    #jn-commercial-desk .jn-choice-list li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid #edf0f2}
+    #jn-commercial-desk .jn-mode-note{font-size:12px;color:var(--jn-muted);margin-top:14px}
+    #jn-commercial-desk .jn-mobile-label{display:none}
+    @media(max-width:850px){#jn-commercial-desk .jn-stats{grid-template-columns:repeat(3,minmax(0,1fr))}#jn-commercial-desk .jn-account .jn-company{display:none}#jn-commercial-desk .jn-upper{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
+    @media(max-width:620px){#jn-commercial-desk .jn-upper{grid-template-columns:1fr}#jn-commercial-desk .jn-main{padding:12px}#jn-commercial-desk .jn-control-panel{padding:12px}#jn-commercial-desk .jn-bar{gap:6px;padding:8px 10px}#jn-commercial-desk .jn-app{margin-right:0}#jn-commercial-desk .jn-nav{order:3;width:100%}#jn-commercial-desk .jn-nav button{padding:5px 9px}#jn-commercial-desk .jn-search{width:100%}#jn-commercial-desk .jn-table-tools{width:100%}#jn-commercial-desk .jn-detail-grid{grid-template-columns:1fr}#jn-commercial-desk .jn-date{font-size:12px}#jn-commercial-desk .jn-modal-body{padding:16px}#jn-commercial-desk .jn-stat span{font-size:12px}}
+    @media(pointer:coarse){#jn-commercial-desk .jn-button,#jn-commercial-desk .jn-tab,#jn-commercial-desk .jn-nav button{min-height:44px}#jn-commercial-desk input,#jn-commercial-desk select{font-size:16px}}
+  </style>
+  <header class="jn-bar">
+    <div class="jn-app"><i data-lucide="grid-3x3" aria-hidden="true"></i><span>销售</span></div>
+    <nav class="jn-nav" aria-label="销售顶部导航">
+      <button type="button" aria-current="page" data-action="home">工作台</button>
+      <button type="button" data-action="orders">订单</button>
+      <button type="button" data-action="products">产品</button>
+      <button type="button" data-action="reports">报表</button>
+      <button type="button" data-action="settings">配置</button>
+    </nav>
+    <div class="jn-account"><span class="jn-company">京能板件（演示）</span><span class="jn-avatar">演</span></div>
+  </header>
+  <section class="jn-control-panel">
+    <div class="jn-heading"><h2>商务工作台</h2><span class="jn-date"><i data-lucide="calendar-days" aria-hidden="true"></i>2026年11月20日 · 星期五</span></div>
+    <div class="jn-actions"><div><button type="button" class="jn-button jn-primary" data-action="new"><i data-lucide="plus" aria-hidden="true"></i>去报价</button></div><span class="jn-scope"><i data-lucide="user-round" aria-hidden="true"></i>我的业务</span></div>
+  </section>
+  <main class="jn-main">
+    <section class="jn-stats" aria-label="我的业务概览" id="jn-desk-stats"></section>
+    <div class="jn-upper" id="jn-desk-upper">
+      <section class="jn-panel" aria-labelledby="jn-todo-title"><div class="jn-panel-heading"><h3 id="jn-todo-title">今日待办<span class="jn-count">含逾期活动</span></h3><button class="jn-link" type="button" data-action="activities">全部活动</button></div><div id="jn-desk-todos"></div></section>
+      <section class="jn-panel" aria-labelledby="jn-reminders-title"><div class="jn-panel-heading"><h3 id="jn-reminders-title">交期提醒</h3><button class="jn-link" type="button" data-action="delivery-filter">查看全部</button></div><div id="jn-desk-reminders"></div></section>
+    </div>
+    <section class="jn-panel" aria-labelledby="jn-orders-title">
+      <div class="jn-table-heading"><h3 id="jn-orders-title">近期单据<span class="jn-count" id="jn-desk-total"></span></h3><div class="jn-table-tools"><label class="jn-search"><i data-lucide="search" aria-hidden="true"></i><input id="jn-desk-search" type="search" placeholder="搜索单号、客户…" aria-label="搜索单号或客户"/></label></div></div>
+      <div class="jn-tabs" role="tablist" aria-label="单据范围"><button class="jn-tab" role="tab" aria-selected="true" type="button" data-action="tab" data-value="all">全部单据</button><button class="jn-tab" role="tab" aria-selected="false" type="button" data-action="tab" data-value="pending">待我处理</button><button class="jn-tab" role="tab" aria-selected="false" type="button" data-action="tab" data-value="sale">销售订单</button></div>
+      <div class="jn-filter-row" id="jn-desk-facets"></div>
+      <div class="jn-scroll"><table class="jn-orders-table"><thead><tr><th>单据编号</th><th>客户</th><th>状态</th><th>承诺交货日期</th><th class="jn-end">总计</th><th>下一步</th></tr></thead><tbody id="jn-desk-rows"></tbody></table></div>
+      <div class="jn-table-footer"><span id="jn-desk-sum" aria-live="polite"></span><div class="jn-pager"><span id="jn-desk-page"></span><button type="button" class="jn-button jn-icon-button" id="jn-desk-prev" data-action="prev">上一页</button><button type="button" class="jn-button jn-icon-button" id="jn-desk-next" data-action="next">下一页</button></div></div>
+    </section>
+  </main>
+  <dialog id="jn-desk-dialog" aria-labelledby="jn-desk-dialog-title"><div class="jn-modal-title"><h3 id="jn-desk-dialog-title"></h3><button type="button" class="jn-button jn-quiet jn-icon-button" data-action="close" aria-label="关闭"><i data-lucide="x" aria-hidden="true"></i></button></div><div class="jn-modal-body" id="jn-desk-dialog-body"></div><div class="jn-modal-footer" id="jn-desk-dialog-footer"></div></dialog>
+  <script>
+  (() => {
+    const root = document.getElementById('jn-commercial-desk');
+    const get = id => root.querySelector('#'+id);
+    const today = '2026-11-20';
+    const companies = ['浙江万丰科技开发股份有限公司','杭州得默尔智能科技有限公司','杭州方圆塑机股份有限公司','杭州诺玥科技有限公司','国祥','标克激光智能装备科技（宁波）有限公司','京能板件（演示）'];
+    const rows = [
+      {id:'S00257',customer:companies[0],stage:'draft',product:'JP',spec:'800 × 600 × 2000',amount:0,delivery:'2026-12-03'},
+      {id:'S00256',customer:companies[1],stage:'draft',product:'JA',spec:'600 × 300 × 800',amount:0,delivery:'2026-12-05'},
+      {id:'S00255',customer:companies[2],stage:'quotation',product:'JS',spec:'800 × 600 × 2000',amount:6382.40,delivery:'2026-12-04'},
+      {id:'S00254',customer:companies[3],stage:'sent',product:'JE',spec:'600 × 300 × 800',amount:2356.80,delivery:'2026-12-02'},
+      {id:'S00253',customer:companies[0],stage:'sent',product:'JP',spec:'1000 × 600 × 2000',amount:7820,delivery:'2026-12-08'},
+      {id:'S00252',customer:companies[5],stage:'contract',product:'JK',spec:'800 × 400 × 1200',amount:4518.50,delivery:'2026-12-09'},
+      {id:'S00251',customer:companies[4],stage:'quotation',product:'JA',spec:'500 × 300 × 700',amount:1918.36,delivery:'2026-12-05'},
+      {id:'S00250',customer:companies[2],stage:'sale',product:'JP',spec:'800 × 400 × 2000',amount:8946.50,delivery:'2026-11-19'},
+      {id:'S00249',customer:companies[1],stage:'sale',product:'JS',spec:'800 + 600 × 600 × 2000',amount:7838.41,delivery:'2026-12-01'},
+      {id:'S00248',customer:companies[3],stage:'sent',product:'JC',spec:'800 × 600 × 1600',amount:3184,delivery:'2026-12-08'},
+      {id:'S00246',customer:companies[6],stage:'contract',product:'JM',spec:'1000 × 480 × 520',amount:4153.48,delivery:'2026-11-25'},
+      {id:'S00245',customer:companies[6],stage:'quotation',product:'JS',spec:'800 × 800 × 2000',amount:3846.81,delivery:'2026-12-01'}
+    ];
+    const stages={draft:'草稿',quotation:'报价单',sent:'已发送报价单',contract:'合同',sale:'销售订单'};
+    const next={draft:'完善报价',quotation:'发送报价',sent:'跟进客户',contract:'确认订单',sale:'查看订单'};
+    const state={filter:'all',query:'',tab:'all',page:1,extra:[]};
+    const design={density:'标准',reminders:true};
+    const PAGE=6;
+    const esc = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const money = value => '¥ '+Number(value).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+    const all = () => [...state.extra,...rows];
+    const icons = () => {if(globalThis.lucide)globalThis.lucide.createIcons({attrs:{width:16,height:16}});};
+    const badge = row => '<span class="jn-badge '+row.stage+'">'+stages[row.stage]+'</span>';
+    const actions = (action,label,id='',primary=false) => '<button type="button" class="jn-button '+(primary?'jn-primary':'')+'" data-action="'+action+'" data-id="'+esc(id)+'">'+label+'</button>';
+    function save(){window.openai?.setWidgetState?.({modelContent:{scheme:'商务工作台（Odoo风格）',filter:state.filter,search:state.query,range:state.tab},privateContent:{...state}})?.catch(()=>{});}
+    function restore(s){const p=s?.privateContent;if(s?.modelContent?.scheme==='商务工作台（Odoo风格）'&&p){state.filter=typeof p.filter==='string'?p.filter:'all';state.query=typeof p.query==='string'?p.query:'';state.tab=['all','pending','sale'].includes(p.tab)?p.tab:'all';state.page=Math.max(1,Number(p.page)||1);state.extra=Array.isArray(p.extra)?p.extra.filter(r=>r&&/^S\d{5}$/.test(r.id)&&r.stage==='draft'&&typeof r.customer==='string'&&typeof r.delivery==='string'&&typeof r.product==='string'&&typeof r.spec==='string'&&r.amount===0).slice(0,8):[];}}
+    function hasDelivery(row){return ['contract','sale'].includes(row.stage)&&row.delivery&&row.delivery<='2026-11-27';}
+    function filtered(){return all().filter(row=>(state.tab==='all'||(state.tab==='pending'?row.stage!=='sale':row.stage==='sale'))&&(state.filter==='all'||(state.filter==='delivery'?hasDelivery(row):row.stage===state.filter||row.id===state.filter))&&(!state.query||(row.id+' '+row.customer).toLowerCase().includes(state.query.toLowerCase())));}
+    function select(filter,tab='all'){state.filter=filter;state.tab=tab;state.page=1;render();save();get('jn-orders-title').scrollIntoView({block:'nearest',behavior:'auto'});}
+    function renderStats(){
+      const metrics=[['customers','我的客户',new Set(all().map(r=>r.customer)).size,'#eceff2','#52606b'],['draft','待完善报价',all().filter(r=>r.stage==='draft').length,'#ffe4cf','#9d5514'],['quotation','待发送报价',all().filter(r=>r.stage==='quotation').length,'#dff1f4','#127b8e'],['sent','待客户反馈',all().filter(r=>r.stage==='sent').length,'#e4ebf8','#41649a'],['contract','合同待确认',all().filter(r=>r.stage==='contract').length,'#e4dcf3','#634d8d'],['sale','销售订单',all().filter(r=>r.stage==='sale').length,'#e2f0e6','#2e7950']];
+      get('jn-desk-stats').innerHTML=metrics.map(([key,label,count,tone,ink])=>'<button type="button" class="jn-stat" data-action="metric" data-value="'+key+'" aria-pressed="'+(state.filter===key)+'" style="--jn-tone:'+tone+';--jn-tone-ink:'+ink+'"><strong>'+count+'</strong><span>'+label+'</span></button>').join('');
+    }
+    function renderTable(){
+      const list=filtered();const pages=Math.max(1,Math.ceil(list.length/PAGE));state.page=Math.min(state.page,pages);const start=(state.page-1)*PAGE;const page=list.slice(start,start+PAGE);
+      get('jn-desk-total').textContent=list.length+' 笔';
+      get('jn-desk-facets').innerHTML='<span>当前范围</span><span class="jn-filter-chip">我的业务</span>'+(state.filter!=='all'?'<button class="jn-filter-chip" type="button" data-action="clear-filter">'+esc(stages[state.filter]||(state.filter==='delivery'?'交期提醒':state.filter))+'<i data-lucide="x" aria-hidden="true"></i></button>':'<span>全部状态</span>');
+      get('jn-desk-rows').innerHTML=page.length?page.map(row=>'<tr><td><button class="jn-link jn-number" type="button" data-action="detail" data-id="'+row.id+'">'+row.id+'</button></td><td>'+esc(row.customer)+'</td><td>'+badge(row)+'</td><td class="jn-number '+(hasDelivery(row)&&row.delivery<today?'jn-danger':'')+'">'+row.delivery.slice(5).replace('-','月')+'日</td><td class="jn-end jn-number">'+(row.stage==='draft'?'—':money(row.amount))+'</td><td><button type="button" class="jn-link" data-action="detail" data-id="'+row.id+'">'+next[row.stage]+'</button></td></tr>').join(''):'<tr><td colspan="6"><div class="jn-empty">没有符合条件的单据。<br/><button type="button" class="jn-button jn-quiet" data-action="clear-all">清除筛选</button></div></td></tr>';
+      get('jn-desk-sum').textContent='当前筛选合计 '+money(list.reduce((sum,r)=>sum+r.amount,0));
+      get('jn-desk-page').textContent=(list.length?start+1:0)+'–'+Math.min(start+PAGE,list.length)+' / '+list.length;
+      get('jn-desk-prev').disabled=state.page===1;get('jn-desk-next').disabled=state.page===pages;
+      root.querySelectorAll('[data-action="tab"]').forEach(btn=>btn.setAttribute('aria-selected',String(btn.dataset.value===state.tab)));icons();
+    }
+    function render(){
+      renderStats();renderTable();get('jn-desk-search').value=state.query;
+      const todos=[['已逾期','补齐柜体选型参数','S00257','交期、门型与附件尚需完善',true],['10:00','跟进客户报价反馈','S00254','杭州诺玥科技有限公司',false],['14:00','核对合同并确认订单','S00246','京能板件（演示）',false]];
+      get('jn-desk-todos').innerHTML=todos.map(([time,title,id,note,late])=>'<div class="jn-todo"><span class="jn-todo-time '+(late?'jn-danger':'')+'">'+time+'</span><div><button class="jn-link jn-todo-name" type="button" data-action="detail" data-id="'+id+'">'+title+'</button><span class="jn-sub">'+id+' · '+note+'</span></div><button class="jn-link" type="button" data-action="detail" data-id="'+id+'">处理</button></div>').join('');
+      get('jn-desk-reminders').innerHTML=all().filter(hasDelivery).sort((a,b)=>a.delivery.localeCompare(b.delivery)).map(row=>'<div class="jn-reminder"><div class="jn-reminder-top"><button type="button" class="jn-link jn-number" data-action="detail" data-id="'+row.id+'">'+row.id+'</button><span class="jn-notice-tag '+(row.delivery<today?'jn-late':'')+'">'+(row.delivery<today?'交期已过 · 待核实':'5天后交货')+'</span></div><span class="jn-sub">'+esc(row.customer)+'</span><span class="jn-sub">承诺交货 '+row.delivery.slice(5).replace('-','月')+'日</span></div>').join('')||'<div class="jn-empty">暂无交期提醒</div>';
+      icons();
+    }
+    function modal(title,body,footer){get('jn-desk-dialog-title').textContent=title;get('jn-desk-dialog-body').innerHTML=body;get('jn-desk-dialog-footer').innerHTML=footer||actions('close','返回工作台');const dialog=get('jn-desk-dialog');if(!dialog.open)dialog.showModal();icons();}
+    function detail(id){const row=all().find(r=>r.id===id);if(!row)return;modal('单据详情','<div class="jn-detail-top"><strong>'+row.id+'</strong>'+badge(row)+'</div><div class="jn-detail-grid"><label><span>客户</span><b>'+esc(row.customer)+'</b></label><label><span>承诺交货日期</span><b>'+row.delivery+'</b></label><label><span>销售人员</span><b>演示管理员</b></label><label><span>总计</span><b class="jn-number">'+(row.stage==='draft'?'待计算':money(row.amount))+'</b></label></div><div class="jn-detail-tabs"><span>图纸与选型</span><span>报价明细</span><span>其他信息</span></div><div class="jn-scroll"><table><thead><tr><th>产品</th><th>规格（宽×深×高）</th><th>数量</th></tr></thead><tbody><tr><td>'+esc(row.product)+'</td><td>'+esc(row.spec)+' mm</td><td>1 '+(row.spec.includes('+')?'组':'台')+'</td></tr></tbody></table></div>',actions('close','返回工作台',id,true)+actions('related','查看同客户单据',id));}
+    function customers(){const names=[...new Set(all().map(r=>r.customer))];modal('我的客户','<ul class="jn-choice-list">'+names.map(name=>'<li><div>'+esc(name)+'<span class="jn-sub">关联单据 '+all().filter(r=>r.customer===name).length+' 笔</span></div><button class="jn-link" type="button" data-action="customer" data-name="'+esc(name)+'">查看单据</button></li>').join('')+'</ul>');}
+    function newQuote(){modal('新建报价单','<div class="jn-detail-grid"><label class="jn-field"><span>客户</span><select class="jn-input" id="jn-new-customer">'+companies.map(c=>'<option>'+esc(c)+'</option>').join('')+'</select></label><label class="jn-field"><span>承诺交货日期</span><input type="date" class="jn-input" id="jn-new-delivery" value="2026-12-05" min="2026-11-20"/></label></div><div class="jn-detail-tabs"><span>图纸与选型</span><span>报价与成本</span><span>其他信息</span></div><p class="jn-mode-note">保存草稿后，在原单据中上传图纸或手工添加产品。</p>',actions('create','创建草稿','',true)+actions('close','取消'));}
+    get('jn-desk-search').addEventListener('input',event=>{state.query=event.target.value;state.page=1;renderTable();save();});
+    root.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-action]');if(!button||!root.contains(button))return;
+      const {action,id,value,name}=button.dataset;
+      if(action==='close'){get('jn-desk-dialog').close();return;}
+      if(action==='metric'){if(value==='customers')customers();else select(state.filter===value?'all':value);}
+      else if(action==='detail')detail(id);
+      else if(action==='related'){get('jn-desk-dialog').close();state.query=all().find(r=>r.id===id)?.customer||'';select('all');}
+      else if(action==='customer'){get('jn-desk-dialog').close();state.query=name;select('all');}
+      else if(action==='delivery-filter')select('delivery');
+      else if(action==='tab'){state.tab=value;state.filter='all';state.page=1;render();save();}
+      else if(action==='clear-filter')select('all',state.tab);
+      else if(action==='home'||action==='clear-all'||action==='orders'){state.query='';select('all');}
+      else if(action==='prev'||action==='next'){state.page+=action==='prev'?-1:1;renderTable();save();}
+      else if(action==='new')newQuote();
+      else if(action==='create'){
+        const customer=get('jn-new-customer').value,delivery=get('jn-new-delivery').value;
+        if(!delivery){get('jn-new-delivery').focus();return;}
+        const row={id:'S00'+(258+state.extra.length),customer,delivery,stage:'draft',product:'待选型',spec:'待填写',amount:0};state.extra.unshift(row);get('jn-desk-dialog').close();state.query='';select('draft');detail(row.id);save();
+      }
+      else if(action==='activities')modal('我的活动','<ul class="jn-choice-list"><li><div>完善柜体选型<span class="jn-sub">已逾期 · S00257</span></div>'+actions('detail','打开单据','S00257')+'</li><li><div>跟进客户报价反馈<span class="jn-sub">今天10:00 · S00254</span></div>'+actions('detail','打开单据','S00254')+'</li><li><div>核对合同并确认订单<span class="jn-sub">今天14:00 · S00246</span></div>'+actions('detail','打开单据','S00246')+'</li></ul>');
+      else if(action==='products')modal('产品','<ul class="jn-choice-list"><li><div>机箱机柜<span class="jn-sub">JA、JC、JE、JK、JM、JP、JP WIDE、JQ、JS、JS WIDE、操作台</span></div></li><li><div>附件<span class="jn-sub">现有附件目录与配置入口</span></div></li></ul>');
+      else if(action==='reports')modal('报表','<ul class="jn-choice-list"><li>销售分析</li><li>销售人员分析</li><li>产品分析</li><li>客户分析</li></ul>');
+      else if(action==='settings')modal('配置','<p>沿用现有销售配置。</p>');
+    });
+    restore(window.openai?.widgetState);render();
+    window.addEventListener('openai:set_globals',event=>{if(event.detail?.globals?.widgetState){restore(event.detail.globals.widgetState);render();}});
+    if(globalThis.Tweak){const tweak=new Tweak({container:root,onChange:()=>{root.style.setProperty('--jn-gap',design.density==='紧凑'?'10px':'16px');get('jn-desk-upper').hidden=!design.reminders;}});tweak.addSelect(design,'density',{label:'内容间距',options:['标准','紧凑']});tweak.addToggle(design,'reminders',{label:'显示待办与交期提醒'});}
+  })();
+  </script>
+</div>

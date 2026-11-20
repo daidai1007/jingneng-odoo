@@ -73,19 +73,19 @@
         >
             <menuitem id="menu_reporting_sales"
                 name="Sales"
-                action="action_order_report_all"
+                action="action_jingneng_report_sales"
                 sequence="10"/>
             <menuitem id="menu_reporting_salespeople"
                 name="Salespersons"
-                action="action_order_report_salesperson"
+                action="action_jingneng_report_people"
                 sequence="20"/>
             <menuitem id="menu_reporting_product"
                 name="Products"
-                action="action_order_report_products"
+                action="action_jingneng_report_products"
                 sequence="30"/>
             <menuitem id="menu_reporting_customer"
                 name="Customers"
-                action="action_order_report_customers"
+                action="action_jingneng_report_customers"
                 sequence="40"/>
 
         </menuitem>

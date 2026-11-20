@@ -1,0 +1,18 @@
+[options]
+admin_passwd = REPLACE_WITH_LOCAL_MASTER_PASSWORD
+http_interface = 127.0.0.1
+http_port = 8069
+db_host = 127.0.0.1
+db_port = 15432
+db_user = odoo
+db_password = REPLACE_WITH_LOCAL_DATABASE_PASSWORD
+db_name = odoo_customer_demo
+dbfilter = ^odoo_customer_demo$
+list_db = False
+data_dir = LOCAL_ODOO_DATA_DIRECTORY
+pg_path = C:/Users/Administrator/AppData/Local/OdooNativePreview/runtime/pgsql/bin
+logfile = LOCAL_ODOO_LOG_FILE
+workers = 0
+smtp_server = 127.0.0.1
+smtp_port = 1025
+

@@ -11,11 +11,11 @@
 
     <t t-name="sale.QtyAtDatePopover">
         <div class="p-2">
-            <h6>Availability</h6>
+            <h6>可用性</h6>
             <table class="table table-borderless table-sm">
                 <tbody>
                     <tr>
-                        <td><strong t-out="this.forecastedLabel"/><br/><small>On <span t-out="this.props.calcData.delivery_date"/></small></td>
+                        <td><strong t-out="this.forecastedLabel"/><br/><small>开 <span t-out="this.props.calcData.delivery_date"/></small></td>
                         <td class="text-end">
                             <b t-out='this.props.record.data.virtual_available_at_date'
                             t-att-class="this.props.record.data.virtual_available_at_date &lt; this.props.calcData.leftToDeliver ? 'text-danger' : 'text-success'"/>

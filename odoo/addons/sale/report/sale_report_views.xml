@@ -204,4 +204,20 @@
             'search_default_team_id': [active_id]}</field>
         <field name="help">This report performs analysis on your sales orders. Analysis check your sales revenues and sort it by different group criteria (salesman, partner, product, etc.) Use this report to perform analysis on sales not having invoiced yet. If you want to analyse your turnover, you should use the Invoice Analysis report in the Accounting application.</field>
     </record>
+    <record id="action_jingneng_report_sales" model="ir.actions.client">
+        <field name="name">销售分析</field><field name="tag">sale.jingneng_reports</field>
+        <field name="path">jingneng-reports-sales</field><field name="params" eval="{'dimension': 'sales'}"/>
+    </record>
+    <record id="action_jingneng_report_people" model="ir.actions.client">
+        <field name="name">销售人员分析</field><field name="tag">sale.jingneng_reports</field>
+        <field name="path">jingneng-reports-people</field><field name="params" eval="{'dimension': 'people'}"/>
+    </record>
+    <record id="action_jingneng_report_products" model="ir.actions.client">
+        <field name="name">产品分析</field><field name="tag">sale.jingneng_reports</field>
+        <field name="path">jingneng-reports-products</field><field name="params" eval="{'dimension': 'products'}"/>
+    </record>
+    <record id="action_jingneng_report_customers" model="ir.actions.client">
+        <field name="name">客户分析</field><field name="tag">sale.jingneng_reports</field>
+        <field name="path">jingneng-reports-customers</field><field name="params" eval="{'dimension': 'customers'}"/>
+    </record>
 </odoo>

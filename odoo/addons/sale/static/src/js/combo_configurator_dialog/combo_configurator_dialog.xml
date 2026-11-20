@@ -8,7 +8,7 @@
         >
             <div t-if="this.unconfigurableCombos.length" class="mb-4">
                 <span class="d-inline-block mb-3 h4">
-                    Included
+                    已包含
                 </span>
                 <div class="container">
                     <div
@@ -21,7 +21,7 @@
                         <div class="col-2 p-0">
                             <img
                                 t-attf-src="/web/image/product.product/{{product.id}}/image_256"
-                                alt="Product Image"
+                                alt="产品图像"
                                 role="img"
                                 class="img-thumbnail rounded"
                             />
@@ -71,7 +71,7 @@
                             t-att-disabled="!this.areAllCombosSelected || this.state.isLoading"
                             t-on-click="this.confirm"
                         >
-                            Add to order
+                            添加到订单
                         </button>
                         <div class="d-flex gap-1">
                             <button
@@ -79,14 +79,14 @@
                                 class="btn btn-secondary flex-fill flex-lg-grow-0 w-lg-auto"
                                 t-on-click="this.cancel"
                             >
-                                Discard
+                                取消
                             </button>
                             <button
                                 t-if="this.props.edit"
                                 class="btn btn-danger flex-fill d-md-none"
                                 t-on-click="this.deleteRecord"
                             >
-                                Delete
+                                删除
                             </button>
                         </div>
                     </div>

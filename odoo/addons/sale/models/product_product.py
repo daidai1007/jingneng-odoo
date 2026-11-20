@@ -16,6 +16,26 @@ class ProductProduct(models.Model):
         search="_search_previously_bought_by_customer", store=False
     )
 
+    @api.model
+    @api.readonly
+    def get_views(self, views, options=None):
+        result = super().get_views(views, options=options)
+        if self.env.context.get("jingneng_sale_ui"):
+            return self.env["product.template"]._without_sales_lead_time(result)
+        return result
+
+    @api.model
+    def fields_get(self, allfields=None, attributes=None):
+        descriptions = super().fields_get(allfields, attributes)
+        if self.env.context.get("jingneng_sale_ui") and "sale_delay" in descriptions:
+            field = descriptions["sale_delay"]
+            for attribute in ("searchable", "sortable", "groupable", "exportable"):
+                if attribute in field:
+                    field[attribute] = False
+            if "readonly" in field:
+                field["readonly"] = True
+        return descriptions
+
     def _compute_sales_count(self):
         r = {}
         self.sales_count = 0

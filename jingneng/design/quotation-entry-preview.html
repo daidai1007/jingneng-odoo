@@ -1,0 +1,369 @@
+<div id="jn-quotation-entry-preview">
+  <style>
+    #jn-quotation-entry-preview { --jn-bg:light-dark(#f7f8fa,#1a1c22); --jn-paper:light-dark(#ffffff,#252731); --jn-ink:light-dark(#172333,#edf0f5); --jn-muted:light-dark(#707988,#b3bac6); --jn-line:light-dark(#dce0e6,#414550); --jn-brand:light-dark(#71629c,#8676b4); --jn-brand-ink:#fff; --jn-soft:light-dark(#f1edf9,#383047); --jn-field:light-dark(#f4f5f7,#30333e); --jn-blue:light-dark(#107b93,#6acbe1); --jn-blue-bg:light-dark(#e1f1f5,#1d3942); --jn-error:light-dark(#b64834,#ffac99); color-scheme:light dark; color:var(--jn-ink); font:14px/1.5 "Microsoft YaHei",system-ui,sans-serif; }
+    #jn-quotation-entry-preview * { box-sizing:border-box; }
+    #jn-quotation-entry-preview [hidden] { display:none !important; }
+    #jn-quotation-entry-preview button,#jn-quotation-entry-preview input,#jn-quotation-entry-preview select { font:inherit; color:inherit; }
+    #jn-quotation-entry-preview button { cursor:var(--cursor-interaction,pointer); }
+    #jn-quotation-entry-preview button:disabled { opacity:.5; cursor:default; }
+    #jn-quotation-entry-preview .jn-app { background:var(--jn-bg); }
+    #jn-quotation-entry-preview .jn-nav { padding:11px 16px; background:var(--jn-brand); color:var(--jn-brand-ink); display:flex; gap:19px; align-items:center; flex-wrap:wrap; }
+    #jn-quotation-entry-preview .jn-company { margin-left:auto; }
+    #jn-quotation-entry-preview .jn-record { padding:12px 17px; border-bottom:1px solid var(--jn-line); display:flex; align-items:center; gap:12px; background:var(--jn-paper); }
+    #jn-quotation-entry-preview .jn-record small { display:block; color:var(--jn-muted); font-size:12px; }
+    #jn-quotation-entry-preview .jn-workspace { display:grid; padding:12px; align-items:start; }
+    #jn-quotation-entry-preview .jn-order,#jn-quotation-entry-preview .jn-dialog { grid-area:1/1; min-width:0; }
+    #jn-quotation-entry-preview .jn-order { padding:18px; background:var(--jn-paper); border:1px solid var(--jn-line); border-radius:5px; }
+    #jn-quotation-entry-preview .jn-workspace.jn-editing .jn-order { opacity:.17; }
+    #jn-quotation-entry-preview .jn-title { font-size:18px; font-weight:500; margin:0; }
+    #jn-quotation-entry-preview .jn-order-head { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:25px; }
+    #jn-quotation-entry-preview .jn-tabs { display:flex; border-bottom:1px solid var(--jn-line); gap:20px; margin:20px 0 12px; }
+    #jn-quotation-entry-preview .jn-tabs span { padding:8px 2px; }
+    #jn-quotation-entry-preview .jn-tabs .jn-active { color:var(--jn-brand); border-bottom:2px solid var(--jn-brand); }
+    #jn-quotation-entry-preview .jn-tabs button { padding:8px 2px; background:none; border:0; border-bottom:2px solid transparent; }
+    #jn-quotation-entry-preview .jn-entry-actions { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+    #jn-quotation-entry-preview .jn-entry-table { width:100%; border-collapse:collapse; }
+    #jn-quotation-entry-preview .jn-entry-table th,#jn-quotation-entry-preview .jn-entry-table td { padding:12px 7px; border-bottom:1px solid var(--jn-line); text-align:left; font-weight:400; vertical-align:top; overflow-wrap:anywhere; }
+    #jn-quotation-entry-preview .jn-entry-table th { font-size:12px; color:var(--jn-muted); }
+    #jn-quotation-entry-preview .jn-entry-table th:first-child { width:52%; }
+    #jn-quotation-entry-preview .jn-entry-title { display:flex; align-items:center; flex-wrap:wrap; gap:9px; }
+    #jn-quotation-entry-preview .jn-entry-meta { font-size:12px; color:var(--jn-muted); margin-top:4px; }
+    #jn-quotation-entry-preview .jn-dialog-heading { display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+    #jn-quotation-entry-preview .jn-head-actions { display:flex; align-items:center; gap:16px; }
+    #jn-quotation-entry-preview .jn-review.jn-manual-review { grid-template-columns:minmax(0,1fr); }
+    #jn-quotation-entry-preview .jn-manual-review .jn-fields { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    #jn-quotation-entry-preview .jn-manual-review .jn-fields>.jn-field:first-child,#jn-quotation-entry-preview .jn-manual-review .jn-fields>.jn-field:nth-child(2),#jn-quotation-entry-preview .jn-manual-review .jn-field-depth,#jn-quotation-entry-preview .jn-manual-review .jn-field-height,#jn-quotation-entry-preview .jn-manual-review [data-part=single-front],#jn-quotation-entry-preview .jn-manual-review [data-part=single-back] { grid-column:span 2; }
+    #jn-quotation-entry-preview .jn-manual-review .jn-cab-head,#jn-quotation-entry-preview .jn-manual-review .jn-cab-row { grid-template-columns:46px minmax(60px,1fr) minmax(0,2fr) minmax(0,2fr); }
+    #jn-quotation-entry-preview .jn-accessory-picker { margin-top:10px; padding:12px; border:1px solid var(--jn-line); border-radius:3px; background:var(--jn-paper); }
+    #jn-quotation-entry-preview .jn-accessory-choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:3px 14px; margin:8px 0; }
+    #jn-quotation-entry-preview .jn-picker-footer { display:flex; justify-content:flex-end; }
+    #jn-quotation-entry-preview .jn-btn { padding:6px 12px; border:1px solid var(--jn-line); border-radius:3px; background:var(--jn-field); white-space:nowrap; }
+    #jn-quotation-entry-preview .jn-btn-primary { background:var(--jn-brand); border-color:var(--jn-brand); color:var(--jn-brand-ink); }
+    #jn-quotation-entry-preview .jn-link { padding:2px 0; background:none; border:0; color:var(--jn-brand); text-align:left; }
+    #jn-quotation-entry-preview .jn-close { padding:0 6px; border:0; background:none; font-size:23px; color:var(--jn-muted); }
+    #jn-quotation-entry-preview .jn-dialog { z-index:1; background:var(--jn-paper); border:1px solid var(--jn-line); border-radius:6px; }
+    #jn-quotation-entry-preview .jn-dialog-head { padding:14px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--jn-line); }
+    #jn-quotation-entry-preview .jn-file { padding:14px 18px 8px; display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+    #jn-quotation-entry-preview .jn-badge { border-radius:12px; padding:2px 8px; font-size:12px; color:var(--jn-blue); background:var(--jn-blue-bg); }
+    #jn-quotation-entry-preview .jn-review { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px; padding:10px 18px 18px; }
+    #jn-quotation-entry-preview .jn-preview { border:1px solid var(--jn-line); border-radius:3px; align-self:start; min-width:0; }
+    #jn-quotation-entry-preview .jn-preview-tools { padding:7px 9px; display:flex; justify-content:space-between; gap:10px; color:var(--jn-muted); font-size:12px; }
+    #jn-quotation-entry-preview .jn-pdf-bar { border-top:1px solid var(--jn-line); border-bottom:1px solid var(--jn-line); padding:7px 9px; background:var(--jn-field); display:flex; gap:14px; align-items:center; }
+    #jn-quotation-entry-preview .jn-page-count { padding:1px 14px; background:var(--jn-paper); border:1px solid var(--jn-line); border-radius:2px; }
+    #jn-quotation-entry-preview .jn-drawing { padding:32px 10px; background:light-dark(#d6d7da,#171920); min-height:440px; display:flex; align-items:center; }
+    #jn-quotation-entry-preview .jn-sheet { background:var(--jn-paper); width:100%; padding:16px 9px 9px; border:1px solid var(--jn-line); }
+    #jn-quotation-entry-preview .jn-drawing-caption { font-size:12px; text-align:right; color:var(--jn-muted); border-top:1px solid var(--jn-line); padding-top:8px; }
+    #jn-quotation-entry-preview .jn-parameters { --jn-gap:8px; min-width:0; }
+    #jn-quotation-entry-preview .jn-section { padding:5px 0; border-bottom:1px solid var(--jn-line); margin:0 0 12px; font-weight:500; }
+    #jn-quotation-entry-preview .jn-fields { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--jn-gap) 14px; }
+    #jn-quotation-entry-preview .jn-field { display:flex; flex-direction:column; gap:3px; min-width:0; }
+    #jn-quotation-entry-preview .jn-field-wide { grid-column:1/-1; }
+    #jn-quotation-entry-preview .jn-field>span:first-child { font-size:12px; color:var(--jn-muted); }
+    #jn-quotation-entry-preview .jn-input,#jn-quotation-entry-preview .jn-select { padding:5px 3px; width:100%; min-width:0; border:0; border-bottom:1px solid var(--jn-line); border-radius:0; background:var(--jn-paper); }
+    #jn-quotation-entry-preview .jn-width-input { color:var(--jn-brand); font-weight:500; }
+    #jn-quotation-entry-preview .jn-detected { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding-top:3px; font-size:12px; color:var(--jn-muted); }
+    #jn-quotation-entry-preview .jn-error { font-size:12px; color:var(--jn-error); }
+    #jn-quotation-entry-preview .jn-cab-config { grid-column:1/-1; }
+    #jn-quotation-entry-preview .jn-cab-heading { font-size:12px; color:var(--jn-muted); display:flex; justify-content:space-between; padding:5px 0; gap:10px; }
+    #jn-quotation-entry-preview .jn-cab-map { display:flex; align-items:stretch; gap:3px; padding:6px 0 10px; }
+    #jn-quotation-entry-preview .jn-cab-block { flex:1; min-width:0; border:1px solid var(--jn-line); border-top:3px solid var(--jn-brand); background:var(--jn-soft); padding:7px 3px; text-align:center; font-size:12px; }
+    #jn-quotation-entry-preview .jn-cab-head,#jn-quotation-entry-preview .jn-cab-row { display:grid; grid-template-columns:28px 55px minmax(0,1fr) minmax(0,1fr); gap:7px; align-items:center; }
+    #jn-quotation-entry-preview .jn-cab-head { color:var(--jn-muted); font-size:12px; padding:3px 0; }
+    #jn-quotation-entry-preview .jn-cab-row { padding:4px 0; border-bottom:1px solid var(--jn-line); }
+    #jn-quotation-entry-preview .jn-cab-row .jn-select { font-size:12px; border:0; padding:4px 0; }
+    #jn-quotation-entry-preview .jn-note { color:var(--jn-muted); font-size:12px; }
+    #jn-quotation-entry-preview .jn-attachments { margin-top:13px; }
+    #jn-quotation-entry-preview .jn-check { display:flex; align-items:center; gap:7px; padding:3px 0; }
+    #jn-quotation-entry-preview .jn-check input { accent-color:var(--jn-brand); }
+    #jn-quotation-entry-preview .jn-attachment-tools { display:flex; align-items:center; flex-wrap:wrap; gap:14px; margin-top:6px; }
+    #jn-quotation-entry-preview .jn-attachment-tools button { font-size:12px; }
+    #jn-quotation-entry-preview .jn-footer { border-top:1px solid var(--jn-line); display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding:12px 18px; }
+    #jn-quotation-entry-preview .jn-footer-summary { margin-left:auto; font-size:12px; color:var(--jn-muted); }
+    #jn-quotation-entry-preview .jn-order-table { border-collapse:collapse; width:100%; }
+    #jn-quotation-entry-preview .jn-order-table td,#jn-quotation-entry-preview .jn-order-table th { padding:11px 6px; border-bottom:1px solid var(--jn-line); text-align:left; font-weight:400; vertical-align:top; }
+    #jn-quotation-entry-preview .jn-order-table th { color:var(--jn-muted); font-size:12px; }
+    #jn-quotation-entry-preview .jn-order-table .jn-numeric { text-align:right; white-space:nowrap; }
+    #jn-quotation-entry-preview .jn-order-spec { font-size:12px; color:var(--jn-muted); margin-top:4px; overflow-wrap:anywhere; }
+    #jn-quotation-entry-preview .jn-quotation-actions { display:flex; justify-content:flex-end; margin-top:18px; }
+    @media (max-width:700px) {
+      #jn-quotation-entry-preview .jn-review { grid-template-columns:1fr; gap:18px; }
+      #jn-quotation-entry-preview .jn-drawing { min-height:0; padding:12px; }
+      #jn-quotation-entry-preview .jn-sheet { max-width:440px; margin:auto; }
+      #jn-quotation-entry-preview .jn-company { display:none; }
+      #jn-quotation-entry-preview .jn-preview-tools { flex-wrap:wrap; }
+      #jn-quotation-entry-preview .jn-manual-review .jn-fields { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #jn-quotation-entry-preview .jn-manual-review .jn-fields>.jn-field:first-child,#jn-quotation-entry-preview .jn-manual-review .jn-fields>.jn-field:nth-child(2),#jn-quotation-entry-preview .jn-manual-review .jn-field-depth,#jn-quotation-entry-preview .jn-manual-review .jn-field-height,#jn-quotation-entry-preview .jn-manual-review [data-part=single-front],#jn-quotation-entry-preview .jn-manual-review [data-part=single-back] { grid-column:auto; }
+    }
+    @media (max-width:420px) {
+      #jn-quotation-entry-preview .jn-nav { gap:12px; padding:10px; }
+      #jn-quotation-entry-preview .jn-workspace { padding:0; }
+      #jn-quotation-entry-preview .jn-review { padding:8px 12px 14px; }
+      #jn-quotation-entry-preview .jn-dialog-head,#jn-quotation-entry-preview .jn-file,#jn-quotation-entry-preview .jn-footer { padding-left:12px; padding-right:12px; }
+      #jn-quotation-entry-preview .jn-cab-head,#jn-quotation-entry-preview .jn-cab-row { grid-template-columns:23px 38px minmax(0,1fr) minmax(0,1fr); gap:4px; }
+      #jn-quotation-entry-preview .jn-footer-summary { margin-left:0; width:100%; }
+      #jn-quotation-entry-preview .jn-order { padding:12px; }
+      #jn-quotation-entry-preview .jn-entry-table th,#jn-quotation-entry-preview .jn-entry-table td { padding:10px 4px; font-size:12px; }
+      #jn-quotation-entry-preview .jn-entry-table th:first-child { width:42%; }
+      #jn-quotation-entry-preview .jn-entry-table .jn-badge { font-size:11px; padding:1px 5px; }
+      #jn-quotation-entry-preview .jn-accessory-choices { grid-template-columns:1fr; }
+      #jn-quotation-entry-preview .jn-head-actions { gap:8px; }
+      #jn-quotation-entry-preview .jn-manual-review .jn-cab-head,#jn-quotation-entry-preview .jn-manual-review .jn-cab-row { grid-template-columns:23px 38px minmax(0,1fr) minmax(0,1fr); }
+    }
+  </style>
+  <div class="jn-app">
+    <div class="jn-nav"><span>▦ 销售</span><span>订单</span><span>产品</span><span>报表</span><span>配置</span><span class="jn-company">京能板件</span></div>
+    <div class="jn-record"><span>报价单<small>S00138</small></span></div>
+    <div class="jn-workspace jn-editing" data-part="workspace">
+      <section class="jn-order" data-part="order" inert>
+        <div class="jn-order-head"><h2 class="jn-title">S00138</h2><span class="jn-note">草稿</span></div>
+        <div>客户　浙江万丰科技开发股份有限公司</div>
+        <div class="jn-tabs" role="tablist" aria-label="报价单内容"><button role="tab" aria-selected="true" aria-controls="jn-selection-items" data-action="tab-selections">图纸与选型</button><button role="tab" aria-selected="false" aria-controls="jn-order-items" data-action="tab-order">订单明细</button></div>
+        <section id="jn-selection-items" data-part="selection-items">
+          <div class="jn-entry-actions"><button class="jn-btn jn-btn-primary" data-action="upload-new">上传图纸</button></div>
+          <table class="jn-entry-table" aria-label="已上传图纸及确认状态"><thead><tr><th>图纸文件</th><th>页数</th><th>状态</th><th>操作</th></tr></thead><tbody data-part="entry-rows"></tbody></table>
+        </section>
+        <section id="jn-order-items" data-part="order-items" hidden>
+        <table class="jn-order-table" aria-label="按整组显示的订单明细">
+          <thead><tr><th>产品</th><th class="jn-numeric">数量</th><th class="jn-numeric">金额</th></tr></thead>
+          <tbody data-part="order-rows"></tbody>
+        </table>
+        <div class="jn-entry-actions"><button class="jn-link" data-action="new-manual">添加明细行</button></div>
+        </section>
+      </section>
+      <section class="jn-dialog" role="dialog" aria-modal="true" aria-label="图纸与选型视觉方案" data-part="dialog">
+        <header class="jn-dialog-head"><div class="jn-dialog-heading"><h2 class="jn-title" data-part="dialog-title">产品选型</h2><span class="jn-badge" data-part="source-badge" hidden>图纸确认</span></div><div class="jn-head-actions"><button class="jn-close" aria-label="关闭选型预览" data-action="close">×</button></div></header>
+        <div class="jn-file" data-part="file-meta" hidden><span data-part="file-name">JP柜体布置图.pdf</span><span class="jn-badge">待选型</span></div>
+        <div class="jn-review jn-manual-review" data-part="review">
+          <div class="jn-preview" data-part="preview" hidden>
+            <div class="jn-preview-tools"><span>拖动框选正视图，请包含尺寸标注</span><span>撤销　清除选区</span></div>
+            <div class="jn-pdf-bar"><span>▤</span><span class="jn-page-count">1</span><span>/ 1</span><span style="margin-left:auto">−　＋</span></div>
+            <div class="jn-drawing"><div class="jn-sheet"><div data-part="drawing"></div><div class="jn-drawing-caption">柜体布置图 · 尺寸示例</div></div></div>
+            <div class="jn-preview-tools"><span>滚轮缩放 · 按住中键拖动</span></div>
+          </div>
+          <section class="jn-parameters" aria-label="选型参数排版">
+            <div class="jn-section">选型参数</div>
+            <div class="jn-fields">
+              <label class="jn-field"><span>产品类型</span><select class="jn-select" data-field="series" aria-label="产品类型"><option value="">选择产品类型</option><option>JA</option><option>JC</option><option>JE</option><option>JK</option><option>JM</option><option selected>JP</option><option>JP WIDE</option><option>JQ</option><option>JS</option><option>JS WIDE</option><option>操作台</option></select></label>
+              <label class="jn-field"><span data-part="quantity-label">数量（组）</span><input class="jn-input" data-field="quantity" aria-label="订单数量" type="number" min="1" step="1" value="2"/></label>
+              <label class="jn-field jn-field-wide"><span>宽度（mm）</span><input class="jn-input jn-width-input" data-field="width" aria-label="宽度尺寸，可输入加号组合" value="600+800+600" placeholder="600 或 600+800+600"/><span class="jn-detected" aria-live="polite" data-part="detected"></span><span class="jn-error" role="alert" data-part="error" hidden></span></label>
+              <label class="jn-field jn-field-depth"><span data-part="depth-label">共用深度（mm）</span><input class="jn-input" data-field="depth" aria-label="深度" placeholder="填写深度" type="number" min="1" value="600"/></label>
+              <label class="jn-field jn-field-height"><span data-part="height-label">共用高度（mm）</span><input class="jn-input" data-field="height" aria-label="高度" placeholder="填写高度" type="number" min="1" value="1800"/></label>
+              <div class="jn-cab-config" data-part="ganged-config">
+                <div class="jn-cab-heading"><span>柜体配置 · 从左到右</span><span data-part="cab-count">3 柜／组</span></div>
+                <div class="jn-cab-map" aria-label="柜体排列示意" data-part="cab-map"></div>
+                <div class="jn-cab-head"><span>柜位</span><span>宽度</span><span>前门</span><span>后面</span></div>
+                <div data-part="cab-rows"></div>
+              </div>
+              <label class="jn-field" data-part="single-front"><span>前门</span><select class="jn-select" data-field="single-front" aria-label="单柜前门"><option value="auto">自动</option><option value="single">单开门</option><option value="double">双开门</option></select></label>
+              <label class="jn-field" data-part="single-back"><span>后面</span><select class="jn-select" data-field="single-back" aria-label="单柜后面"><option value="panel">背板</option><option value="single">单开门</option><option value="double">双开门</option></select></label>
+              <label class="jn-field"><span>材质</span><select class="jn-select" data-field="material" aria-label="材质"><option value="SECC">碳钢 SECC</option><option value="SUS304">不锈钢 SUS304</option><option value="SUS316">不锈钢 SUS316</option></select></label>
+              <label class="jn-field"><span>箱体料厚（mm）</span><input class="jn-input" data-field="thickness" aria-label="箱体料厚" type="number" min="0.1" step="0.1" value="1.5"/></label>
+              <label class="jn-field"><span>喷塑</span><select class="jn-select" data-field="coating" aria-label="喷塑"><option>橘纹</option><option>平光</option><option>无</option></select></label>
+              <label class="jn-field"><span>颜色</span><input class="jn-input" data-field="color" aria-label="颜色" value="RAL7035 浅灰"/></label>
+            </div>
+            <div class="jn-attachments">
+              <div class="jn-section">附件选配</div>
+              <div data-part="selected-accessories"></div>
+              <div class="jn-attachment-tools"><button class="jn-link" data-action="pick-accessories">＋从附件库选择</button></div>
+              <div class="jn-accessory-picker" data-part="accessory-picker" role="region" aria-label="附件库选择" hidden>
+                <label class="jn-field"><span>选择附件</span><input class="jn-input" data-picker-search aria-label="搜索附件" placeholder="搜索附件名称"/></label>
+                <div class="jn-accessory-choices" data-part="accessory-choices"></div>
+                <div class="jn-picker-footer"><button class="jn-btn" data-action="finish-accessories">完成</button></div>
+              </div>
+              <div class="jn-attachment-tools" data-part="ganged-tools"><button class="jn-link" data-action="connector">＋选配并柜件</button><button class="jn-link" data-action="fill-board">＋选配填充安装板</button></div>
+            </div>
+          </section>
+        </div>
+        <footer class="jn-footer"><button class="jn-btn jn-btn-primary" data-action="confirm">加入订单明细</button><button class="jn-btn" data-action="save" hidden>保存待选型</button><button class="jn-btn" data-action="close">取消</button><span class="jn-footer-summary" data-part="footer-summary"></span></footer>
+      </section>
+    </div>
+    <input type="file" data-part="file-input" multiple accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg,.bmp,.tif,.tiff" style="display:none"/>
+  </div>
+  <script>
+    (() => {
+      const root=document.getElementById('jn-quotation-entry-preview');
+      const writerId='selection-'+Math.random().toString(36).slice(2);
+      const part=name=>root.querySelector('[data-part="'+name+'"]');
+      const field=name=>root.querySelector('[data-field="'+name+'"]');
+      const design={density:'compact',showDiagram:true};
+      const clone=value=>JSON.parse(JSON.stringify(value));
+      const keys=['id','status','source','originManual','fileName','width','quantity','depth','height','series','material','thickness','coating','color','doors','accessories','manual','matched'];
+      const defaults={id:null,status:'pending',source:'manual',originManual:true,fileName:'',width:'',quantity:1,depth:null,height:null,series:'',material:'SECC',thickness:1.5,coating:'橘纹',color:'RAL7035 浅灰',doors:[{front:'auto',back:'panel'}],accessories:{},manual:[],matched:[]};
+      const sample={...clone(defaults),id:1,status:'confirmed',width:'600+800+600',quantity:2,depth:600,height:1800,series:'JP',doors:[{front:'auto',back:'panel'},{front:'auto',back:'panel'},{front:'auto',back:'panel'}],accessories:{'A4资料盒':true},manual:['A4资料盒']};
+      const drawingSample={...clone(defaults),id:2,source:'drawing',originManual:false,fileName:'JP柜体布置图.pdf',width:'600',depth:600,height:1800,series:'JP',matched:['A4资料盒','通风顶罩'],accessories:{'A4资料盒':true,'通风顶罩':true}};
+      let state={...clone(sample),entries:[clone(sample),clone(drawingSample)],editing:false,tab:'order',pickerOpen:false,query:'',attempted:false};
+      const catalog=['A3资料盒','A4资料盒','通风顶罩','JP控制柜侧板','行程开关','门限位器','绑线条','填充安装板','并柜件','安装板'];
+      const num=value=>Number(value).toLocaleString('zh-CN',{useGrouping:false,maximumFractionDigits:3});
+      const escape=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      function widths(value=state.width){
+        return /^\s*\d+(?:\.\d+)?(?:\s*\+\s*\d+(?:\.\d+)?)*\s*$/.test(value)?value.split('+').map(Number).filter(value=>value>0):[];
+      }
+      function validate(){
+        if(!state.series)return '请选择产品类型。';
+        if(!/^\s*\d+(?:\.\d+)?(?:\s*\+\s*\d+(?:\.\d+)?)*\s*$/.test(state.width)||!widths().length||state.width.split('+').some(value=>Number(value)<=0))return '请填写正数宽度，多个柜体用 + 分隔。';
+        if(widths().length>20)return '每组并柜支持 2–20 个柜体。';
+        if(!Number.isFinite(state.depth)||!Number.isFinite(state.height)||state.depth<=0||state.height<=0)return '请填写大于 0 的深度和高度。';
+        if(!Number.isInteger(state.quantity)||state.quantity<1)return '请填写大于 0 的整数数量。';
+        return '';
+      }
+      const frontText=(door,w)=>door?.front==='double'?'双开门':door?.front==='single'?'单开门':w>800?'双开门':'单开门';
+      const backText=door=>door?.back==='single'?'单开门':door?.back==='double'?'双开门':'背板';
+      function hydrate(snapshot){
+        const saved=snapshot?.modelContent||snapshot;
+        if(saved?.scheme==='图纸确认与直接产品选型分开入口'&&typeof saved.width==='string'&&Array.isArray(saved.doors)&&Array.isArray(saved.entries)){
+          const changed=state.id!==saved.id;
+          state={...state,...saved,...(changed?{pickerOpen:false,query:''}:{})};
+        }
+        const extra=snapshot?.privateContent;
+        if(extra&&typeof extra.editing==='boolean')state.editing=extra.editing;
+        if(['order','selections'].includes(extra?.tab))state.tab=extra.tab;
+      }
+      function persist(){
+        const modelContent={...Object.fromEntries(keys.map(key=>[key,state[key]])),entries:state.entries.slice(-6),scheme:'图纸确认与直接产品选型分开入口',_writer:writerId};
+        if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent,privateContent:{editing:state.editing,tab:state.tab}}).catch(()=>{});
+      }
+      function draw(ws){
+        const sum=ws.reduce((a,b)=>a+b,0),x=24,y=48,w=310,h=190;
+        const labelSize=12*370/Math.max(210,part('drawing').clientWidth||350);
+        let at=x;
+        const bodies=ws.map((value,i)=>{
+          const cw=w*value/sum,door=state.doors[i]||{},double=frontText(door,value)==='双开门';
+          const shape='<rect x="'+at+'" y="'+y+'" width="'+cw+'" height="'+h+'" fill="none" stroke="currentColor"/><rect x="'+(at+4)+'" y="'+(y+4)+'" width="'+Math.max(1,cw-8)+'" height="'+(h-8)+'" fill="none" stroke="currentColor" stroke-width=".6"/>'+(double?'<line x1="'+(at+cw/2)+'" y1="'+(y+4)+'" x2="'+(at+cw/2)+'" y2="'+(y+h-4)+'" stroke="currentColor"/>':'')+'<rect x="'+(at+cw-12)+'" y="'+(y+h*.52)+'" width="3" height="13" fill="none" stroke="currentColor"/><text x="'+(at+cw/2)+'" y="'+(y-15)+'" text-anchor="middle" fill="currentColor">'+num(value)+'</text><text x="'+(at+cw/2)+'" y="'+(y+h+25)+'" text-anchor="middle" fill="currentColor">'+(i+1)+'号柜</text>';
+          at+=cw;return shape;
+        }).join('');
+        part('drawing').innerHTML='<svg viewBox="0 0 370 330" width="100%" role="img" aria-label="'+ws.length+'个柜体横向排列，宽度'+ws.map(num).join('加')+'毫米，共用深度'+state.depth+'、高度'+state.height+'毫米"><g style="color:var(--jn-ink);font:'+labelSize+'px Microsoft YaHei,system-ui,sans-serif">'+bodies+'<line x1="24" y1="284" x2="334" y2="284" stroke="currentColor"/><line x1="24" y1="277" x2="24" y2="291" stroke="currentColor"/><line x1="334" y1="277" x2="334" y2="291" stroke="currentColor"/><text x="179" y="307" text-anchor="middle" fill="currentColor">总宽 '+num(sum)+' mm</text><text x="356" y="145" text-anchor="middle" fill="currentColor" transform="rotate(90 356 145)">高 '+num(state.height)+' mm</text></g></svg>';
+      }
+      function specification(entry){
+        const ws=widths(entry.width);
+        if(!ws.length||!entry.depth||!entry.height)return '尺寸待填写';
+        return (ws.length>1?'('+ws.map(num).join('+')+')':num(ws[0]))+'×'+num(entry.depth)+'×'+num(entry.height)+' mm';
+      }
+      const title=entry=>entry.series?entry.series+' '+(widths(entry.width).length>1?'并柜':'单柜'):'产品（待配置）';
+      function load(entry){
+        Object.assign(state,clone(entry),{editing:true,pickerOpen:false,query:'',attempted:false});render();syncInputs();
+      }
+      function newManual(){state.tab='order';load(clone(defaults));}
+      function save(confirmed){
+        if(confirmed&&validate()){state.attempted=true;render();return;}
+        if(!state.id)state.id=Math.max(0,...state.entries.map(entry=>entry.id))+1;
+        state.status=confirmed?'confirmed':'pending';
+        const entry=clone(Object.fromEntries(keys.map(key=>[key,state[key]])));
+        const index=state.entries.findIndex(value=>value.id===entry.id);
+        if(index<0)state.entries.push(entry);else state.entries[index]=entry;
+        state.editing=false;state.tab=confirmed||state.source==='manual'?'order':'selections';state.pickerOpen=false;
+      }
+      function renderEntries(){
+        part('selection-items').hidden=state.tab!=='selections';part('order-items').hidden=state.tab!=='order';
+        root.querySelector('[data-action="tab-selections"]').setAttribute('aria-selected',String(state.tab==='selections'));
+        root.querySelector('[data-action="tab-order"]').setAttribute('aria-selected',String(state.tab==='order'));
+        root.querySelectorAll('.jn-tabs button').forEach(button=>button.classList.toggle('jn-active',button.getAttribute('aria-selected')==='true'));
+        part('entry-rows').innerHTML=state.entries.filter(entry=>entry.source==='drawing').map(entry=>{
+          const ready=!!(entry.width&&entry.depth&&entry.height);
+          return '<tr><td><div class="jn-entry-title"><button class="jn-link" data-action="open-entry" data-id="'+entry.id+'">'+escape(entry.fileName)+'</button></div><div class="jn-entry-meta">'+escape(ready?specification(entry):'等待图纸识别')+'</div></td><td>'+(ready?'1 页':'待读取')+'</td><td><span class="jn-badge">'+(entry.status==='confirmed'?'已确认':ready?'待确认':'识别中')+'</span></td><td><button class="jn-link" data-action="open-entry" data-id="'+entry.id+'">核对</button></td></tr>';
+        }).join('');
+        const ready=state.entries.filter(entry=>entry.status==='confirmed');
+        part('order-rows').innerHTML=ready.length?ready.map(entry=>{
+          const ws=widths(entry.width),rows=ws.map((w,i)=>(i+1)+'号柜　'+num(w)+'×'+num(entry.depth)+'×'+num(entry.height)+'　前门：'+frontText(entry.doors[i],w)+'／后面：'+backText(entry.doors[i])).join('<br>');
+          const source=entry.source==='drawing'?'<button class="jn-link" data-action="open-entry" data-id="'+entry.id+'">来源图纸：'+escape(entry.fileName)+'</button>':'按参数选型';
+          return '<tr><td><button class="jn-link" data-action="open-entry" data-id="'+entry.id+'">'+escape(title(entry))+'</button><div class="jn-order-spec">'+escape(specification(entry))+' · '+escape(entry.material)+' · '+escape(entry.color)+'</div><div class="jn-entry-meta">'+source+'</div><details><summary class="jn-note">展开柜体配置</summary><div class="jn-order-spec">'+rows+'</div></details></td><td class="jn-numeric">'+entry.quantity+(ws.length>1?' 组':' 台')+'</td><td class="jn-numeric jn-note">待计算</td></tr>';
+        }).join(''):'<tr><td colspan="3" class="jn-note">添加产品，或确认图纸后生成订单明细。</td></tr>';
+      }
+      function renderAccessories(){
+        const names=[...new Set([...(state.matched||[]),...state.manual])];
+        part('selected-accessories').innerHTML=names.length?names.map(name=>'<label class="jn-check"><input type="checkbox" data-accessory="'+escape(name)+'"'+(state.accessories[name]?' checked':'')+'/><span>'+escape(name)+' <span class="jn-note">· '+(state.manual.includes(name)?'手工选配':'图纸匹配')+'</span></span></label>').join(''):'<div class="jn-note">尚未选择附件</div>';
+        part('accessory-picker').hidden=!state.pickerOpen;
+      }
+      function renderPicker(){
+        const choices=catalog.filter(name=>name.toLowerCase().includes(state.query.trim().toLowerCase()));
+        part('accessory-choices').innerHTML=choices.length?choices.map(name=>'<label class="jn-check"><input type="checkbox" data-picker-choice="'+escape(name)+'"'+(state.accessories[name]?' checked':'')+'/><span>'+escape(name)+'</span></label>').join(''):'<span class="jn-note">未找到匹配附件</span>';
+      }
+      function render(){
+        const error=validate(),ws=widths().slice(0,20),ganged=ws.length>1,total=ws.reduce((a,b)=>a+b,0),hasDrawing=state.source==='drawing';
+        while(state.doors.length<Math.max(1,ws.length))state.doors.push({front:'auto',back:'panel'});
+        const showError=state.attempted||(state.width.trim()&&(!ws.length||state.width.split('+').some(value=>Number(value)<=0)||state.width.split('+').length>20));
+        part('error').hidden=!error||!showError;part('error').textContent=error;
+        part('detected').textContent=!ws.length?'填写一个宽度或用 + 连接多个柜体宽度。':ganged?'已识别 '+ws.length+' 柜并柜 · 总宽 '+num(total)+' mm':'已识别单柜 · 宽 '+num(total)+' mm';
+        part('ganged-config').hidden=!ganged;
+        part('single-front').hidden=ganged;part('single-back').hidden=ganged;
+        field('single-front').value=state.doors[0].front;field('single-back').value=state.doors[0].back;
+        field('single-front').querySelector('option[value="auto"]').textContent=ws.length?'自动（'+(ws[0]>800?'双开':'单开')+'）':'自动';
+        part('depth-label').textContent=(ganged?'共用':'')+'深度（mm）';part('height-label').textContent=(ganged?'共用':'')+'高度（mm）';
+        part('quantity-label').textContent=ganged?'数量（组）':'数量（台）';
+        part('cab-count').textContent=ws.length+' 柜／组';
+        part('cab-map').hidden=!design.showDiagram||ws.length>5;
+        part('cab-map').innerHTML=ws.map((w,i)=>'<div class="jn-cab-block" style="flex-grow:'+w+'">'+(i+1)+'号柜<br>'+num(w)+'</div>').join('');
+        part('cab-rows').innerHTML=ws.map((w,i)=>{
+          const door=state.doors[i],compact=part('cab-rows').clientWidth<350;
+          const options=(values,selected)=>values.map(([value,label])=>'<option value="'+value+'"'+(value===selected?' selected':'')+'>'+label+'</option>').join('');
+          return '<div class="jn-cab-row"><span>'+(i+1)+'</span><span>'+num(w)+'</span><select class="jn-select" data-door="front" data-index="'+i+'" aria-label="'+(i+1)+'号柜前门">'+options([['auto',compact?'自动':'自动（'+(w>800?'双开':'单开')+'）'],['single','单开门'],['double','双开门']],door.front)+'</select><select class="jn-select" data-door="back" data-index="'+i+'" aria-label="'+(i+1)+'号柜后面">'+options([['panel','背板'],['single','单开门'],['double','双开门']],door.back)+'</select></div>';
+        }).join('');
+        part('ganged-tools').hidden=!ganged;
+        renderAccessories();renderPicker();renderEntries();
+        part('footer-summary').textContent=!ws.length?'':!state.quantity?'数量待填写':ganged?ws.length+' 柜／组 × '+state.quantity+' 组 = '+ws.length*state.quantity+' 柜':state.quantity+' 台单柜';
+        root.querySelector('[data-action="confirm"]').disabled=!!error;
+        root.querySelector('[data-action="save"]').disabled=false;
+        root.querySelector('[data-action="save"]').hidden=!hasDrawing;
+        root.querySelector('[data-action="confirm"]').textContent=hasDrawing?'确认选型':'加入订单明细';
+        root.querySelector('.jn-footer [data-action="close"]').textContent=hasDrawing?'关闭':'取消';
+        part('preview').hidden=!hasDrawing;part('file-meta').hidden=!hasDrawing;
+        part('review').classList.toggle('jn-manual-review',!hasDrawing);
+        part('dialog-title').textContent=hasDrawing?'图纸确认':'产品选型';
+        part('dialog').setAttribute('aria-label',hasDrawing?'图纸确认':'产品选型');
+        part('source-badge').textContent='已上传图纸';part('source-badge').hidden=!hasDrawing;
+        part('file-meta').querySelector('.jn-badge').textContent=state.status==='confirmed'?'已确认':(state.width&&state.depth&&state.height)?'待确认':'识别中';
+        part('file-name').textContent=state.fileName;
+        part('dialog').hidden=!state.editing;part('workspace').classList.toggle('jn-editing',state.editing);part('order').inert=state.editing;
+        root.querySelector('.jn-parameters').style.setProperty('--jn-gap',design.density==='compact'?'8px':'13px');
+        if(hasDrawing&&ws.length)draw(ws);else part('drawing').innerHTML='<div class="jn-note">图纸预览示意</div>';
+      }
+      function syncInputs(){
+        for(const key of ['width','quantity','depth','height','series','material','thickness','coating','color'])field(key).value=state[key]??'';
+        field('single-front').value=state.doors[0]?.front||'auto';field('single-back').value=state.doors[0]?.back||'panel';
+        root.querySelectorAll('[data-accessory]').forEach(input=>input.checked=!!state.accessories[input.dataset.accessory]);
+      }
+      root.addEventListener('input',event=>{
+        if(event.target.hasAttribute('data-picker-search')){state.query=event.target.value;renderPicker();return;}
+        const key=event.target.dataset.field;if(!key)return;
+        if(key.startsWith('single-'))return;
+        state[key]=['quantity','depth','height','thickness'].includes(key)?(event.target.value===''?null:Number(event.target.value)):event.target.value;
+        render();persist();
+      });
+      root.addEventListener('change',event=>{
+        const input=event.target;
+        if(input===part('file-input')){
+          const files=[...input.files];input.value='';if(!files.length)return;
+          const next=Math.max(0,...state.entries.map(entry=>entry.id))+1;
+          const added=files.map((file,index)=>({...clone(defaults),id:next+index,source:'drawing',originManual:false,fileName:file.name}));
+          state.entries.push(...added);state.tab='selections';load(added[0]);
+          persist();return;
+        }
+        if(input.dataset.door){state.doors[Number(input.dataset.index)][input.dataset.door]=input.value;render();persist();}
+        if(input.dataset.field?.startsWith('single-')){state.doors[0][input.dataset.field==='single-front'?'front':'back']=input.value;render();persist();}
+        if(input.dataset.accessory){state.accessories[input.dataset.accessory]=input.checked;persist();}
+        if(input.dataset.pickerChoice){const name=input.dataset.pickerChoice;state.accessories[name]=input.checked;if(!state.manual.includes(name))state.manual.push(name);renderAccessories();persist();}
+      });
+      root.addEventListener('click',event=>{
+        const trigger=event.target.closest('[data-action]'),action=trigger?.dataset.action;if(!action)return;
+        if(action==='confirm')save(true);
+        if(action==='save')save(false);
+        if(action==='close'){state.editing=false;state.pickerOpen=false;}
+        if(action==='new-manual'){newManual();persist();return;}
+        if(action==='open-entry'){const entry=state.entries.find(value=>value.id===Number(trigger.dataset.id));if(entry)load(entry);persist();return;}
+        if(action==='tab-selections')state.tab='selections';
+        if(action==='tab-order')state.tab='order';
+        if(action==='upload-new'){part('file-input').multiple=true;part('file-input').click();return;}
+        if(action==='pick-accessories'){state.pickerOpen=true;state.query='';root.querySelector('[data-picker-search]').value='';}
+        if(action==='finish-accessories')state.pickerOpen=false;
+        if(action==='connector'||action==='fill-board'){
+          const name=action==='connector'?'并柜件':'填充安装板';
+          if(!state.manual.includes(name))state.manual.push(name);state.accessories[name]=true;
+        }
+        render();syncInputs();persist();
+      });
+      hydrate(window.openai?.widgetState);render();syncInputs();
+      window.addEventListener('openai:set_globals',event=>{const value=event.detail?.globals?.widgetState;if(value&&(value.modelContent||value)._writer!==writerId){hydrate(value);render();syncInputs();}});
+      window.addEventListener('resize',render);
+      if(globalThis.Tweak){const tweak=new Tweak({container:root.querySelector('.jn-parameters'),onChange:render});tweak.addSelect(design,'density',{label:'参数密度',options:[{label:'紧凑',value:'compact'},{label:'标准',value:'standard'}]});tweak.addToggle(design,'showDiagram',{label:'显示柜位示意'});}
+    })();
+  </script>
+</div>

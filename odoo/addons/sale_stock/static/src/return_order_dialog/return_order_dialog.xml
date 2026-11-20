@@ -21,11 +21,11 @@
                                     <div>
                                         <h6 class="o_line_clamp mb-1" t-out="line.name"/>
                                         <div t-if="line.lot_name" class="small">
-                                            Lot/Serial Number:
+                                            批号/序列号：
                                             <strong><t t-out="line.lot_name"/></strong>
                                         </div>
                                         <div t-if="line.picking_name" class="small">
-                                            Delivery:
+                                            送货：
                                             <strong><t t-out="line.picking_name"/></strong>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                 </tbody>
             </table>
             <div class="o_return_order_dialog_return_reason d-sm-flex align-items-center gap-3 mt-auto me-n3 mb-n3 ms-n3 px-3 py-4 border-top">
-                <h6 class="mb-sm-0 text-nowrap">Return reason</h6>
+                <h6 class="mb-sm-0 text-nowrap">退货原因</h6>
                 <select
                     name="return_reason"
                     class="form-select"
@@ -56,7 +56,7 @@
                     t-on-change="this.updateReturnReason"
                 >
                     <option value="" disabled="disabled" selected="selected">
-                        Select a reason...
+                        选择原因……
                     </option>
                     <t t-foreach="this.orderReturnData.return_reasons" t-as="reason" t-key="reason.id">
                         <option t-att-value="reason.id" t-out="reason.name"/>
@@ -70,10 +70,10 @@
                     t-att-disabled="!this.isReadyToContinue"
                     t-on-click="this.openReturnLabelDialog"
                 >
-                    Continue
+                    继续
                 </button>
                 <small t-if="!this.isReadyToContinue" class="ms-2 text-muted">
-                    Select at least one product and a return reason.
+                    请至少选择一个产品和一项退货原因。
                 </small>
             </t>
         </Dialog>

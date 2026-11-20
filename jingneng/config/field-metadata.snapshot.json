@@ -1,0 +1,7355 @@
+{
+  "sale.order": {
+    "id": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "ID",
+      "type": "integer"
+    },
+    "display_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示名称",
+      "type": "char"
+    },
+    "campaign_id": {
+      "readonly": false,
+      "relation": "utm.campaign",
+      "required": false,
+      "store": true,
+      "string": "活动",
+      "type": "many2one"
+    },
+    "source_id": {
+      "readonly": false,
+      "relation": "utm.source",
+      "required": false,
+      "store": true,
+      "string": "来源",
+      "type": "many2one"
+    },
+    "medium_id": {
+      "readonly": false,
+      "relation": "utm.medium",
+      "required": false,
+      "store": true,
+      "string": "中等",
+      "type": "many2one"
+    },
+    "utm_reference": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "iap.account",
+          "IAP 账户"
+        ],
+        [
+          "mail.thread.blacklist",
+          "mixin邮件黑名单"
+        ],
+        [
+          "mail.thread.main.attachment",
+          "主邮件附件管理"
+        ],
+        [
+          "product.template",
+          "产品"
+        ],
+        [
+          "product.product",
+          "产品变体"
+        ],
+        [
+          "product.category",
+          "产品类别"
+        ],
+        [
+          "product.pricelist",
+          "价格表"
+        ],
+        [
+          "res.company",
+          "公司"
+        ],
+        [
+          "account.analytic.account",
+          "分析账户"
+        ],
+        [
+          "mrp.unbuild",
+          "分解单"
+        ],
+        [
+          "mrp.production",
+          "制造订单"
+        ],
+        [
+          "mrp.workcenter",
+          "工作中心"
+        ],
+        [
+          "mrp.routing.workcenter",
+          "工作中心使用情况"
+        ],
+        [
+          "mrp.workorder",
+          "工单"
+        ],
+        [
+          "mail.thread.subject.suggested",
+          "带建议主题的线程"
+        ],
+        [
+          "stock.lot",
+          "批次/序列号"
+        ],
+        [
+          "stock.picking.batch",
+          "批次调拨"
+        ],
+        [
+          "account.payment",
+          "收款"
+        ],
+        [
+          "account.journal",
+          "日记账"
+        ],
+        [
+          "account.move",
+          "日记账分录"
+        ],
+        [
+          "ir.actions.server",
+          "服务器动作"
+        ],
+        [
+          "mrp.bom",
+          "物料清单"
+        ],
+        [
+          "mail.tracking.duration.mixin",
+          "用于计算记录在 many2one 字段的每个值上所花费时间的混合函数"
+        ],
+        [
+          "res.users",
+          "用户"
+        ],
+        [
+          "phone.blacklist",
+          "电话黑名单"
+        ],
+        [
+          "mail.thread.phone",
+          "电话黑名单混混合"
+        ],
+        [
+          "account.tax",
+          "税项"
+        ],
+        [
+          "res.partner",
+          "联系人"
+        ],
+        [
+          "ir.access",
+          "规则"
+        ],
+        [
+          "ir.cron",
+          "计划操作"
+        ],
+        [
+          "discuss.channel",
+          "讨论频道"
+        ],
+        [
+          "stock.picking",
+          "调拨"
+        ],
+        [
+          "account.account",
+          "账户"
+        ],
+        [
+          "mail.thread",
+          "邮件会话"
+        ],
+        [
+          "mail.blacklist",
+          "邮件黑名单"
+        ],
+        [
+          "purchase.order",
+          "采购订单"
+        ],
+        [
+          "res.partner.bank",
+          "银行账户"
+        ],
+        [
+          "crm.team",
+          "销售团队"
+        ],
+        [
+          "crm.team.member",
+          "销售团队成员"
+        ],
+        [
+          "sale.order",
+          "销售订单"
+        ],
+        [
+          "account.reconcile.model",
+          "预设在发票和付款匹配期间创建日记账分录"
+        ],
+        [
+          "account.edi.xml.ubl_a_nz",
+          "A-NZ BIS Billing 3.0"
+        ],
+        [
+          "avatar.mixin",
+          "Avatar Mixin"
+        ],
+        [
+          "account.edi.xml.ubl_de",
+          "BIS3 DE（XRechnung）"
+        ],
+        [
+          "account.edi.cii",
+          "CII 基础辅助方法"
+        ],
+        [
+          "crm.tag",
+          "CRM标签"
+        ],
+        [
+          "account.edi.xml.ubl_efff",
+          "E-FFF（BE）"
+        ],
+        [
+          "account.edi.common",
+          "EDI文件常用功能：生成数据、约束等"
+        ],
+        [
+          "mail.alias.mixin",
+          "EMail别名 Mixin"
+        ],
+        [
+          "mail.template",
+          "EMail模板"
+        ],
+        [
+          "account.edi.xml.cii",
+          "Factur-x/ZUGFeRD CII 2.2.0"
+        ],
+        [
+          "html_editor.converter.test.sub",
+          "HTML 编辑器转换器子测试"
+        ],
+        [
+          "html_editor.converter.test",
+          "HTML 编辑器转换器测试"
+        ],
+        [
+          "ir.http",
+          "HTTP 路由"
+        ],
+        [
+          "iap.enrich.api",
+          "IAP 丰富线索 API"
+        ],
+        [
+          "iap.service",
+          "IAP 服务"
+        ],
+        [
+          "iap.service.pack",
+          "IAP 服务包"
+        ],
+        [
+          "iap.autocomplete.api",
+          "IAP合作伙伴自动完成API"
+        ],
+        [
+          "mail.ice.server",
+          "ICE 服务器"
+        ],
+        [
+          "mail.track.mixin",
+          "Mail Track Mixin"
+        ],
+        [
+          "microsoft.outlook.mixin",
+          "Microsoft Outlook Mixin"
+        ],
+        [
+          "ir.profile.query",
+          "Profiling Query"
+        ],
+        [
+          "ir.qweb.field.float_time",
+          "QWEB字段浮点数时间"
+        ],
+        [
+          "ir.qweb.field.one2many",
+          "QWeb 一对多字段"
+        ],
+        [
+          "ir.qweb.field.time",
+          "QWeb 实地时间"
+        ],
+        [
+          "ir.qweb.field.duration",
+          "QWeb字段持续时间"
+        ],
+        [
+          "ir.qweb.field.date",
+          "QWeb字段日期"
+        ],
+        [
+          "ir.qweb.field.datetime",
+          "QWeb字段日期时间"
+        ],
+        [
+          "ir.qweb.field.barcode",
+          "QWeb字段条码"
+        ],
+        [
+          "ir.qweb",
+          "Qweb"
+        ],
+        [
+          "ir.qweb.field.monetary",
+          "Qweb 外地货币"
+        ],
+        [
+          "ir.qweb.field.html",
+          "Qweb 字段 HTML"
+        ],
+        [
+          "ir.qweb.field.image_url",
+          "Qweb 字段图像"
+        ],
+        [
+          "ir.qweb.field.image",
+          "Qweb 字段图像"
+        ],
+        [
+          "ir.qweb.field.text",
+          "Qweb 字段文本"
+        ],
+        [
+          "ir.qweb.field.float",
+          "Qweb 字段浮动"
+        ],
+        [
+          "ir.qweb.field.relative",
+          "Qweb 字段相对"
+        ],
+        [
+          "ir.qweb.field.selection",
+          "Qweb 字段选择"
+        ],
+        [
+          "ir.qweb.field.contact",
+          "Qweb 现场联系方式"
+        ],
+        [
+          "ir.qweb.field",
+          "Qweb 领域"
+        ],
+        [
+          "ir.qweb.field.many2many",
+          "Qweb 领域2个以上"
+        ],
+        [
+          "ir.qweb.field.qweb",
+          "Qweb字段qweb"
+        ],
+        [
+          "ir.qweb.field.many2one",
+          "Qweb字段多对一"
+        ],
+        [
+          "ir.qweb.field.integer",
+          "Qweb字段整数"
+        ],
+        [
+          "account.edi.xml.ubl_sg",
+          "SG BIS Billing 3.0"
+        ],
+        [
+          "account.edi.xml.ubl_nl",
+          "SI-UBL 2.0（NLCIUS）"
+        ],
+        [
+          "account.edi.xml.ubl_20",
+          "UBL 2.0"
+        ],
+        [
+          "account.edi.xml.ubl_21",
+          "UBL 2.1"
+        ],
+        [
+          "account.edi.xml.ubl_bis3",
+          "UBL BIS Billing 3.0.12"
+        ],
+        [
+          "account.edi.ubl_cen_en16931",
+          "UBL CEN-EN16931"
+        ],
+        [
+          "account.edi.ubl_pint",
+          "UBL PINT"
+        ],
+        [
+          "account.edi.ubl_pint_eu",
+          "UBL PINT-EU 层"
+        ],
+        [
+          "account.edi.ubl",
+          "UBL 基础辅助方法"
+        ],
+        [
+          "utm.medium",
+          "UTM媒介"
+        ],
+        [
+          "utm.source",
+          "UTM来源"
+        ],
+        [
+          "utm.tag",
+          "UTM标签"
+        ],
+        [
+          "utm.mixin",
+          "UTM混合"
+        ],
+        [
+          "utm.campaign",
+          "UTM营销"
+        ],
+        [
+          "ir.websocket",
+          "websocket消息处理"
+        ],
+        [
+          "stock.putaway.rule",
+          "上架规则"
+        ],
+        [
+          "product.removal",
+          "下架策略"
+        ],
+        [
+          "mrp.workcenter.tag",
+          "为工作中心添加标签"
+        ],
+        [
+          "product.value",
+          "产品价值"
+        ],
+        [
+          "product.base.unit",
+          "产品单价所用的计量单位。"
+        ],
+        [
+          "product.attribute",
+          "产品属性"
+        ],
+        [
+          "product.attribute.custom.value",
+          "产品属性自定义值"
+        ],
+        [
+          "product.tag",
+          "产品标签"
+        ],
+        [
+          "product.template.attribute.value",
+          "产品模板属性值"
+        ],
+        [
+          "product.template.attribute.line",
+          "产品模板属性明细行"
+        ],
+        [
+          "product.catalog.mixin",
+          "产品目录混合素"
+        ],
+        [
+          "product.catalog.line.mixin",
+          "产品目录行 Mixin"
+        ],
+        [
+          "stock.move.line",
+          "产品移动(移库明细)"
+        ],
+        [
+          "product.combo",
+          "产品组合"
+        ],
+        [
+          "product.combo.item",
+          "产品组合项目"
+        ],
+        [
+          "stock.replenish.mixin",
+          "产品补货混入程序"
+        ],
+        [
+          "web_tour.tour",
+          "产品视频"
+        ],
+        [
+          "uom.uom",
+          "产品计量单位"
+        ],
+        [
+          "discuss.gif.favorite",
+          "从 Tenor API 保存收藏的 GIF"
+        ],
+        [
+          "stock.warehouse",
+          "仓库"
+        ],
+        [
+          "payment.transaction",
+          "付款交易"
+        ],
+        [
+          "payment.method",
+          "付款方式"
+        ],
+        [
+          "account.payment.method",
+          "付款方式"
+        ],
+        [
+          "account.payment.method.line",
+          "付款方式行"
+        ],
+        [
+          "account.payment.term",
+          "付款条款"
+        ],
+        [
+          "account.payment.term.line",
+          "付款条款行"
+        ],
+        [
+          "spreadsheet.dashboard.favorite.filters",
+          "仪表板收藏筛选"
+        ],
+        [
+          "spreadsheet.dashboard",
+          "仪表板电子表格"
+        ],
+        [
+          "spreadsheet.dashboard.group",
+          "仪表板群组"
+        ],
+        [
+          "report.product.report_pricelist",
+          "价格表报表"
+        ],
+        [
+          "product.pricelist.item",
+          "价格表规则"
+        ],
+        [
+          "resource.calendar.leaves",
+          "休假详细信息"
+        ],
+        [
+          "account.report",
+          "会计报表"
+        ],
+        [
+          "account.report.external.value",
+          "会计报表外部值"
+        ],
+        [
+          "account.report.column",
+          "会计报表栏"
+        ],
+        [
+          "account.report.line",
+          "会计报表行"
+        ],
+        [
+          "account.report.expression",
+          "会计报表表达式"
+        ],
+        [
+          "account.journal.group",
+          "会计日记账组"
+        ],
+        [
+          "res.session",
+          "会话"
+        ],
+        [
+          "l10n_cn.balance.deduction",
+          "余额扣减信息"
+        ],
+        [
+          "product.supplierinfo",
+          "供应商价格表"
+        ],
+        [
+          "vendor.delay.report",
+          "供应商延迟报表"
+        ],
+        [
+          "discuss.call.history",
+          "保留通话记录"
+        ],
+        [
+          "mail.gateway.allowed",
+          "允许的邮件网关"
+        ],
+        [
+          "onboarding.progress.step",
+          "入职进度步骤跟踪表"
+        ],
+        [
+          "onboarding.progress",
+          "入职进度跟踪表"
+        ],
+        [
+          "onboarding.onboarding.step",
+          "入门步骤"
+        ],
+        [
+          "spreadsheet.dashboard.share",
+          "共享仪表板副本"
+        ],
+        [
+          "account.move.send",
+          "共用开票向导功能"
+        ],
+        [
+          "ir.model.relation",
+          "关系模型"
+        ],
+        [
+          "publisher_warranty.contract",
+          "出版商保修合同"
+        ],
+        [
+          "account.analytic.distribution.model",
+          "分析分摊模型"
+        ],
+        [
+          "account.analytic.plan",
+          "分析方案"
+        ],
+        [
+          "account.analytic.applicability",
+          "分析方案的适用性"
+        ],
+        [
+          "analytic.mixin",
+          "分析混入"
+        ],
+        [
+          "account.analytic.line",
+          "分析行"
+        ],
+        [
+          "analytic.plan.fields.mixin",
+          "分析计划字段"
+        ],
+        [
+          "report.mrp.report_mo_overview",
+          "制造订单（MO）概述报表"
+        ],
+        [
+          "ir.profile",
+          "剖析结果"
+        ],
+        [
+          "mrp.bom.byproduct",
+          "副产品"
+        ],
+        [
+          "ir.actions.actions",
+          "动作"
+        ],
+        [
+          "ir.actions.act_url",
+          "动作URL"
+        ],
+        [
+          "ir.actions.act_window.view",
+          "动作窗体视图"
+        ],
+        [
+          "ir.actions.act_window",
+          "动作窗口"
+        ],
+        [
+          "sms.sms",
+          "发信短信息"
+        ],
+        [
+          "mail.mail",
+          "发出邮件"
+        ],
+        [
+          "account.invoice.report",
+          "发票统计"
+        ],
+        [
+          "bus.listener.mixin",
+          "可以通过 bus.bus 发送消息"
+        ],
+        [
+          "res.partner.category",
+          "合作伙伴标签"
+        ],
+        [
+          "report.account.report_invoice_with_payments",
+          "含付款行的科目报表"
+        ],
+        [
+          "res.currency.rate.consolidation.mixin",
+          "启用多公司合并"
+        ],
+        [
+          "account.document.import.mixin",
+          "商业文件导入混入程序"
+        ],
+        [
+          "res.country",
+          "国家/地区"
+        ],
+        [
+          "res.country.group",
+          "国家/地区组"
+        ],
+        [
+          "res.country.state",
+          "国家省/州"
+        ],
+        [
+          "account.incoterms",
+          "国际贸易术语"
+        ],
+        [
+          "image.mixin",
+          "图像 Mixin"
+        ],
+        [
+          "sale.order.drawing.candidate",
+          "图纸识别项目与复核证据"
+        ],
+        [
+          "mail.message.translation",
+          "在线翻译"
+        ],
+        [
+          "format.address.mixin",
+          "地址格式"
+        ],
+        [
+          "res.city",
+          "城市"
+        ],
+        [
+          "base",
+          "基础"
+        ],
+        [
+          "base_import.mapping",
+          "基础导入对照"
+        ],
+        [
+          "report.product.label.base",
+          "基础标签报表"
+        ],
+        [
+          "ir.model.fields",
+          "字段"
+        ],
+        [
+          "html.field.history.mixin",
+          "字段html 历史"
+        ],
+        [
+          "ir.fields.converter",
+          "字段转换器"
+        ],
+        [
+          "ir.model.fields.selection",
+          "字段选择"
+        ],
+        [
+          "stock.storage.category",
+          "存储类别"
+        ],
+        [
+          "stock.storage.category.capacity",
+          "存储类别能力"
+        ],
+        [
+          "mail.link.preview",
+          "存储链接预览数据"
+        ],
+        [
+          "account.stock.valuation.report",
+          "存货估值"
+        ],
+        [
+          "mail.message.schedule",
+          "安排的消息"
+        ],
+        [
+          "mail.scheduled.message",
+          "安排的消息"
+        ],
+        [
+          "account.full.reconcile",
+          "完全对账"
+        ],
+        [
+          "customer.product.reference",
+          "客户产品参考"
+        ],
+        [
+          "ir.actions.client",
+          "客户端动作"
+        ],
+        [
+          "account.reconcile.model.line",
+          "对账模型规则"
+        ],
+        [
+          "ir.exports",
+          "导出"
+        ],
+        [
+          "ir.exports.line",
+          "导出行"
+        ],
+        [
+          "sms.tracker",
+          "将短信与邮件/短信跟踪模型联系起来"
+        ],
+        [
+          "decimal.precision",
+          "小数精确位数"
+        ],
+        [
+          "product.attribute.value",
+          "属性值"
+        ],
+        [
+          "properties.base.definition",
+          "属性基础定义"
+        ],
+        [
+          "properties.base.definition.mixin",
+          "属性基础定义 Mixin"
+        ],
+        [
+          "ir.embedded.actions",
+          "嵌入动作"
+        ],
+        [
+          "res.users.settings.embedded.action",
+          "嵌入式操作的用户设置"
+        ],
+        [
+          "mrp.workcenter.capacity",
+          "工作中心产能"
+        ],
+        [
+          "mrp.workcenter.productivity.loss",
+          "工作中心生产力损失"
+        ],
+        [
+          "mrp.workcenter.productivity",
+          "工作中心生产力日志"
+        ],
+        [
+          "resource.calendar.attendance",
+          "工作细节"
+        ],
+        [
+          "mrp.workcenter.productivity.loss.type",
+          "工单生产力损失类型"
+        ],
+        [
+          "res.currency",
+          "币别"
+        ],
+        [
+          "product.document",
+          "帮助文档"
+        ],
+        [
+          "ir.sequence",
+          "序列"
+        ],
+        [
+          "ir.sequence.date_range",
+          "序列日期范围"
+        ],
+        [
+          "stock.avco.report",
+          "库存 AVCO 计算依据"
+        ],
+        [
+          "stock.warn.insufficient.qty",
+          "库存不足时发出警告"
+        ],
+        [
+          "stock.allocation.report",
+          "库存分配报表"
+        ],
+        [
+          "stock.package.history",
+          "库存包装历史"
+        ],
+        [
+          "stock.package.type",
+          "库存包裹类型"
+        ],
+        [
+          "report.stock.quantity",
+          "库存数量报表"
+        ],
+        [
+          "stock.reference",
+          "库存文件之间的参照"
+        ],
+        [
+          "stock.move",
+          "库存移动"
+        ],
+        [
+          "stock.forecasted_product_template",
+          "库存补货报表"
+        ],
+        [
+          "stock.forecasted_product_product",
+          "库存补货报表"
+        ],
+        [
+          "stock.rule",
+          "库存规则"
+        ],
+        [
+          "report.stock.report_stock_rule",
+          "库存规则报表"
+        ],
+        [
+          "stock.route",
+          "库存路线"
+        ],
+        [
+          "ir.module.category",
+          "应用"
+        ],
+        [
+          "account.fiscal.position",
+          "应税设定"
+        ],
+        [
+          "account.fiscal.position.account",
+          "应税设定的科目映射"
+        ],
+        [
+          "payment.data",
+          "待处理的付款数据负载"
+        ],
+        [
+          "discuss.channel.last.interest.update",
+          "待处理的频道最后关注时间更新"
+        ],
+        [
+          "bus.sync.mixin",
+          "总线同步 Mixin"
+        ],
+        [
+          "mail.poll",
+          "投票"
+        ],
+        [
+          "mail.poll.vote",
+          "投票记录"
+        ],
+        [
+          "mail.poll.option",
+          "投票选项"
+        ],
+        [
+          "sale.order.drawing",
+          "报价单图纸与选型"
+        ],
+        [
+          "quotation.document",
+          "报价单的页眉和页脚"
+        ],
+        [
+          "sale.pdf.form.field",
+          "报价文件内部的表单字段。"
+        ],
+        [
+          "sale.order.template.line",
+          "报价模板行"
+        ],
+        [
+          "report.layout",
+          "报告布局"
+        ],
+        [
+          "stock.scrap.reason.tag",
+          "报废原因标签"
+        ],
+        [
+          "ir.actions.report",
+          "报表动作"
+        ],
+        [
+          "stock.picking.type",
+          "拣货类型"
+        ],
+        [
+          "kpi.provider",
+          "指标提供者"
+        ],
+        [
+          "ir.binary",
+          "控制器的文件流辅助模型"
+        ],
+        [
+          "mail.push",
+          "推送通知"
+        ],
+        [
+          "mail.push.device",
+          "推送通知设备"
+        ],
+        [
+          "digest.digest",
+          "摘要"
+        ],
+        [
+          "digest.tip",
+          "摘要提示"
+        ],
+        [
+          "ir.actions.act_window_close",
+          "操作窗口关闭"
+        ],
+        [
+          "payment.token",
+          "支付令牌"
+        ],
+        [
+          "payment.provider",
+          "支付提供商"
+        ],
+        [
+          "fetchmail.server",
+          "收件服务器"
+        ],
+        [
+          "mail.followers",
+          "文档关注者"
+        ],
+        [
+          "onboarding.onboarding",
+          "新手入门"
+        ],
+        [
+          "ir.logging",
+          "日志"
+        ],
+        [
+          "account.move.line",
+          "日记账项目"
+        ],
+        [
+          "res.users.apikeys.show",
+          "显示应用程序接口密钥"
+        ],
+        [
+          "stock.warehouse.orderpoint",
+          "最小库存规则"
+        ],
+        [
+          "stock.package",
+          "服务包"
+        ],
+        [
+          "ir.actions.server.history",
+          "服务器操作历史记录"
+        ],
+        [
+          "_unknown",
+          "未知"
+        ],
+        [
+          "res.groups.privilege",
+          "权利"
+        ],
+        [
+          "res.groups",
+          "权限组"
+        ],
+        [
+          "barcode.nomenclature",
+          "条形码命名规则"
+        ],
+        [
+          "barcode.rule",
+          "条形码规则"
+        ],
+        [
+          "report.product.report_product_label_dymo",
+          "标签 Dymo 报表"
+        ],
+        [
+          "report.product.report_product_label_pdf",
+          "标签 PDF 报表"
+        ],
+        [
+          "report.product.report_product_label_zpl",
+          "标签 ZPL 报表"
+        ],
+        [
+          "ir.module.module",
+          "模块"
+        ],
+        [
+          "ir.module.module.dependency",
+          "模块依赖性"
+        ],
+        [
+          "report.base.report_irmodulereference",
+          "模块参考报告 (基础)"
+        ],
+        [
+          "ir.module.module.exclusion",
+          "模块排除"
+        ],
+        [
+          "ir.model.constraint",
+          "模块限制"
+        ],
+        [
+          "ir.model",
+          "模型"
+        ],
+        [
+          "ir.model.data",
+          "模型数据"
+        ],
+        [
+          "ir.model.inherit",
+          "模型继承树"
+        ],
+        [
+          "template.reset.mixin",
+          "模板重置混合"
+        ],
+        [
+          "account.code.mapping",
+          "每个公司的账户代码映射"
+        ],
+        [
+          "res.currency.rate",
+          "汇率"
+        ],
+        [
+          "report.account.report_invoice",
+          "没有付款行的科目报表"
+        ],
+        [
+          "mail.activity",
+          "活动"
+        ],
+        [
+          "mail.activity.mixin",
+          "活动Mixin"
+        ],
+        [
+          "mail.activity.type",
+          "活动类型"
+        ],
+        [
+          "mail.activity.plan",
+          "活动计划"
+        ],
+        [
+          "mail.activity.plan.template",
+          "活动计划模板"
+        ],
+        [
+          "mail.message",
+          "消息"
+        ],
+        [
+          "mail.message.reaction",
+          "消息反应"
+        ],
+        [
+          "mail.message.subtype",
+          "消息子类型"
+        ],
+        [
+          "mail.notification",
+          "消息通知"
+        ],
+        [
+          "web_tour.tour.step",
+          "游览步骤"
+        ],
+        [
+          "mrp.bom.line",
+          "物料清单行"
+        ],
+        [
+          "report.mrp.report_bom_structure",
+          "物料清单（BOM）概述报表"
+        ],
+        [
+          "format.vat.label.mixin",
+          "特定国家/地区增值税标签"
+        ],
+        [
+          "mrp.production.group",
+          "生产组"
+        ],
+        [
+          "res.role",
+          "用于对用户进行分类的系统角色。每个角色拥有唯一名称，并可关联多个用户。在消息中提及角色时，将自动通知所有关联用户。"
+        ],
+        [
+          "res.users.apikeys",
+          "用户 API 密钥"
+        ],
+        [
+          "mail.presence",
+          "用户/访客偏好"
+        ],
+        [
+          "res.users.deletion",
+          "用户删除请求"
+        ],
+        [
+          "res.users.log",
+          "用户日志"
+        ],
+        [
+          "res.users.settings",
+          "用户设置"
+        ],
+        [
+          "res.users.settings.volumes",
+          "用户设置数量"
+        ],
+        [
+          "spreadsheet.mixin",
+          "电子表格混合"
+        ],
+        [
+          "mail.alias",
+          "电子邮件别名"
+        ],
+        [
+          "mail.alias.mixin.optional",
+          "电子邮件别名混合素（轻型）"
+        ],
+        [
+          "mail.alias.domain",
+          "电子邮件域名"
+        ],
+        [
+          "stock.location",
+          "盘点位置"
+        ],
+        [
+          "sms.template",
+          "短信息模板"
+        ],
+        [
+          "account.root",
+          "科目代码前2位数"
+        ],
+        [
+          "account.account.tag",
+          "科目标签"
+        ],
+        [
+          "account.chart.template",
+          "科目表模版"
+        ],
+        [
+          "account.tax.group",
+          "税项组"
+        ],
+        [
+          "account.tax.repartition.line",
+          "税项重新分配行"
+        ],
+        [
+          "ir.filters",
+          "筛选"
+        ],
+        [
+          "ir.config_parameter",
+          "系统参数"
+        ],
+        [
+          "report.paperformat",
+          "纸张格式配置"
+        ],
+        [
+          "website",
+          "网站"
+        ],
+        [
+          "sequence.mixin",
+          "自动序列"
+        ],
+        [
+          "ir.autovacuum",
+          "自动清理"
+        ],
+        [
+          "ir.ui.view.custom",
+          "自定义视图"
+        ],
+        [
+          "report.account.report_hash_integrity",
+          "获得散列完整性结果PDF。"
+        ],
+        [
+          "ir.ui.menu",
+          "菜单"
+        ],
+        [
+          "utm.stage",
+          "营销阶段"
+        ],
+        [
+          "res.partner.industry",
+          "行业"
+        ],
+        [
+          "ir.ui.view",
+          "视图"
+        ],
+        [
+          "ir.cron.trigger",
+          "触发的动作"
+        ],
+        [
+          "ir.cron.progress",
+          "计划行动的进展"
+        ],
+        [
+          "sale.order.template",
+          "订单模板"
+        ],
+        [
+          "mysubscription.mysubscription",
+          "订阅仪表板助手"
+        ],
+        [
+          "auth_totp.device",
+          "认证设备"
+        ],
+        [
+          "discuss.category",
+          "讨论类别"
+        ],
+        [
+          "res.device",
+          "设备"
+        ],
+        [
+          "res.device.log",
+          "设备记录"
+        ],
+        [
+          "mail.guest",
+          "访客"
+        ],
+        [
+          "res.lang",
+          "语言"
+        ],
+        [
+          "discuss.voice.metadata",
+          "语音附件的元数据"
+        ],
+        [
+          "google.gmail.mixin",
+          "谷歌Gmail混合器"
+        ],
+        [
+          "account.cash.rounding",
+          "账户现金舍入"
+        ],
+        [
+          "account.lock_exception",
+          "账户锁定异常"
+        ],
+        [
+          "resource.resource",
+          "资源"
+        ],
+        [
+          "resource.calendar",
+          "资源工作时间"
+        ],
+        [
+          "ir.asset",
+          "资源文件包"
+        ],
+        [
+          "resource.mixin",
+          "资源装饰"
+        ],
+        [
+          "product.uom",
+          "连结产品与所使用的计量单位"
+        ],
+        [
+          "return.reason",
+          "退货原因"
+        ],
+        [
+          "auth.passkey.key",
+          "通行密钥"
+        ],
+        [
+          "bus.bus",
+          "通讯总线"
+        ],
+        [
+          "mail.call.artifact",
+          "通话工件"
+        ],
+        [
+          "discuss.channel.rtc.session",
+          "邮件 RTC 会话"
+        ],
+        [
+          "ir.mail_server",
+          "邮件服务器"
+        ],
+        [
+          "mail.bot",
+          "邮件机器人"
+        ],
+        [
+          "mail.render.mixin",
+          "邮件渲染混合"
+        ],
+        [
+          "mail.composer.mixin",
+          "邮件编辑器混合"
+        ],
+        [
+          "account.partial.reconcile",
+          "部分对账"
+        ],
+        [
+          "ir.actions.todo",
+          "配置向导"
+        ],
+        [
+          "purchase.edi.xml.ubl_bis3",
+          "采购 UBL BIS 订购 3.5"
+        ],
+        [
+          "purchase.bill.union",
+          "采购与账单联合"
+        ],
+        [
+          "purchase.report",
+          "采购报表"
+        ],
+        [
+          "purchase.bill.line.match",
+          "采购行和供应商账单行匹配视图"
+        ],
+        [
+          "purchase.order.line",
+          "采购订单明细"
+        ],
+        [
+          "stock.quant",
+          "量化"
+        ],
+        [
+          "account.bank.statement.line",
+          "银行交易"
+        ],
+        [
+          "account.bank.statement",
+          "银行对账单"
+        ],
+        [
+          "clearing.label",
+          "银行账户清算号码标签"
+        ],
+        [
+          "mail.message.link.preview",
+          "链接预览及讯息内的链接"
+        ],
+        [
+          "sale.edi.xml.ubl_bis3",
+          "销售 BIS 订购 3.5"
+        ],
+        [
+          "sale.report",
+          "销售分析报表"
+        ],
+        [
+          "sale.order.line",
+          "销售订单明细"
+        ],
+        [
+          "portal.mixin",
+          "门户Mixin"
+        ],
+        [
+          "portal.entry",
+          "门户条目"
+        ],
+        [
+          "ir.attachment",
+          "附件"
+        ],
+        [
+          "privacy.log",
+          "隐私日志"
+        ],
+        [
+          "mail.canned.response",
+          "预设回复"
+        ],
+        [
+          "discuss.channel.member",
+          "频道成员"
+        ],
+        [
+          "ir.default",
+          "默认值"
+        ]
+      ],
+      "store": true,
+      "string": "UTM 参考",
+      "type": "reference"
+    },
+    "access_url": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "门户网站访问网址",
+      "type": "char"
+    },
+    "access_token": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "安全令牌",
+      "type": "char"
+    },
+    "access_warning": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "访问警告信息",
+      "type": "text"
+    },
+    "message_is_follower": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是关注者",
+      "type": "boolean"
+    },
+    "message_follower_ids": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.followers",
+      "required": false,
+      "store": true,
+      "string": "关注者",
+      "type": "one2many"
+    },
+    "message_partner_ids": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": false,
+      "store": false,
+      "string": "关注者（合作伙伴）",
+      "type": "many2many"
+    },
+    "message_ids": {
+      "readonly": false,
+      "relation": "mail.message",
+      "required": false,
+      "store": true,
+      "string": "消息",
+      "type": "one2many"
+    },
+    "has_message": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "有消息",
+      "type": "boolean"
+    },
+    "message_needaction": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "所需操作",
+      "type": "boolean"
+    },
+    "message_needaction_counter": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "操作数量",
+      "type": "integer"
+    },
+    "message_has_error": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "消息发送错误",
+      "type": "boolean"
+    },
+    "message_has_error_counter": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "错误数量",
+      "type": "integer"
+    },
+    "message_attachment_count": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "附件数量",
+      "type": "integer"
+    },
+    "message_has_sms_error": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "短信发送错误",
+      "type": "boolean"
+    },
+    "activity_ids": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.activity",
+      "required": false,
+      "store": true,
+      "string": "活动",
+      "type": "one2many"
+    },
+    "activity_state": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "overdue",
+          "Overdue"
+        ],
+        [
+          "today",
+          "Today"
+        ],
+        [
+          "planned",
+          "Planned"
+        ]
+      ],
+      "store": false,
+      "string": "活动状态",
+      "type": "selection"
+    },
+    "activity_user_id": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": false,
+      "string": "责任用户",
+      "type": "many2one"
+    },
+    "activity_type_id": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.activity.type",
+      "required": false,
+      "store": false,
+      "string": "下一活动类型",
+      "type": "many2one"
+    },
+    "activity_type_icon": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "活动类型图标",
+      "type": "char"
+    },
+    "activity_date_deadline": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "下一活动截止日期",
+      "type": "date"
+    },
+    "my_activity_date_deadline": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "我的活动截止时间",
+      "type": "date"
+    },
+    "activity_summary": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "下一活动摘要",
+      "type": "char"
+    },
+    "activity_exception_decoration": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "warning",
+          "Alert"
+        ],
+        [
+          "danger",
+          "Error"
+        ]
+      ],
+      "store": false,
+      "string": "活动异常标示",
+      "type": "selection"
+    },
+    "activity_exception_icon": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图标",
+      "type": "char"
+    },
+    "activity_plans_ids": {
+      "readonly": true,
+      "relation": "mail.activity.plan",
+      "required": false,
+      "store": false,
+      "string": "活动计划",
+      "type": "many2many"
+    },
+    "drawing_ids": {
+      "readonly": false,
+      "relation": "sale.order.drawing",
+      "required": false,
+      "store": true,
+      "string": "图纸与选型",
+      "type": "one2many"
+    },
+    "saved_quote_linked": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Saved Quote Linked",
+      "type": "boolean"
+    },
+    "selection_pricing_error": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "最近计价错误",
+      "type": "char"
+    },
+    "selection_quote_snapshot": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "选型报价计算快照",
+      "type": "json"
+    },
+    "selection_quote_stale": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Selection Quote Stale",
+      "type": "boolean"
+    },
+    "selection_price_settings": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "材料与计价参数",
+      "type": "json"
+    },
+    "drawing_recognition_pending": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Drawing Recognition Pending",
+      "type": "boolean"
+    },
+    "drawing_recognition_version": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Drawing Recognition Version",
+      "type": "char"
+    },
+    "name": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "订单参考号",
+      "type": "char"
+    },
+    "company_id": {
+      "readonly": false,
+      "relation": "res.company",
+      "required": true,
+      "store": true,
+      "string": "公司",
+      "type": "many2one"
+    },
+    "partner_id": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": true,
+      "store": true,
+      "string": "客户",
+      "type": "many2one"
+    },
+    "state": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "draft",
+          "报价单"
+        ],
+        [
+          "sent",
+          "已发送报价单"
+        ],
+        [
+          "sale",
+          "销售订单"
+        ],
+        [
+          "cancel",
+          "已取消"
+        ]
+      ],
+      "store": true,
+      "string": "状态",
+      "type": "selection"
+    },
+    "quotation_workflow_step": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "quotation",
+          "报价单"
+        ],
+        [
+          "contract",
+          "合同"
+        ]
+      ],
+      "store": true,
+      "string": "报价处理阶段",
+      "type": "selection"
+    },
+    "quotation_status": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "draft",
+          "草稿"
+        ],
+        [
+          "quotation",
+          "报价单"
+        ],
+        [
+          "sent",
+          "已发送报价单"
+        ],
+        [
+          "contract",
+          "合同"
+        ],
+        [
+          "sale",
+          "销售订单"
+        ],
+        [
+          "cancel",
+          "已取消"
+        ]
+      ],
+      "store": true,
+      "string": "状态",
+      "type": "selection"
+    },
+    "quotation_first_sent_at": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "首次正式发送日期",
+      "type": "datetime"
+    },
+    "quotation_result": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "pending",
+          "待反馈"
+        ],
+        [
+          "won",
+          "中标"
+        ],
+        [
+          "lost",
+          "失标"
+        ]
+      ],
+      "store": true,
+      "string": "客户反馈结果",
+      "type": "selection"
+    },
+    "quotation_feedback_date": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "客户反馈日期",
+      "type": "date"
+    },
+    "quotation_lost_reason": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "price",
+          "价格原因"
+        ],
+        [
+          "delivery",
+          "交期不符"
+        ],
+        [
+          "technical",
+          "技术不符"
+        ],
+        [
+          "terminated",
+          "客户终止项目"
+        ],
+        [
+          "competitor",
+          "选择其他供应商"
+        ],
+        [
+          "other",
+          "其他"
+        ],
+        [
+          "unrecorded",
+          "未登记"
+        ]
+      ],
+      "store": true,
+      "string": "失标原因",
+      "type": "selection"
+    },
+    "quotation_feedback_notes": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "反馈备注",
+      "type": "text"
+    },
+    "quotation_followup_date": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "下次跟进日期",
+      "type": "date"
+    },
+    "quotation_revision_of_id": {
+      "readonly": false,
+      "relation": "sale.order",
+      "required": false,
+      "store": true,
+      "string": "上一版报价",
+      "type": "many2one"
+    },
+    "quotation_source_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "原报价日期",
+      "type": "date"
+    },
+    "quotation_prepared_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "转为报价单时间",
+      "type": "datetime"
+    },
+    "quotation_sent_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "发送报价时间",
+      "type": "datetime"
+    },
+    "quotation_contract_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "进入合同时间",
+      "type": "datetime"
+    },
+    "quotation_confirmed_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "确认销售订单时间",
+      "type": "datetime"
+    },
+    "locked": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "已锁定",
+      "type": "boolean"
+    },
+    "invoicing_closed": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "已手动关闭开票",
+      "type": "boolean"
+    },
+    "has_archived_products": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "有归档产品",
+      "type": "boolean"
+    },
+    "client_order_ref": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "客户参考号",
+      "type": "char"
+    },
+    "create_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "创建日期",
+      "type": "datetime"
+    },
+    "commitment_date": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "承诺交货日期",
+      "type": "datetime"
+    },
+    "delivery_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "交付日期",
+      "type": "datetime"
+    },
+    "date_order": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "订单日期",
+      "type": "datetime"
+    },
+    "origin": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "源单据",
+      "type": "char"
+    },
+    "reference": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "付款参考号",
+      "type": "char"
+    },
+    "pending_email_template_id": {
+      "readonly": true,
+      "relation": "mail.template",
+      "required": false,
+      "store": true,
+      "string": "待处理电子邮件模板",
+      "type": "many2one"
+    },
+    "require_signature": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "网上签名",
+      "type": "boolean"
+    },
+    "prepayment_percent": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "预付款",
+      "type": "float"
+    },
+    "prepayment_amount": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "预付款金额",
+      "type": "monetary"
+    },
+    "signature": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "签名",
+      "type": "binary"
+    },
+    "signed_by": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "签名人",
+      "type": "char"
+    },
+    "signed_on": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "签名日期",
+      "type": "datetime"
+    },
+    "validity_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "有效期至",
+      "type": "date"
+    },
+    "journal_id": {
+      "readonly": false,
+      "relation": "account.journal",
+      "required": false,
+      "store": true,
+      "string": "日记账",
+      "type": "many2one"
+    },
+    "document_tax_mode": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "tax_excluded",
+          "不含税"
+        ],
+        [
+          "tax_included",
+          "含税"
+        ]
+      ],
+      "store": true,
+      "string": "文档税模式",
+      "type": "selection"
+    },
+    "note": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "条款和条件",
+      "type": "html"
+    },
+    "partner_invoice_id": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": true,
+      "store": true,
+      "string": "发票地址",
+      "type": "many2one"
+    },
+    "partner_shipping_id": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": true,
+      "store": true,
+      "string": "交付地址",
+      "type": "many2one"
+    },
+    "fiscal_position_id": {
+      "readonly": false,
+      "relation": "account.fiscal.position",
+      "required": false,
+      "store": true,
+      "string": "财政状况",
+      "type": "many2one"
+    },
+    "payment_term_id": {
+      "readonly": false,
+      "relation": "account.payment.term",
+      "required": false,
+      "store": true,
+      "string": "付款条款",
+      "type": "many2one"
+    },
+    "preferred_payment_method_line_id": {
+      "readonly": false,
+      "relation": "account.payment.method.line",
+      "required": false,
+      "store": true,
+      "string": "付款方式",
+      "type": "many2one"
+    },
+    "pricelist_id": {
+      "readonly": false,
+      "relation": "product.pricelist",
+      "required": false,
+      "store": true,
+      "string": "价格表",
+      "type": "many2one"
+    },
+    "currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": true,
+      "string": "币别",
+      "type": "many2one"
+    },
+    "currency_rate": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "汇率",
+      "type": "float"
+    },
+    "user_id": {
+      "readonly": false,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "销售人员",
+      "type": "many2one"
+    },
+    "team_id": {
+      "readonly": false,
+      "relation": "crm.team",
+      "required": false,
+      "store": true,
+      "string": "销售团队",
+      "type": "many2one"
+    },
+    "incoterm": {
+      "readonly": false,
+      "relation": "account.incoterms",
+      "required": false,
+      "store": true,
+      "string": "国际贸易术语",
+      "type": "many2one"
+    },
+    "incoterm_location": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "国际贸易术语位置",
+      "type": "char"
+    },
+    "order_line": {
+      "readonly": false,
+      "relation": "sale.order.line",
+      "required": false,
+      "store": true,
+      "string": "订单明细",
+      "type": "one2many"
+    },
+    "amount_untaxed": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "未完税金额",
+      "type": "monetary"
+    },
+    "amount_tax": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "税项",
+      "type": "monetary"
+    },
+    "amount_total": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "总计",
+      "type": "monetary"
+    },
+    "amount_to_invoice": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "未开票余额",
+      "type": "monetary"
+    },
+    "amount_invoiced": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已开票",
+      "type": "monetary"
+    },
+    "invoice_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "发票计数",
+      "type": "integer"
+    },
+    "invoice_ids": {
+      "readonly": true,
+      "relation": "account.move",
+      "required": false,
+      "store": false,
+      "string": "发票",
+      "type": "many2many"
+    },
+    "invoice_status": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "upselling",
+          "加售商机"
+        ],
+        [
+          "invoiced",
+          "已全额开票"
+        ],
+        [
+          "to invoice",
+          "待开票"
+        ],
+        [
+          "no",
+          "没有待开票项目"
+        ]
+      ],
+      "store": true,
+      "string": "发票状态",
+      "type": "selection"
+    },
+    "sale_warning_text": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "销售警告",
+      "type": "text"
+    },
+    "show_sol_numbers": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "明细行编号",
+      "type": "boolean"
+    },
+    "transaction_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "交易数量",
+      "type": "integer"
+    },
+    "transaction_ids": {
+      "groups": "account.group_account_invoice",
+      "readonly": true,
+      "relation": "payment.transaction",
+      "required": false,
+      "store": true,
+      "string": "交易",
+      "type": "many2many"
+    },
+    "authorized_transaction_ids": {
+      "groups": "account.group_account_invoice",
+      "readonly": true,
+      "relation": "payment.transaction",
+      "required": false,
+      "store": false,
+      "string": "已授权交易",
+      "type": "many2many"
+    },
+    "has_authorized_transaction_ids": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "存在已授权交易",
+      "type": "boolean"
+    },
+    "amount_paid": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "付款交易金额",
+      "type": "float"
+    },
+    "amount_unpaid": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "剩余金额",
+      "type": "monetary"
+    },
+    "tag_ids": {
+      "groups": "sales_team.group_sale_salesman",
+      "readonly": false,
+      "relation": "crm.tag",
+      "required": false,
+      "store": true,
+      "string": "标签",
+      "type": "many2many"
+    },
+    "country_code": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "国家/地区代码",
+      "type": "char"
+    },
+    "company_price_include": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "tax_included",
+          "含税"
+        ],
+        [
+          "tax_excluded",
+          "不含税"
+        ]
+      ],
+      "store": false,
+      "string": "默认销售价格包括",
+      "type": "selection"
+    },
+    "delivery_status": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "pending",
+          "未交货"
+        ],
+        [
+          "started",
+          "开始"
+        ],
+        [
+          "partial",
+          "部分交付"
+        ],
+        [
+          "full",
+          "完全交付"
+        ]
+      ],
+      "store": true,
+      "string": "交货状态",
+      "type": "selection"
+    },
+    "duplicated_order_ids": {
+      "readonly": true,
+      "relation": "sale.order",
+      "required": false,
+      "store": false,
+      "string": "重复订单",
+      "type": "many2many"
+    },
+    "expected_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "预计日期",
+      "type": "datetime"
+    },
+    "extra_total_fields": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "额外合计字段",
+      "type": "json"
+    },
+    "is_expired": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已过期",
+      "type": "boolean"
+    },
+    "is_unfulfilled": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "未履行订单",
+      "type": "boolean"
+    },
+    "partner_credit_warning": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "合作伙伴贷方警告消息",
+      "type": "text"
+    },
+    "show_ship_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示发货按钮",
+      "type": "boolean"
+    },
+    "tax_calculation_rounding_method": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "round_globally",
+          "按税种舍入"
+        ],
+        [
+          "round_per_line",
+          "每行舍入"
+        ]
+      ],
+      "store": false,
+      "string": "税费计算舍入方法",
+      "type": "selection"
+    },
+    "tax_country_id": {
+      "readonly": true,
+      "relation": "res.country",
+      "required": false,
+      "store": false,
+      "string": "税项所在国家/地区",
+      "type": "many2one"
+    },
+    "tax_totals": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "总税额",
+      "type": "json"
+    },
+    "terms_type": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "plain",
+          "添加备注"
+        ],
+        [
+          "html",
+          "在网页中添加链接"
+        ]
+      ],
+      "store": false,
+      "string": "条款和条件格式",
+      "type": "selection"
+    },
+    "type_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "类型名称",
+      "type": "char"
+    },
+    "has_overages": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "存在超额",
+      "type": "boolean"
+    },
+    "invoice_overages": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "开票超额",
+      "type": "boolean"
+    },
+    "has_active_pricelist": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "有现行价格表",
+      "type": "boolean"
+    },
+    "analytic_account_id": {
+      "readonly": false,
+      "relation": "account.analytic.account",
+      "required": false,
+      "store": true,
+      "string": "分析账户",
+      "type": "many2one"
+    },
+    "create_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "创建人",
+      "type": "many2one"
+    },
+    "write_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "上一更新人",
+      "type": "many2one"
+    },
+    "write_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "上次更新日期",
+      "type": "datetime"
+    },
+    "sale_order_template_id": {
+      "readonly": false,
+      "relation": "sale.order.template",
+      "required": false,
+      "store": true,
+      "string": "模板",
+      "type": "many2one"
+    },
+    "purchase_order_count": {
+      "groups": "purchase.group_purchase_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "生成的采购订单数量",
+      "type": "integer"
+    },
+    "picking_policy": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "direct",
+          "尽快，允许欠单"
+        ],
+        [
+          "one",
+          "当所有产品就绪时"
+        ]
+      ],
+      "store": true,
+      "string": "送货策略",
+      "type": "selection"
+    },
+    "warehouse_id": {
+      "readonly": false,
+      "relation": "stock.warehouse",
+      "required": false,
+      "store": true,
+      "string": "仓库",
+      "type": "many2one"
+    },
+    "picking_ids": {
+      "readonly": false,
+      "relation": "stock.picking",
+      "required": false,
+      "store": true,
+      "string": "调拨",
+      "type": "one2many"
+    },
+    "delivery_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "交货单",
+      "type": "integer"
+    },
+    "late_availability": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "迟到的可用性",
+      "type": "boolean"
+    },
+    "stock_reference_ids": {
+      "readonly": false,
+      "relation": "stock.reference",
+      "required": false,
+      "store": true,
+      "string": "参考",
+      "type": "many2many"
+    },
+    "effective_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "实际日期",
+      "type": "datetime"
+    },
+    "json_popover": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "弹出式窗口小部件的JSON数据",
+      "type": "char"
+    },
+    "show_json_popover": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "有迟到拣货",
+      "type": "boolean"
+    },
+    "margin": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "毛利",
+      "type": "monetary"
+    },
+    "margin_percent": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "毛利率（%）",
+      "type": "float"
+    },
+    "mrp_production_count": {
+      "groups": "mrp.group_mrp_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "MO 生成计数",
+      "type": "integer"
+    },
+    "mrp_production_ids": {
+      "groups": "mrp.group_mrp_user",
+      "readonly": true,
+      "relation": "mrp.production",
+      "required": false,
+      "store": false,
+      "string": "与此销售订单相关的制造订单。",
+      "type": "many2many"
+    },
+    "available_quotation_document_ids": {
+      "readonly": true,
+      "relation": "quotation.document",
+      "required": false,
+      "store": false,
+      "string": "可用的报价文件",
+      "type": "many2many"
+    },
+    "is_pdf_quote_builder_available": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "PDF生成报价单是否可用",
+      "type": "boolean"
+    },
+    "quotation_document_ids": {
+      "readonly": false,
+      "relation": "quotation.document",
+      "required": false,
+      "store": true,
+      "string": "页眉/页脚",
+      "type": "many2many"
+    },
+    "customizable_pdf_form_fields": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "可定制的 PDF 表格字段",
+      "type": "json"
+    }
+  },
+  "sale.order.line": {
+    "id": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "ID",
+      "type": "integer"
+    },
+    "display_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示名称",
+      "type": "char"
+    },
+    "product_id": {
+      "readonly": false,
+      "relation": "product.product",
+      "required": false,
+      "store": true,
+      "string": "产品",
+      "type": "many2one"
+    },
+    "consolidation_rate": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "汇率",
+      "type": "float"
+    },
+    "consolidation_currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": false,
+      "string": "合并币种",
+      "type": "many2one"
+    },
+    "analytic_distribution": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "分析分摊",
+      "type": "json"
+    },
+    "analytic_precision": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "分析精度",
+      "type": "integer"
+    },
+    "distribution_analytic_account_ids": {
+      "readonly": true,
+      "relation": "account.analytic.account",
+      "required": false,
+      "store": false,
+      "string": "分析分布账户",
+      "type": "many2many"
+    },
+    "order_id": {
+      "readonly": false,
+      "relation": "sale.order",
+      "required": true,
+      "store": true,
+      "string": "订单参考号",
+      "type": "many2one"
+    },
+    "sequence": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "序列",
+      "type": "integer"
+    },
+    "selection_values": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "报价选型参数",
+      "type": "json"
+    },
+    "selection_drawing_id": {
+      "readonly": false,
+      "relation": "sale.order.drawing",
+      "required": false,
+      "store": true,
+      "string": "来源图纸",
+      "type": "many2one"
+    },
+    "selection_candidate_id": {
+      "readonly": false,
+      "relation": "sale.order.drawing.candidate",
+      "required": false,
+      "store": true,
+      "string": "来源识别项目",
+      "type": "many2one"
+    },
+    "quotation_name": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "名称",
+      "type": "char"
+    },
+    "quotation_remark": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "备注",
+      "type": "text"
+    },
+    "quotation_order_type": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "internal",
+          "内部"
+        ],
+        [
+          "external",
+          "外部"
+        ]
+      ],
+      "store": true,
+      "string": "订单类型",
+      "type": "selection"
+    },
+    "quotation_name_manual": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Quotation Name Manual",
+      "type": "boolean"
+    },
+    "quotation_name_value": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Quotation Name Value",
+      "type": "char"
+    },
+    "quotation_remark_manual": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Quotation Remark Manual",
+      "type": "boolean"
+    },
+    "quotation_remark_value": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Quotation Remark Value",
+      "type": "text"
+    },
+    "quotation_remark_generated": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Quotation Remark Generated",
+      "type": "boolean"
+    },
+    "quotation_specification": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "规格（W×D×H）",
+      "type": "char"
+    },
+    "quotation_discounted_unit": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "折后单价",
+      "type": "monetary"
+    },
+    "quotation_discounted_total": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "折后总价",
+      "type": "monetary"
+    },
+    "selection_pricing_result": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "当前规格计价快照",
+      "type": "json"
+    },
+    "selection_pricing_error": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "最近计价错误",
+      "type": "char"
+    },
+    "selection_discount_coefficient": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "折扣系数",
+      "type": "float"
+    },
+    "saved_fixed_quote": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "固定报价",
+      "type": "float"
+    },
+    "saved_discounted_face": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "折扣面价",
+      "type": "float"
+    },
+    "saved_quote_coefficient": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "折扣系数",
+      "type": "float"
+    },
+    "saved_quote_unit": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "报价",
+      "type": "float"
+    },
+    "saved_quote_freight": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "报价运费",
+      "type": "float"
+    },
+    "saved_quote_total": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "报价总价",
+      "type": "float"
+    },
+    "saved_cost_unit": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "成本单价",
+      "type": "float"
+    },
+    "saved_material_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "材料成本",
+      "type": "float"
+    },
+    "saved_auxiliary_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "辅材成本",
+      "type": "float"
+    },
+    "saved_manufacturing_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "制造成本",
+      "type": "float"
+    },
+    "saved_labor_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "人工成本",
+      "type": "float"
+    },
+    "saved_attachment_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "附件成本",
+      "type": "float"
+    },
+    "saved_spray_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "喷涂费用",
+      "type": "float"
+    },
+    "saved_management_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "管理费用",
+      "type": "float"
+    },
+    "saved_tax_cost": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "税费",
+      "type": "float"
+    },
+    "saved_cost_freight": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "成本运费",
+      "type": "float"
+    },
+    "saved_cost_total": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "成本总价",
+      "type": "float"
+    },
+    "saved_gross_margin": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "毛利率",
+      "type": "float"
+    },
+    "saved_net_margin": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "净利率",
+      "type": "float"
+    },
+    "saved_self_made_weight": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "自制件重量",
+      "type": "float"
+    },
+    "saved_result_snapshot": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "原报价结果快照",
+      "type": "json"
+    },
+    "saved_result_values": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Saved Result Values",
+      "type": "json"
+    },
+    "saved_result_state": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "missing",
+          "未计算"
+        ],
+        [
+          "saved",
+          "已读取"
+        ],
+        [
+          "calculated",
+          "已计算"
+        ],
+        [
+          "stale",
+          "待重算"
+        ],
+        [
+          "failed",
+          "计算失败"
+        ]
+      ],
+      "store": false,
+      "string": "原结果状态",
+      "type": "selection"
+    },
+    "saved_result_source": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "原报价来源",
+      "type": "char"
+    },
+    "saved_result_html": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "原报价明细",
+      "type": "html"
+    },
+    "company_id": {
+      "readonly": true,
+      "relation": "res.company",
+      "required": false,
+      "store": true,
+      "string": "公司",
+      "type": "many2one"
+    },
+    "currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": true,
+      "string": "币别",
+      "type": "many2one"
+    },
+    "order_partner_id": {
+      "readonly": true,
+      "relation": "res.partner",
+      "required": false,
+      "store": true,
+      "string": "客户",
+      "type": "many2one"
+    },
+    "salesman_id": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "销售人员",
+      "type": "many2one"
+    },
+    "state": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "draft",
+          "报价单"
+        ],
+        [
+          "sent",
+          "已发送报价单"
+        ],
+        [
+          "sale",
+          "销售订单"
+        ],
+        [
+          "cancel",
+          "已取消"
+        ]
+      ],
+      "store": true,
+      "string": "订单状态",
+      "type": "selection"
+    },
+    "tax_country_id": {
+      "readonly": true,
+      "relation": "res.country",
+      "required": false,
+      "store": false,
+      "string": "税项所在国家/地区",
+      "type": "many2one"
+    },
+    "display_type": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "line_section",
+          "小节"
+        ],
+        [
+          "line_subsection",
+          "小节"
+        ],
+        [
+          "line_note",
+          "备注"
+        ]
+      ],
+      "store": true,
+      "string": "显示类型",
+      "type": "selection"
+    },
+    "is_configurable_product": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "产品是否可配置？",
+      "type": "boolean"
+    },
+    "is_downpayment": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "是预付款",
+      "type": "boolean"
+    },
+    "is_expense": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "是费用",
+      "type": "boolean"
+    },
+    "product_template_id": {
+      "readonly": false,
+      "relation": "product.template",
+      "required": false,
+      "store": false,
+      "string": "产品模板",
+      "type": "many2one"
+    },
+    "product_template_attribute_value_ids": {
+      "readonly": true,
+      "relation": "product.template.attribute.value",
+      "required": false,
+      "store": false,
+      "string": "属性值",
+      "type": "many2many"
+    },
+    "product_custom_attribute_value_ids": {
+      "readonly": false,
+      "relation": "product.attribute.custom.value",
+      "required": false,
+      "store": true,
+      "string": "自定义值",
+      "type": "one2many"
+    },
+    "product_no_variant_attribute_value_ids": {
+      "readonly": false,
+      "relation": "product.template.attribute.value",
+      "required": false,
+      "store": true,
+      "string": "附加值",
+      "type": "many2many"
+    },
+    "is_product_archived": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "产品是否归档",
+      "type": "boolean"
+    },
+    "name": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "描述",
+      "type": "text"
+    },
+    "label": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "标签",
+      "type": "text"
+    },
+    "product_uom_qty": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "数量",
+      "type": "float"
+    },
+    "product_uom_id": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": false,
+      "store": true,
+      "string": "单元",
+      "type": "many2one"
+    },
+    "allowed_uom_ids": {
+      "readonly": true,
+      "relation": "uom.uom",
+      "required": false,
+      "store": false,
+      "string": "允许的单位",
+      "type": "many2many"
+    },
+    "qty_available_today": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "今日可用数量",
+      "type": "float"
+    },
+    "virtual_available_at_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "按日期的虚拟可用",
+      "type": "float"
+    },
+    "display_qty_widget": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示数量挂件",
+      "type": "boolean"
+    },
+    "is_storable": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "追踪库存",
+      "type": "boolean"
+    },
+    "scheduled_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "交付日期",
+      "type": "datetime"
+    },
+    "linked_line_id": {
+      "readonly": false,
+      "relation": "sale.order.line",
+      "required": false,
+      "store": true,
+      "string": "链接的订单明细",
+      "type": "many2one"
+    },
+    "linked_line_ids": {
+      "readonly": false,
+      "relation": "sale.order.line",
+      "required": false,
+      "store": true,
+      "string": "已关联的订单明细",
+      "type": "one2many"
+    },
+    "categ_id": {
+      "readonly": true,
+      "relation": "product.category",
+      "required": false,
+      "store": false,
+      "string": "产品类别",
+      "type": "many2one"
+    },
+    "virtual_id": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "虚拟",
+      "type": "char"
+    },
+    "linked_virtual_id": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "链接虚拟",
+      "type": "char"
+    },
+    "selected_combo_items": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "已选定的组合项目",
+      "type": "char"
+    },
+    "combo_item_id": {
+      "readonly": false,
+      "relation": "product.combo.item",
+      "required": false,
+      "store": true,
+      "string": "组合项目",
+      "type": "many2one"
+    },
+    "tax_ids": {
+      "readonly": false,
+      "relation": "account.tax",
+      "required": false,
+      "store": true,
+      "string": "税项",
+      "type": "many2many"
+    },
+    "document_tax_mode": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "tax_excluded",
+          "不含税"
+        ],
+        [
+          "tax_included",
+          "含税"
+        ]
+      ],
+      "store": false,
+      "string": "文档税模式",
+      "type": "selection"
+    },
+    "pricelist_item_id": {
+      "readonly": true,
+      "relation": "product.pricelist.item",
+      "required": false,
+      "store": false,
+      "string": "价格表项目",
+      "type": "many2one"
+    },
+    "price_unit": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "单价",
+      "type": "float"
+    },
+    "technical_price_unit": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "技术价格单位",
+      "type": "float"
+    },
+    "discount": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "折扣（%）",
+      "type": "float"
+    },
+    "price_subtotal": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "小计",
+      "type": "monetary"
+    },
+    "price_tax": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "总税额",
+      "type": "float"
+    },
+    "price_total": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "总计",
+      "type": "monetary"
+    },
+    "price_reduce_taxexcl": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "不含税降价",
+      "type": "monetary"
+    },
+    "price_reduce_taxinc": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "含税降价",
+      "type": "monetary"
+    },
+    "customer_lead": {
+      "readonly": true,
+      "required": true,
+      "store": true,
+      "string": "提前期",
+      "type": "integer"
+    },
+    "qty_delivered_method": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "manual",
+          "手动"
+        ],
+        [
+          "analytic",
+          "费用分析"
+        ],
+        [
+          "stock_move",
+          "库存移动"
+        ]
+      ],
+      "store": true,
+      "string": "更新已交付数量的方法",
+      "type": "selection"
+    },
+    "qty_delivered": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "交付数量",
+      "type": "float"
+    },
+    "qty_delivered_percent": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "已交货 (%)",
+      "type": "float"
+    },
+    "qty_overage": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "超额数量",
+      "type": "float"
+    },
+    "invoice_policy": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "order",
+          "订单数量"
+        ],
+        [
+          "delivery",
+          "已交付数量"
+        ]
+      ],
+      "store": false,
+      "string": "开票原则",
+      "type": "selection"
+    },
+    "qty_invoiced": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "已开具发票的数量",
+      "type": "float"
+    },
+    "qty_invoiced_posted": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已开具发票的数量（已过账）",
+      "type": "float"
+    },
+    "qty_to_invoice": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "待开票数量",
+      "type": "float"
+    },
+    "analytic_line_ids": {
+      "readonly": false,
+      "relation": "account.analytic.line",
+      "required": false,
+      "store": true,
+      "string": "分析行",
+      "type": "one2many"
+    },
+    "invoice_lines": {
+      "readonly": false,
+      "relation": "account.move.line",
+      "required": false,
+      "store": true,
+      "string": "发票行",
+      "type": "many2many"
+    },
+    "invoice_status": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "upselling",
+          "加售商机"
+        ],
+        [
+          "invoiced",
+          "已全额开票"
+        ],
+        [
+          "to invoice",
+          "待开票"
+        ],
+        [
+          "no",
+          "没有待开票项目"
+        ]
+      ],
+      "store": true,
+      "string": "发票状态",
+      "type": "selection"
+    },
+    "untaxed_amount_invoiced": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "未税开票金额",
+      "type": "monetary"
+    },
+    "amount_invoiced": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "结算金额",
+      "type": "monetary"
+    },
+    "untaxed_amount_to_invoice": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "待开票的未税金额",
+      "type": "monetary"
+    },
+    "amount_to_invoice": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "未开票余额",
+      "type": "monetary"
+    },
+    "amount_to_invoice_at_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "金额",
+      "type": "float"
+    },
+    "accrual_move_ids": {
+      "readonly": false,
+      "relation": "account.move",
+      "required": false,
+      "store": true,
+      "string": "应计分录",
+      "type": "many2many"
+    },
+    "qty_delivered_at_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已交付",
+      "type": "float"
+    },
+    "qty_invoiced_at_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已开具发票",
+      "type": "float"
+    },
+    "deferred_revenue": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "递延收入",
+      "type": "boolean"
+    },
+    "invoice_to_be_issued": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "待开具发票",
+      "type": "boolean"
+    },
+    "extra_tax_data": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "额外税务数据",
+      "type": "json"
+    },
+    "product_type": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "consu",
+          "实物"
+        ],
+        [
+          "service",
+          "服务"
+        ],
+        [
+          "combo",
+          "组合"
+        ]
+      ],
+      "store": false,
+      "string": "产品类型",
+      "type": "selection"
+    },
+    "service_tracking": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "no",
+          "没有什么"
+        ],
+        [
+          "subcontract",
+          "分包询价单"
+        ]
+      ],
+      "store": false,
+      "string": "按订单创建",
+      "type": "selection"
+    },
+    "product_updatable": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可以编辑产品",
+      "type": "boolean"
+    },
+    "product_uom_readonly": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "只读产品计量单位",
+      "type": "boolean"
+    },
+    "tax_calculation_rounding_method": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "round_globally",
+          "按税种舍入"
+        ],
+        [
+          "round_per_line",
+          "每行舍入"
+        ]
+      ],
+      "store": false,
+      "string": "税费计算舍入方法",
+      "type": "selection"
+    },
+    "company_price_include": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "tax_included",
+          "含税"
+        ],
+        [
+          "tax_excluded",
+          "不含税"
+        ]
+      ],
+      "store": false,
+      "string": "默认销售价格包括",
+      "type": "selection"
+    },
+    "sale_line_warn_msg": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "销售明细行警告消息",
+      "type": "text"
+    },
+    "parent_id": {
+      "readonly": true,
+      "relation": "sale.order.line",
+      "required": false,
+      "store": false,
+      "string": "父级章节行",
+      "type": "many2one"
+    },
+    "collapse_prices": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "折叠价格",
+      "type": "boolean"
+    },
+    "collapse_composition": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "收起组合内容",
+      "type": "boolean"
+    },
+    "line_number_offset": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Line Number Offset",
+      "type": "integer"
+    },
+    "mandatory_product": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "产品为必填",
+      "type": "boolean"
+    },
+    "section_qty": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "节数量",
+      "type": "float"
+    },
+    "section_uom_id": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": false,
+      "store": true,
+      "string": "节计量单位",
+      "type": "many2one"
+    },
+    "create_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "创建人",
+      "type": "many2one"
+    },
+    "create_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "创建日期",
+      "type": "datetime"
+    },
+    "write_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "上一更新人",
+      "type": "many2one"
+    },
+    "write_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "上次更新日期",
+      "type": "datetime"
+    },
+    "edi_customer_product_ref": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Edi 客户产品参考",
+      "type": "char"
+    },
+    "is_optional": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "可选明细行",
+      "type": "boolean"
+    },
+    "purchase_line_ids": {
+      "readonly": true,
+      "relation": "purchase.order.line",
+      "required": false,
+      "store": true,
+      "string": "生成采购订单明细行",
+      "type": "one2many"
+    },
+    "purchase_line_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "生成采购订单号",
+      "type": "integer"
+    },
+    "route_ids": {
+      "readonly": false,
+      "relation": "stock.route",
+      "required": false,
+      "store": true,
+      "string": "路线",
+      "type": "many2many"
+    },
+    "move_ids": {
+      "readonly": false,
+      "relation": "stock.move",
+      "required": false,
+      "store": true,
+      "string": "库存移动",
+      "type": "one2many"
+    },
+    "forecast_expected_date": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "预测预计日期",
+      "type": "datetime"
+    },
+    "free_qty_today": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "今日闲置数量",
+      "type": "float"
+    },
+    "warehouse_id": {
+      "readonly": true,
+      "relation": "stock.warehouse",
+      "required": false,
+      "store": true,
+      "string": "仓库",
+      "type": "many2one"
+    },
+    "qty_to_deliver": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "待交货数量",
+      "type": "float"
+    },
+    "is_mto": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是MTO",
+      "type": "boolean"
+    },
+    "margin": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "毛利",
+      "type": "float"
+    },
+    "margin_percent": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "毛利率（%）",
+      "type": "float"
+    },
+    "purchase_price": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "单位成本",
+      "type": "float"
+    },
+    "available_product_document_ids": {
+      "readonly": true,
+      "relation": "product.document",
+      "required": false,
+      "store": false,
+      "string": "可用产品文件",
+      "type": "many2many"
+    },
+    "product_document_ids": {
+      "readonly": false,
+      "relation": "product.document",
+      "required": false,
+      "store": true,
+      "string": "产品文件",
+      "type": "many2many"
+    }
+  },
+  "sale.order.drawing": {
+    "id": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "ID",
+      "type": "integer"
+    },
+    "display_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Display Name",
+      "type": "char"
+    },
+    "order_id": {
+      "readonly": false,
+      "relation": "sale.order",
+      "required": true,
+      "store": true,
+      "string": "Order",
+      "type": "many2one"
+    },
+    "company_id": {
+      "readonly": true,
+      "relation": "res.company",
+      "required": false,
+      "store": true,
+      "string": "Company",
+      "type": "many2one"
+    },
+    "name": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "图纸文件",
+      "type": "char"
+    },
+    "file_data": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "图纸内容",
+      "type": "binary"
+    },
+    "upload_files": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "待上传图纸",
+      "type": "json"
+    },
+    "file_kind": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "pdf",
+          "PDF"
+        ],
+        [
+          "image",
+          "图片"
+        ],
+        [
+          "cad",
+          "CAD"
+        ]
+      ],
+      "store": false,
+      "string": "File Kind",
+      "type": "selection"
+    },
+    "page_count": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图纸页数",
+      "type": "integer"
+    },
+    "page_label": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "页数",
+      "type": "char"
+    },
+    "state": {
+      "readonly": true,
+      "required": true,
+      "selection": [
+        [
+          "pending",
+          "待选型"
+        ],
+        [
+          "confirmed",
+          "已选型"
+        ]
+      ],
+      "store": true,
+      "string": "选型状态",
+      "type": "selection"
+    },
+    "product_series": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "JA",
+          "JA"
+        ],
+        [
+          "JC",
+          "JC"
+        ],
+        [
+          "JE",
+          "JE"
+        ],
+        [
+          "JK",
+          "JK"
+        ],
+        [
+          "JM",
+          "JM"
+        ],
+        [
+          "JP",
+          "JP"
+        ],
+        [
+          "JP WIDE",
+          "JP WIDE"
+        ],
+        [
+          "JQ",
+          "JQ"
+        ],
+        [
+          "JS",
+          "JS"
+        ],
+        [
+          "JS WIDE",
+          "JS WIDE"
+        ],
+        [
+          "操作台",
+          "操作台"
+        ]
+      ],
+      "store": true,
+      "string": "产品类型",
+      "type": "selection"
+    },
+    "product_template_id": {
+      "readonly": false,
+      "relation": "product.template",
+      "required": false,
+      "store": true,
+      "string": "产品主档",
+      "type": "many2one"
+    },
+    "quantity": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "数量",
+      "type": "float"
+    },
+    "uom_id": {
+      "readonly": true,
+      "relation": "uom.uom",
+      "required": false,
+      "store": false,
+      "string": "单位",
+      "type": "many2one"
+    },
+    "width_mm": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "宽度（mm）",
+      "type": "float"
+    },
+    "width_expression": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "宽度（mm）",
+      "type": "char"
+    },
+    "cabinet_configuration": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "门型与柜位",
+      "type": "json"
+    },
+    "depth_mm": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "深度（mm）",
+      "type": "float"
+    },
+    "height_mm": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "高度（mm）",
+      "type": "float"
+    },
+    "material": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "材质",
+      "type": "char"
+    },
+    "thickness_mm": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "箱体料厚（mm）",
+      "type": "float"
+    },
+    "coating_type": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "none",
+          "无"
+        ],
+        [
+          "gloss",
+          "平光"
+        ],
+        [
+          "orange",
+          "橘纹"
+        ]
+      ],
+      "store": true,
+      "string": "喷塑",
+      "type": "selection"
+    },
+    "display_color": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "颜色",
+      "type": "char"
+    },
+    "orientation_data": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图纸页面方向",
+      "type": "json"
+    },
+    "orientation_state": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "queued",
+          "旋正排队中"
+        ],
+        [
+          "processing",
+          "旋正中"
+        ],
+        [
+          "ready",
+          "旋正完成"
+        ],
+        [
+          "failed",
+          "旋正未完成"
+        ]
+      ],
+      "store": true,
+      "string": "Orientation State",
+      "type": "selection"
+    },
+    "orientation_started_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Orientation Started At",
+      "type": "datetime"
+    },
+    "orientation_token": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Orientation Token",
+      "type": "char"
+    },
+    "dimension_assist_data": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "辅助尺寸复核",
+      "type": "json"
+    },
+    "door_type": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "门型",
+      "type": "char"
+    },
+    "selection_notes": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "附件选配与技术要求",
+      "type": "text"
+    },
+    "accessory_selection_data": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "附件选配",
+      "type": "json"
+    },
+    "source_text": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图纸文字",
+      "type": "text"
+    },
+    "order_line_id": {
+      "readonly": false,
+      "relation": "sale.order.line",
+      "required": false,
+      "store": true,
+      "string": "关联明细",
+      "type": "many2one"
+    },
+    "reviewed_by": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "复核人员",
+      "type": "many2one"
+    },
+    "reviewed_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "复核时间",
+      "type": "datetime"
+    },
+    "selection_row_hidden": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "Selection Row Hidden",
+      "type": "boolean"
+    },
+    "can_edit_selection": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Can Edit Selection",
+      "type": "boolean"
+    },
+    "recognition_state": {
+      "readonly": true,
+      "required": true,
+      "selection": [
+        [
+          "idle",
+          "待识别"
+        ],
+        [
+          "queued",
+          "排队中"
+        ],
+        [
+          "processing",
+          "识别中"
+        ],
+        [
+          "review",
+          "待复核"
+        ],
+        [
+          "done",
+          "已复核"
+        ],
+        [
+          "failed",
+          "识别失败"
+        ]
+      ],
+      "store": true,
+      "string": "识别状态",
+      "type": "selection"
+    },
+    "recognition_token": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Recognition Token",
+      "type": "char"
+    },
+    "recognition_started_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Recognition Started At",
+      "type": "datetime"
+    },
+    "recognition_finished_at": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "识别完成时间",
+      "type": "datetime"
+    },
+    "recognition_data": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Recognition Data",
+      "type": "json"
+    },
+    "recognition_completed_pages": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "已处理页数",
+      "type": "integer"
+    },
+    "recognition_error": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "识别提示",
+      "type": "text"
+    },
+    "recognition_candidate_ids": {
+      "readonly": true,
+      "relation": "sale.order.drawing.candidate",
+      "required": false,
+      "store": true,
+      "string": "全部识别项目",
+      "type": "one2many"
+    },
+    "active_recognition_id": {
+      "readonly": false,
+      "relation": "sale.order.drawing.candidate",
+      "required": false,
+      "store": true,
+      "string": "识别项目",
+      "type": "many2one"
+    },
+    "recognition_summary": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "识别依据",
+      "type": "text"
+    },
+    "drawing_recognition_pending": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Drawing Recognition Pending",
+      "type": "boolean"
+    },
+    "drawing_recognition_version": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "Drawing Recognition Version",
+      "type": "char"
+    },
+    "file_data_page": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "原图页码",
+      "type": "integer"
+    },
+    "create_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "Created by",
+      "type": "many2one"
+    },
+    "create_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Created on",
+      "type": "datetime"
+    },
+    "write_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "Last Updated by",
+      "type": "many2one"
+    },
+    "write_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "Last Updated on",
+      "type": "datetime"
+    }
+  },
+  "product.template": {
+    "id": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "ID",
+      "type": "integer"
+    },
+    "display_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示名称",
+      "type": "char"
+    },
+    "image_1920": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "图像",
+      "type": "binary"
+    },
+    "image_1024": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图像 1024",
+      "type": "binary"
+    },
+    "image_512": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图像 512",
+      "type": "binary"
+    },
+    "image_256": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图像 256",
+      "type": "binary"
+    },
+    "image_128": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "图像128",
+      "type": "binary"
+    },
+    "activity_ids": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.activity",
+      "required": false,
+      "store": true,
+      "string": "活动",
+      "type": "one2many"
+    },
+    "activity_state": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "overdue",
+          "Overdue"
+        ],
+        [
+          "today",
+          "Today"
+        ],
+        [
+          "planned",
+          "Planned"
+        ]
+      ],
+      "store": false,
+      "string": "活动状态",
+      "type": "selection"
+    },
+    "activity_user_id": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": false,
+      "string": "责任用户",
+      "type": "many2one"
+    },
+    "activity_type_id": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.activity.type",
+      "required": false,
+      "store": false,
+      "string": "下一活动类型",
+      "type": "many2one"
+    },
+    "activity_type_icon": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "活动类型图标",
+      "type": "char"
+    },
+    "activity_date_deadline": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "下一活动截止日期",
+      "type": "date"
+    },
+    "my_activity_date_deadline": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "我的活动截止时间",
+      "type": "date"
+    },
+    "activity_summary": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "下一活动摘要",
+      "type": "char"
+    },
+    "activity_exception_decoration": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "warning",
+          "Alert"
+        ],
+        [
+          "danger",
+          "Error"
+        ]
+      ],
+      "store": false,
+      "string": "活动异常标示",
+      "type": "selection"
+    },
+    "activity_exception_icon": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图标",
+      "type": "char"
+    },
+    "activity_plans_ids": {
+      "readonly": true,
+      "relation": "mail.activity.plan",
+      "required": false,
+      "store": false,
+      "string": "活动计划",
+      "type": "many2many"
+    },
+    "message_is_follower": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是关注者",
+      "type": "boolean"
+    },
+    "message_follower_ids": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.followers",
+      "required": false,
+      "store": true,
+      "string": "关注者",
+      "type": "one2many"
+    },
+    "message_partner_ids": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": false,
+      "store": false,
+      "string": "关注者（合作伙伴）",
+      "type": "many2many"
+    },
+    "message_ids": {
+      "readonly": false,
+      "relation": "mail.message",
+      "required": false,
+      "store": true,
+      "string": "消息",
+      "type": "one2many"
+    },
+    "has_message": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "有消息",
+      "type": "boolean"
+    },
+    "message_needaction": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "所需操作",
+      "type": "boolean"
+    },
+    "message_needaction_counter": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "操作数量",
+      "type": "integer"
+    },
+    "message_has_error": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "消息发送错误",
+      "type": "boolean"
+    },
+    "message_has_error_counter": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "错误数量",
+      "type": "integer"
+    },
+    "message_attachment_count": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "附件数量",
+      "type": "integer"
+    },
+    "message_has_sms_error": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "短信发送错误",
+      "type": "boolean"
+    },
+    "name": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "名称",
+      "type": "char"
+    },
+    "sequence": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "序列",
+      "type": "integer"
+    },
+    "description": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "描述",
+      "type": "html"
+    },
+    "description_purchase": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "采购说明",
+      "type": "text"
+    },
+    "description_sale": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "销售说明",
+      "type": "text"
+    },
+    "type": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "consu",
+          "实物"
+        ],
+        [
+          "service",
+          "服务"
+        ],
+        [
+          "combo",
+          "组合"
+        ]
+      ],
+      "store": true,
+      "string": "产品类型",
+      "type": "selection"
+    },
+    "combo_ids": {
+      "readonly": false,
+      "relation": "product.combo",
+      "required": false,
+      "store": true,
+      "string": "组合选择",
+      "type": "many2many"
+    },
+    "service_tracking": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "no",
+          "没有什么"
+        ],
+        [
+          "subcontract",
+          "分包询价单"
+        ]
+      ],
+      "store": true,
+      "string": "按订单创建",
+      "type": "selection"
+    },
+    "categ_id": {
+      "readonly": false,
+      "relation": "product.category",
+      "required": false,
+      "store": true,
+      "string": "产品类别",
+      "type": "many2one"
+    },
+    "currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": false,
+      "string": "币别",
+      "type": "many2one"
+    },
+    "cost_currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": false,
+      "string": "成本币别",
+      "type": "many2one"
+    },
+    "list_price": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "销售价格",
+      "type": "float"
+    },
+    "standard_price": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "成本",
+      "type": "float"
+    },
+    "is_storable": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "追踪库存",
+      "type": "boolean"
+    },
+    "qty_available": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "在手数量",
+      "type": "float"
+    },
+    "virtual_available": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "预测数量",
+      "type": "float"
+    },
+    "incoming_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "进货",
+      "type": "float"
+    },
+    "outgoing_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "出货",
+      "type": "float"
+    },
+    "free_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可用数量",
+      "type": "float"
+    },
+    "volume": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "体积",
+      "type": "float"
+    },
+    "volume_uom_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "体积单位标签",
+      "type": "char"
+    },
+    "weight": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "重量",
+      "type": "float"
+    },
+    "weight_uom_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重量单位标签",
+      "type": "char"
+    },
+    "sale_ok": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "销售",
+      "type": "boolean"
+    },
+    "purchase_ok": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "采购",
+      "type": "boolean"
+    },
+    "uom_id": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": true,
+      "store": true,
+      "string": "单位",
+      "type": "many2one"
+    },
+    "uom_ids": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": false,
+      "store": true,
+      "string": "包装",
+      "type": "many2many"
+    },
+    "uom_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "单位名称",
+      "type": "char"
+    },
+    "company_id": {
+      "readonly": false,
+      "relation": "res.company",
+      "required": false,
+      "store": true,
+      "string": "公司",
+      "type": "many2one"
+    },
+    "seller_ids": {
+      "readonly": false,
+      "relation": "product.supplierinfo",
+      "required": false,
+      "store": true,
+      "string": "供应商",
+      "type": "one2many"
+    },
+    "variant_seller_ids": {
+      "readonly": false,
+      "relation": "product.supplierinfo",
+      "required": false,
+      "store": true,
+      "string": "变体卖家",
+      "type": "one2many"
+    },
+    "active": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "有效",
+      "type": "boolean"
+    },
+    "color": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "颜色指标",
+      "type": "integer"
+    },
+    "is_product_variant": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是产品变体",
+      "type": "boolean"
+    },
+    "attribute_line_ids": {
+      "readonly": false,
+      "relation": "product.template.attribute.line",
+      "required": false,
+      "store": true,
+      "string": "产品属性",
+      "type": "one2many"
+    },
+    "valid_product_template_attribute_line_ids": {
+      "readonly": true,
+      "relation": "product.template.attribute.line",
+      "required": false,
+      "store": false,
+      "string": "有效产品属性明细行",
+      "type": "many2many"
+    },
+    "import_attribute_values": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "产品值",
+      "type": "char"
+    },
+    "product_variant_ids": {
+      "readonly": false,
+      "relation": "product.product",
+      "required": true,
+      "store": true,
+      "string": "产品",
+      "type": "one2many"
+    },
+    "product_variant_id": {
+      "readonly": true,
+      "relation": "product.product",
+      "required": false,
+      "store": false,
+      "string": "产品",
+      "type": "many2one"
+    },
+    "product_variant_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "# 产品变体",
+      "type": "integer"
+    },
+    "show_qty_update_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示数量更新按钮",
+      "type": "boolean"
+    },
+    "barcode": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "条码",
+      "type": "char"
+    },
+    "default_code": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "内部参考号",
+      "type": "char"
+    },
+    "pricelist_rule_ids": {
+      "readonly": false,
+      "relation": "product.pricelist.item",
+      "required": false,
+      "store": true,
+      "string": "价格表规则",
+      "type": "one2many"
+    },
+    "fixed_pricelist_rule_ids": {
+      "readonly": false,
+      "relation": "product.pricelist.item",
+      "required": false,
+      "store": true,
+      "string": "固定价格表规则",
+      "type": "one2many"
+    },
+    "product_document_ids": {
+      "readonly": false,
+      "relation": "product.document",
+      "required": false,
+      "store": true,
+      "string": "文档",
+      "type": "one2many"
+    },
+    "product_document_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "文件数量",
+      "type": "integer"
+    },
+    "can_image_1024_be_zoomed": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "1024图可被缩放",
+      "type": "boolean"
+    },
+    "has_configurable_attributes": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "是可配置产品",
+      "type": "boolean"
+    },
+    "is_dynamically_created": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是动态建立",
+      "type": "boolean"
+    },
+    "product_tooltip": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "产品提示",
+      "type": "char"
+    },
+    "is_favorite": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "已收藏",
+      "type": "boolean"
+    },
+    "product_tag_ids": {
+      "readonly": false,
+      "relation": "product.tag",
+      "required": false,
+      "store": true,
+      "string": "标签",
+      "type": "many2many"
+    },
+    "product_properties": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "属性",
+      "type": "properties"
+    },
+    "show_sales_price_page": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示销售价格页面",
+      "type": "boolean"
+    },
+    "base_unit_count": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "参考单位",
+      "type": "float"
+    },
+    "base_unit_id": {
+      "readonly": false,
+      "relation": "product.base.unit",
+      "required": false,
+      "store": true,
+      "string": "自定义计量单位",
+      "type": "many2one"
+    },
+    "base_unit_price": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "每单位价格",
+      "type": "monetary"
+    },
+    "base_unit_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "基本单位名称",
+      "type": "char"
+    },
+    "create_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "创建人",
+      "type": "many2one"
+    },
+    "create_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "创建日期",
+      "type": "datetime"
+    },
+    "write_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "最后更新人",
+      "type": "many2one"
+    },
+    "write_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "上次更新日期",
+      "type": "datetime"
+    },
+    "taxes_id": {
+      "readonly": false,
+      "relation": "account.tax",
+      "required": false,
+      "store": true,
+      "string": "销售税",
+      "type": "many2many"
+    },
+    "tax_string": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "税项字符串",
+      "type": "char"
+    },
+    "supplier_taxes_id": {
+      "readonly": false,
+      "relation": "account.tax",
+      "required": false,
+      "store": true,
+      "string": "采购税",
+      "type": "many2many"
+    },
+    "property_account_income_id": {
+      "readonly": false,
+      "relation": "account.account",
+      "required": false,
+      "store": true,
+      "string": "收入科目",
+      "type": "many2one"
+    },
+    "property_account_income_active": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "收入科目启用",
+      "type": "boolean"
+    },
+    "property_account_expense_id": {
+      "readonly": false,
+      "relation": "account.account",
+      "required": false,
+      "store": true,
+      "string": "费用科目",
+      "type": "many2one"
+    },
+    "property_account_expense_active": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "费用科目启用",
+      "type": "boolean"
+    },
+    "account_tag_ids": {
+      "readonly": false,
+      "relation": "account.account.tag",
+      "required": false,
+      "store": true,
+      "string": "科目标签",
+      "type": "many2many"
+    },
+    "fiscal_country_codes": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "会计所在国家/地区代码",
+      "type": "char"
+    },
+    "valuation": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "periodic",
+          "定期（结账时）"
+        ],
+        [
+          "real_time",
+          "永续（开票时）"
+        ]
+      ],
+      "store": false,
+      "string": "估值",
+      "type": "selection"
+    },
+    "cost_method": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "standard",
+          "标准价格"
+        ],
+        [
+          "average",
+          "平均成本（AVCO）"
+        ],
+        [
+          "fifo",
+          "先进先出（FIFO）"
+        ]
+      ],
+      "store": false,
+      "string": "成本计价方法",
+      "type": "selection"
+    },
+    "responsible_id": {
+      "readonly": false,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "负责人",
+      "type": "many2one"
+    },
+    "property_stock_production": {
+      "readonly": false,
+      "relation": "stock.location",
+      "required": false,
+      "store": true,
+      "string": "生产",
+      "type": "many2one"
+    },
+    "property_stock_inventory": {
+      "readonly": false,
+      "relation": "stock.location",
+      "required": false,
+      "store": true,
+      "string": "库存调整",
+      "type": "many2one"
+    },
+    "tracking": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "lot",
+          "按批次"
+        ],
+        [
+          "serial",
+          "按唯一序列号"
+        ]
+      ],
+      "store": true,
+      "string": "跟踪方法",
+      "type": "selection"
+    },
+    "store_by": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "untracked",
+          "无"
+        ],
+        [
+          "quantity",
+          "按数量"
+        ],
+        [
+          "lot",
+          "按批次"
+        ],
+        [
+          "serial",
+          "按唯一序列号"
+        ]
+      ],
+      "store": false,
+      "string": "追溯",
+      "type": "selection"
+    },
+    "lot_sequence_id": {
+      "readonly": false,
+      "relation": "ir.sequence",
+      "required": false,
+      "store": true,
+      "string": "序号/批次号码序列",
+      "type": "many2one"
+    },
+    "serial_prefix_format": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "自定义批次/序号",
+      "type": "char"
+    },
+    "next_serial": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "下一序列号",
+      "type": "char"
+    },
+    "description_picking": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "拣货说明",
+      "type": "text"
+    },
+    "description_pickingout": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "出库单说明",
+      "type": "text"
+    },
+    "description_pickingin": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "收货说明",
+      "type": "text"
+    },
+    "location_id": {
+      "readonly": false,
+      "relation": "stock.location",
+      "required": false,
+      "store": false,
+      "string": "位置",
+      "type": "many2one"
+    },
+    "warehouse_id": {
+      "readonly": false,
+      "relation": "stock.warehouse",
+      "required": false,
+      "store": false,
+      "string": "仓库",
+      "type": "many2one"
+    },
+    "has_available_route_ids": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可以在此产品上选择路线",
+      "type": "boolean"
+    },
+    "route_ids": {
+      "readonly": false,
+      "relation": "stock.route",
+      "required": false,
+      "store": true,
+      "string": "路线",
+      "type": "many2many"
+    },
+    "nbr_moves_in": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "移动进数量",
+      "type": "integer"
+    },
+    "nbr_moves_out": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "移动出数量",
+      "type": "integer"
+    },
+    "nbr_reordering_rules": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重订货规则",
+      "type": "integer"
+    },
+    "reordering_min_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重订货最小数量",
+      "type": "float"
+    },
+    "reordering_max_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重订货最大数量",
+      "type": "float"
+    },
+    "route_from_categ_ids": {
+      "readonly": true,
+      "relation": "stock.route",
+      "required": false,
+      "store": false,
+      "string": "类别路线",
+      "type": "many2many"
+    },
+    "show_on_hand_qty_status_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "在状态按钮显示在手数量",
+      "type": "boolean"
+    },
+    "show_forecasted_qty_status_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示预测的数量状态按钮",
+      "type": "boolean"
+    },
+    "bom_line_ids": {
+      "readonly": false,
+      "relation": "mrp.bom.line",
+      "required": false,
+      "store": true,
+      "string": "物料清单（BOM）组件",
+      "type": "one2many"
+    },
+    "bom_ids": {
+      "readonly": false,
+      "relation": "mrp.bom",
+      "required": false,
+      "store": true,
+      "string": "物料清单",
+      "type": "one2many"
+    },
+    "bom_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "# 物料清单",
+      "type": "integer"
+    },
+    "used_in_bom_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "#使用的物料清单（BOM）",
+      "type": "integer"
+    },
+    "mrp_product_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已制造",
+      "type": "float"
+    },
+    "is_kits": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是套件",
+      "type": "boolean"
+    },
+    "purchased_product_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已采购",
+      "type": "float"
+    },
+    "purchase_method": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "purchase",
+          "订购数量"
+        ],
+        [
+          "receive",
+          "收到数量"
+        ]
+      ],
+      "store": true,
+      "string": "控制策略",
+      "type": "selection"
+    },
+    "purchase_line_warn_msg": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "采购订单明细的消息",
+      "type": "text"
+    },
+    "lot_valuated": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "按批号/序列号估值",
+      "type": "boolean"
+    },
+    "service_type": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "manual",
+          "在订单中手动设置数量"
+        ]
+      ],
+      "store": true,
+      "string": "跟踪服务",
+      "type": "selection"
+    },
+    "sale_line_warn_msg": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "销售订单明细行警告",
+      "type": "text"
+    },
+    "reinvoice_policy": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "no",
+          "否"
+        ],
+        [
+          "cost",
+          "以成本"
+        ],
+        [
+          "sales_price",
+          "按销售价格"
+        ]
+      ],
+      "store": true,
+      "string": "重新开票成本",
+      "type": "selection"
+    },
+    "visible_reinvoice_policy": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可见的重开票原则",
+      "type": "boolean"
+    },
+    "sales_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已售",
+      "type": "float"
+    },
+    "invoice_policy": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "order",
+          "订单数量"
+        ],
+        [
+          "delivery",
+          "已交付数量"
+        ]
+      ],
+      "store": true,
+      "string": "开票原则",
+      "type": "selection"
+    },
+    "optional_product_ids": {
+      "readonly": false,
+      "relation": "product.template",
+      "required": false,
+      "store": true,
+      "string": "可选产品",
+      "type": "many2many"
+    },
+    "sale_delay": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "交货时间",
+      "type": "integer"
+    },
+    "jingneng_catalog_series": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "系列 / 附件分类",
+      "type": "char"
+    },
+    "jingneng_catalog_specification": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "规格",
+      "type": "char"
+    }
+  },
+  "product.product": {
+    "id": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "ID",
+      "type": "integer"
+    },
+    "display_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示名称",
+      "type": "char"
+    },
+    "activity_ids": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.activity",
+      "required": false,
+      "store": true,
+      "string": "活动",
+      "type": "one2many"
+    },
+    "activity_state": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "overdue",
+          "Overdue"
+        ],
+        [
+          "today",
+          "Today"
+        ],
+        [
+          "planned",
+          "Planned"
+        ]
+      ],
+      "store": false,
+      "string": "活动状态",
+      "type": "selection"
+    },
+    "activity_user_id": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": false,
+      "string": "责任用户",
+      "type": "many2one"
+    },
+    "activity_type_id": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.activity.type",
+      "required": false,
+      "store": false,
+      "string": "下一活动类型",
+      "type": "many2one"
+    },
+    "activity_type_icon": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "活动类型图标",
+      "type": "char"
+    },
+    "activity_date_deadline": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "下一活动截止日期",
+      "type": "date"
+    },
+    "my_activity_date_deadline": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "我的活动截止时间",
+      "type": "date"
+    },
+    "activity_summary": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "下一活动摘要",
+      "type": "char"
+    },
+    "activity_exception_decoration": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "warning",
+          "Alert"
+        ],
+        [
+          "danger",
+          "Error"
+        ]
+      ],
+      "store": false,
+      "string": "活动异常标示",
+      "type": "selection"
+    },
+    "activity_exception_icon": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图标",
+      "type": "char"
+    },
+    "activity_plans_ids": {
+      "readonly": true,
+      "relation": "mail.activity.plan",
+      "required": false,
+      "store": false,
+      "string": "活动计划",
+      "type": "many2many"
+    },
+    "message_is_follower": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是关注者",
+      "type": "boolean"
+    },
+    "message_follower_ids": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "relation": "mail.followers",
+      "required": false,
+      "store": true,
+      "string": "关注者",
+      "type": "one2many"
+    },
+    "message_partner_ids": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": false,
+      "store": false,
+      "string": "关注者（合作伙伴）",
+      "type": "many2many"
+    },
+    "message_ids": {
+      "readonly": false,
+      "relation": "mail.message",
+      "required": false,
+      "store": true,
+      "string": "消息",
+      "type": "one2many"
+    },
+    "has_message": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "有消息",
+      "type": "boolean"
+    },
+    "message_needaction": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "所需操作",
+      "type": "boolean"
+    },
+    "message_needaction_counter": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "操作数量",
+      "type": "integer"
+    },
+    "message_has_error": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "消息发送错误",
+      "type": "boolean"
+    },
+    "message_has_error_counter": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "错误数量",
+      "type": "integer"
+    },
+    "message_attachment_count": {
+      "groups": "base.group_user",
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "附件数量",
+      "type": "integer"
+    },
+    "message_has_sms_error": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "短信发送错误",
+      "type": "boolean"
+    },
+    "price_extra": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "变体累加价格",
+      "type": "float"
+    },
+    "lst_price": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "销售价格",
+      "type": "float"
+    },
+    "default_code": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "内部参考号",
+      "type": "char"
+    },
+    "code": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "参考号",
+      "type": "char"
+    },
+    "partner_ref": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "客户单号",
+      "type": "char"
+    },
+    "active": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "有效",
+      "type": "boolean"
+    },
+    "product_tmpl_id": {
+      "readonly": false,
+      "relation": "product.template",
+      "required": true,
+      "store": true,
+      "string": "产品模板",
+      "type": "many2one"
+    },
+    "barcode": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "条码",
+      "type": "char"
+    },
+    "product_uom_ids": {
+      "readonly": false,
+      "relation": "product.uom",
+      "required": false,
+      "store": true,
+      "string": "单位条形码",
+      "type": "one2many"
+    },
+    "product_template_attribute_value_ids": {
+      "readonly": false,
+      "relation": "product.template.attribute.value",
+      "required": false,
+      "store": true,
+      "string": "属性值",
+      "type": "many2many"
+    },
+    "product_template_variant_value_ids": {
+      "readonly": false,
+      "relation": "product.template.attribute.value",
+      "required": false,
+      "store": true,
+      "string": "属性",
+      "type": "many2many"
+    },
+    "import_attribute_values": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "产品值",
+      "type": "char"
+    },
+    "combination_indices": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "组合指数",
+      "type": "char"
+    },
+    "is_product_variant": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是产品变体",
+      "type": "boolean"
+    },
+    "extra_uom_ids": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": false,
+      "store": true,
+      "string": "额外包装",
+      "type": "many2many"
+    },
+    "standard_price": {
+      "groups": "base.group_user",
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "成本",
+      "type": "float"
+    },
+    "volume": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "体积",
+      "type": "float"
+    },
+    "weight": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "重量",
+      "type": "float"
+    },
+    "qty_available": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "在手数量",
+      "type": "float"
+    },
+    "virtual_available": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "预测数量",
+      "type": "float"
+    },
+    "incoming_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "进货",
+      "type": "float"
+    },
+    "outgoing_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "出货",
+      "type": "float"
+    },
+    "free_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可用数量 ",
+      "type": "float"
+    },
+    "pricelist_rule_ids": {
+      "readonly": false,
+      "relation": "product.pricelist.item",
+      "required": false,
+      "store": false,
+      "string": "价格表规则",
+      "type": "one2many"
+    },
+    "product_document_ids": {
+      "readonly": false,
+      "relation": "product.document",
+      "required": false,
+      "store": true,
+      "string": "文档",
+      "type": "one2many"
+    },
+    "product_document_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "文件数量",
+      "type": "integer"
+    },
+    "additional_product_tag_ids": {
+      "readonly": false,
+      "relation": "product.tag",
+      "required": false,
+      "store": true,
+      "string": "变体标签",
+      "type": "many2many"
+    },
+    "all_product_tag_ids": {
+      "readonly": true,
+      "relation": "product.tag",
+      "required": false,
+      "store": false,
+      "string": "所有产品标记",
+      "type": "many2many"
+    },
+    "image_variant_1920": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "变体图像",
+      "type": "binary"
+    },
+    "image_variant_1024": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "变体图像1024",
+      "type": "binary"
+    },
+    "image_variant_512": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "变体l图像512",
+      "type": "binary"
+    },
+    "image_variant_256": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "变体l图像256",
+      "type": "binary"
+    },
+    "image_variant_128": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "变体图像128",
+      "type": "binary"
+    },
+    "can_image_variant_1024_be_zoomed": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "可放大缩小的1024变体图像",
+      "type": "boolean"
+    },
+    "image_1920": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "图像",
+      "type": "binary"
+    },
+    "image_1024": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图像 1024",
+      "type": "binary"
+    },
+    "image_512": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图像 512",
+      "type": "binary"
+    },
+    "image_256": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图像 256",
+      "type": "binary"
+    },
+    "image_128": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "图像128",
+      "type": "binary"
+    },
+    "can_image_1024_be_zoomed": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "1024图可被缩放",
+      "type": "boolean"
+    },
+    "write_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "写入日期",
+      "type": "datetime"
+    },
+    "is_favorite": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "已收藏",
+      "type": "boolean"
+    },
+    "base_unit_count": {
+      "readonly": false,
+      "required": true,
+      "store": true,
+      "string": "参考单位",
+      "type": "float"
+    },
+    "base_unit_id": {
+      "readonly": false,
+      "relation": "product.base.unit",
+      "required": false,
+      "store": true,
+      "string": "自定义计量单位",
+      "type": "many2one"
+    },
+    "base_unit_price": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "每单位价格",
+      "type": "monetary"
+    },
+    "base_unit_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "基本单位名称",
+      "type": "char"
+    },
+    "catalog_is_in_order": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "目录中已加入订单",
+      "type": "boolean"
+    },
+    "create_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "创建人",
+      "type": "many2one"
+    },
+    "create_date": {
+      "readonly": true,
+      "required": false,
+      "store": true,
+      "string": "创建日期",
+      "type": "datetime"
+    },
+    "write_uid": {
+      "readonly": true,
+      "relation": "res.users",
+      "required": false,
+      "store": true,
+      "string": "最后更新人",
+      "type": "many2one"
+    },
+    "catalog_is_in_selected_section": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "目录位于所选节中",
+      "type": "boolean"
+    },
+    "tax_string": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "税项字符串",
+      "type": "char"
+    },
+    "stock_quant_ids": {
+      "readonly": false,
+      "relation": "stock.quant",
+      "required": false,
+      "store": true,
+      "string": "库存量",
+      "type": "one2many"
+    },
+    "stock_move_ids": {
+      "readonly": false,
+      "relation": "stock.move",
+      "required": false,
+      "store": true,
+      "string": "库存移动",
+      "type": "one2many"
+    },
+    "orderpoint_ids": {
+      "readonly": false,
+      "relation": "stock.warehouse.orderpoint",
+      "required": false,
+      "store": true,
+      "string": "最小库存规则",
+      "type": "one2many"
+    },
+    "nbr_moves_in": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "移动进数量",
+      "type": "integer"
+    },
+    "nbr_moves_out": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "移动出数量",
+      "type": "integer"
+    },
+    "nbr_reordering_rules": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重订货规则",
+      "type": "integer"
+    },
+    "reordering_min_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重订货最小数量",
+      "type": "float"
+    },
+    "reordering_max_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重订货最大数量",
+      "type": "float"
+    },
+    "putaway_rule_ids": {
+      "readonly": false,
+      "relation": "stock.putaway.rule",
+      "required": false,
+      "store": true,
+      "string": "上架规则",
+      "type": "one2many"
+    },
+    "storage_category_capacity_ids": {
+      "readonly": false,
+      "relation": "stock.storage.category.capacity",
+      "required": false,
+      "store": true,
+      "string": "存储类别能力",
+      "type": "one2many"
+    },
+    "show_on_hand_qty_status_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "在状态按钮显示在手数量",
+      "type": "boolean"
+    },
+    "show_forecasted_qty_status_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示预测的数量状态按钮",
+      "type": "boolean"
+    },
+    "show_qty_update_button": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示数量更新按钮",
+      "type": "boolean"
+    },
+    "valid_ean": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "条码是有效 EAN",
+      "type": "boolean"
+    },
+    "lot_properties_definition": {
+      "readonly": false,
+      "required": false,
+      "store": true,
+      "string": "批次属性",
+      "type": "properties_definition"
+    },
+    "variant_bom_ids": {
+      "readonly": false,
+      "relation": "mrp.bom",
+      "required": false,
+      "store": true,
+      "string": "物料清单（BOM）产品变体",
+      "type": "one2many"
+    },
+    "bom_line_ids": {
+      "readonly": false,
+      "relation": "mrp.bom.line",
+      "required": false,
+      "store": true,
+      "string": "物料清单（BOM）组件",
+      "type": "one2many"
+    },
+    "bom_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "# 物料清单",
+      "type": "integer"
+    },
+    "used_in_bom_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "#使用的物料清单（BOM）",
+      "type": "integer"
+    },
+    "mrp_product_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已制造",
+      "type": "float"
+    },
+    "is_kits": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是套件",
+      "type": "boolean"
+    },
+    "purchased_product_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已采购",
+      "type": "float"
+    },
+    "sold_by_vendor_id": {
+      "readonly": false,
+      "relation": "res.partner",
+      "required": false,
+      "store": false,
+      "string": "供应商",
+      "type": "many2one"
+    },
+    "avg_cost": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "平均成本",
+      "type": "monetary"
+    },
+    "total_value": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "总价值",
+      "type": "monetary"
+    },
+    "company_currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": false,
+      "string": "估值币别",
+      "type": "many2one"
+    },
+    "purchase_order_line_ids": {
+      "readonly": false,
+      "relation": "purchase.order.line",
+      "required": false,
+      "store": true,
+      "string": "PO明细行",
+      "type": "one2many"
+    },
+    "monthly_demand": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "每月需求",
+      "type": "float"
+    },
+    "suggested_qty": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "建议数量",
+      "type": "integer"
+    },
+    "suggest_estimated_price": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "建议估价",
+      "type": "float"
+    },
+    "sales_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "已售",
+      "type": "float"
+    },
+    "previously_bought_by_customer": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "客户之前购买过",
+      "type": "boolean"
+    },
+    "name": {
+      "readonly": false,
+      "required": true,
+      "store": false,
+      "string": "名称",
+      "type": "char"
+    },
+    "sequence": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "序列",
+      "type": "integer"
+    },
+    "description": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "描述",
+      "type": "html"
+    },
+    "description_purchase": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "采购说明",
+      "type": "text"
+    },
+    "description_sale": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "销售说明",
+      "type": "text"
+    },
+    "type": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "consu",
+          "实物"
+        ],
+        [
+          "service",
+          "服务"
+        ],
+        [
+          "combo",
+          "组合"
+        ]
+      ],
+      "store": false,
+      "string": "产品类型",
+      "type": "selection"
+    },
+    "combo_ids": {
+      "readonly": false,
+      "relation": "product.combo",
+      "required": false,
+      "store": false,
+      "string": "组合选择",
+      "type": "many2many"
+    },
+    "service_tracking": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "no",
+          "没有什么"
+        ],
+        [
+          "subcontract",
+          "分包询价单"
+        ]
+      ],
+      "store": false,
+      "string": "按订单创建",
+      "type": "selection"
+    },
+    "categ_id": {
+      "readonly": false,
+      "relation": "product.category",
+      "required": false,
+      "store": false,
+      "string": "产品类别",
+      "type": "many2one"
+    },
+    "currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": false,
+      "string": "币别",
+      "type": "many2one"
+    },
+    "cost_currency_id": {
+      "readonly": true,
+      "relation": "res.currency",
+      "required": false,
+      "store": false,
+      "string": "成本币别",
+      "type": "many2one"
+    },
+    "list_price": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "销售价格",
+      "type": "float"
+    },
+    "is_storable": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "追踪库存",
+      "type": "boolean"
+    },
+    "volume_uom_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "体积单位标签",
+      "type": "char"
+    },
+    "weight_uom_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "重量单位标签",
+      "type": "char"
+    },
+    "sale_ok": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "销售",
+      "type": "boolean"
+    },
+    "purchase_ok": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "采购",
+      "type": "boolean"
+    },
+    "uom_id": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": true,
+      "store": false,
+      "string": "单位",
+      "type": "many2one"
+    },
+    "uom_ids": {
+      "readonly": false,
+      "relation": "uom.uom",
+      "required": false,
+      "store": false,
+      "string": "包装",
+      "type": "many2many"
+    },
+    "uom_name": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "单位名称",
+      "type": "char"
+    },
+    "company_id": {
+      "readonly": false,
+      "relation": "res.company",
+      "required": false,
+      "store": false,
+      "string": "公司",
+      "type": "many2one"
+    },
+    "seller_ids": {
+      "readonly": false,
+      "relation": "product.supplierinfo",
+      "required": false,
+      "store": false,
+      "string": "供应商",
+      "type": "one2many"
+    },
+    "variant_seller_ids": {
+      "readonly": false,
+      "relation": "product.supplierinfo",
+      "required": false,
+      "store": false,
+      "string": "变体卖家",
+      "type": "one2many"
+    },
+    "color": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "颜色指标",
+      "type": "integer"
+    },
+    "attribute_line_ids": {
+      "readonly": false,
+      "relation": "product.template.attribute.line",
+      "required": false,
+      "store": false,
+      "string": "产品属性",
+      "type": "one2many"
+    },
+    "valid_product_template_attribute_line_ids": {
+      "readonly": true,
+      "relation": "product.template.attribute.line",
+      "required": false,
+      "store": false,
+      "string": "有效产品属性明细行",
+      "type": "many2many"
+    },
+    "product_variant_ids": {
+      "readonly": false,
+      "relation": "product.product",
+      "required": true,
+      "store": false,
+      "string": "产品",
+      "type": "one2many"
+    },
+    "product_variant_id": {
+      "readonly": true,
+      "relation": "product.product",
+      "required": false,
+      "store": false,
+      "string": "产品",
+      "type": "many2one"
+    },
+    "product_variant_count": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "# 产品变体",
+      "type": "integer"
+    },
+    "fixed_pricelist_rule_ids": {
+      "readonly": false,
+      "relation": "product.pricelist.item",
+      "required": false,
+      "store": false,
+      "string": "固定价格表规则",
+      "type": "one2many"
+    },
+    "has_configurable_attributes": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是可配置产品",
+      "type": "boolean"
+    },
+    "is_dynamically_created": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "是动态建立",
+      "type": "boolean"
+    },
+    "product_tooltip": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "产品提示",
+      "type": "char"
+    },
+    "product_tag_ids": {
+      "readonly": false,
+      "relation": "product.tag",
+      "required": false,
+      "store": false,
+      "string": "标签",
+      "type": "many2many"
+    },
+    "product_properties": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "属性",
+      "type": "properties"
+    },
+    "show_sales_price_page": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "显示销售价格页面",
+      "type": "boolean"
+    },
+    "taxes_id": {
+      "readonly": false,
+      "relation": "account.tax",
+      "required": false,
+      "store": false,
+      "string": "销售税",
+      "type": "many2many"
+    },
+    "supplier_taxes_id": {
+      "readonly": false,
+      "relation": "account.tax",
+      "required": false,
+      "store": false,
+      "string": "采购税",
+      "type": "many2many"
+    },
+    "property_account_income_id": {
+      "readonly": false,
+      "relation": "account.account",
+      "required": false,
+      "store": false,
+      "string": "收入科目",
+      "type": "many2one"
+    },
+    "property_account_income_active": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "收入科目启用",
+      "type": "boolean"
+    },
+    "property_account_expense_id": {
+      "readonly": false,
+      "relation": "account.account",
+      "required": false,
+      "store": false,
+      "string": "费用科目",
+      "type": "many2one"
+    },
+    "property_account_expense_active": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "费用科目启用",
+      "type": "boolean"
+    },
+    "account_tag_ids": {
+      "readonly": false,
+      "relation": "account.account.tag",
+      "required": false,
+      "store": false,
+      "string": "科目标签",
+      "type": "many2many"
+    },
+    "fiscal_country_codes": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "会计所在国家/地区代码",
+      "type": "char"
+    },
+    "valuation": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "periodic",
+          "定期（结账时）"
+        ],
+        [
+          "real_time",
+          "永续（开票时）"
+        ]
+      ],
+      "store": false,
+      "string": "估值",
+      "type": "selection"
+    },
+    "cost_method": {
+      "readonly": true,
+      "required": false,
+      "selection": [
+        [
+          "standard",
+          "标准价格"
+        ],
+        [
+          "average",
+          "平均成本（AVCO）"
+        ],
+        [
+          "fifo",
+          "先进先出（FIFO）"
+        ]
+      ],
+      "store": false,
+      "string": "成本计价方法",
+      "type": "selection"
+    },
+    "responsible_id": {
+      "readonly": false,
+      "relation": "res.users",
+      "required": false,
+      "store": false,
+      "string": "负责人",
+      "type": "many2one"
+    },
+    "property_stock_production": {
+      "readonly": false,
+      "relation": "stock.location",
+      "required": false,
+      "store": false,
+      "string": "生产",
+      "type": "many2one"
+    },
+    "property_stock_inventory": {
+      "readonly": false,
+      "relation": "stock.location",
+      "required": false,
+      "store": false,
+      "string": "库存调整",
+      "type": "many2one"
+    },
+    "tracking": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "lot",
+          "按批次"
+        ],
+        [
+          "serial",
+          "按唯一序列号"
+        ]
+      ],
+      "store": false,
+      "string": "跟踪方法",
+      "type": "selection"
+    },
+    "store_by": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "untracked",
+          "无"
+        ],
+        [
+          "quantity",
+          "按数量"
+        ],
+        [
+          "lot",
+          "按批次"
+        ],
+        [
+          "serial",
+          "按唯一序列号"
+        ]
+      ],
+      "store": false,
+      "string": "追溯",
+      "type": "selection"
+    },
+    "lot_sequence_id": {
+      "readonly": false,
+      "relation": "ir.sequence",
+      "required": false,
+      "store": false,
+      "string": "序号/批次号码序列",
+      "type": "many2one"
+    },
+    "serial_prefix_format": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "自定义批次/序号",
+      "type": "char"
+    },
+    "next_serial": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "下一序列号",
+      "type": "char"
+    },
+    "description_picking": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "拣货说明",
+      "type": "text"
+    },
+    "description_pickingout": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "出库单说明",
+      "type": "text"
+    },
+    "description_pickingin": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "收货说明",
+      "type": "text"
+    },
+    "location_id": {
+      "readonly": false,
+      "relation": "stock.location",
+      "required": false,
+      "store": false,
+      "string": "位置",
+      "type": "many2one"
+    },
+    "warehouse_id": {
+      "readonly": false,
+      "relation": "stock.warehouse",
+      "required": false,
+      "store": false,
+      "string": "仓库",
+      "type": "many2one"
+    },
+    "has_available_route_ids": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可以在此产品上选择路线",
+      "type": "boolean"
+    },
+    "route_ids": {
+      "readonly": false,
+      "relation": "stock.route",
+      "required": false,
+      "store": false,
+      "string": "路线",
+      "type": "many2many"
+    },
+    "route_from_categ_ids": {
+      "readonly": true,
+      "relation": "stock.route",
+      "required": false,
+      "store": false,
+      "string": "类别路线",
+      "type": "many2many"
+    },
+    "bom_ids": {
+      "readonly": false,
+      "relation": "mrp.bom",
+      "required": false,
+      "store": false,
+      "string": "物料清单",
+      "type": "one2many"
+    },
+    "purchase_method": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "purchase",
+          "订购数量"
+        ],
+        [
+          "receive",
+          "收到数量"
+        ]
+      ],
+      "store": false,
+      "string": "控制策略",
+      "type": "selection"
+    },
+    "purchase_line_warn_msg": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "采购订单明细的消息",
+      "type": "text"
+    },
+    "lot_valuated": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "按批号/序列号估值",
+      "type": "boolean"
+    },
+    "service_type": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "manual",
+          "在订单中手动设置数量"
+        ]
+      ],
+      "store": false,
+      "string": "跟踪服务",
+      "type": "selection"
+    },
+    "sale_line_warn_msg": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "销售订单明细行警告",
+      "type": "text"
+    },
+    "reinvoice_policy": {
+      "readonly": false,
+      "required": false,
+      "selection": [
+        [
+          "no",
+          "否"
+        ],
+        [
+          "cost",
+          "以成本"
+        ],
+        [
+          "sales_price",
+          "按销售价格"
+        ]
+      ],
+      "store": false,
+      "string": "重新开票成本",
+      "type": "selection"
+    },
+    "visible_reinvoice_policy": {
+      "readonly": true,
+      "required": false,
+      "store": false,
+      "string": "可见的重开票原则",
+      "type": "boolean"
+    },
+    "invoice_policy": {
+      "readonly": false,
+      "required": true,
+      "selection": [
+        [
+          "order",
+          "订单数量"
+        ],
+        [
+          "delivery",
+          "已交付数量"
+        ]
+      ],
+      "store": false,
+      "string": "开票原则",
+      "type": "selection"
+    },
+    "optional_product_ids": {
+      "readonly": false,
+      "relation": "product.template",
+      "required": false,
+      "store": false,
+      "string": "可选产品",
+      "type": "many2many"
+    },
+    "sale_delay": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "交货时间",
+      "type": "integer"
+    },
+    "jingneng_catalog_series": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "系列 / 附件分类",
+      "type": "char"
+    },
+    "jingneng_catalog_specification": {
+      "readonly": false,
+      "required": false,
+      "store": false,
+      "string": "规格",
+      "type": "char"
+    }
+  }
+}

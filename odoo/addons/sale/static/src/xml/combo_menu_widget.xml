@@ -4,12 +4,12 @@
     <t t-name="sale.ComboMenuWidget">
         <Dropdown menuClass="'py-0'">
             <button class="btn btn-secondary w-100">
-                Combo
+                组合套餐
             </button>
             <t t-set-slot="content">
                 <t t-if="!this.comboProducts.length">
                     <DropdownItem tag="'span'" class="'text-muted'">
-                        No Combo Product Available
+                        没有可用的组合套餐产品
                     </DropdownItem>
                 </t>
                 <t t-foreach="this.comboProducts" t-as="product" t-key="product.id">

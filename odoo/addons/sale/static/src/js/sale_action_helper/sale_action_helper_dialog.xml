@@ -17,11 +17,11 @@
                     width="1140"
                     height="641"
                     t-att-src="this.props.url"
-                    title="Sale"
+                    title="销售"
                     frameborder="0"
                     allowfullscreen="1"
                 >
-                    Your browser does not support iframe.
+                    当前浏览器无法显示嵌入文档，请下载后查看。
                 </iframe>
             </div>
         </Dialog>

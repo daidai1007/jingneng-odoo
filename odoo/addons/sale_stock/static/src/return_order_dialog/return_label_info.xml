@@ -2,7 +2,7 @@
 <template>
 
     <t t-name="sale_stock.ReturnLabelInfo">
-        <t name="download_instructions">Please download and print the label, attach it to your package, and send the package to the address below:</t>
+        <t name="download_instructions">请下载并打印标签，将其贴在包裹上，然后把包裹寄到以下地址：</t>
         <br/><br/>
         <div class="card border">
             <div class="card-body">

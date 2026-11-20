@@ -12,7 +12,7 @@
                     name="product_card_image"
                     class="w-25 border rounded"
                     t-att-src="this.props.product.image_src || `/web/image/product.product/${this.props.product.id}/image_256`"
-                    alt="Product Image"
+                    alt="产品图像"
                 />
                 <div class="w-75 p-2">
                     <t t-set="ptalsToShow" t-value="this.props.product.ptals.filter(this.shouldShowPtal)"/>
@@ -26,7 +26,7 @@
                                 t-out="ptal.ptalDisplayName"
                             />
                         </t>
-                        <small t-elif="this.props.isConfigurable">Click to configure</small>
+                        <small t-elif="this.props.isConfigurable">点击进行配置</small>
                     </div>
                     <BadgeExtraPrice
                         t-if="this.props.extraPrice"
